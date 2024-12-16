@@ -33,6 +33,12 @@ async function bubbleSort() {
   for (let i = 0; i < bars.length - 1; i++) {
     if (!isRunning) break;
 
+    // reset bars color on each phase start.
+    bars.forEach((barValue, idx) => {
+      const adjustedIdx = idx - i;
+      if (adjustedIdx >= 0) selection[adjustedIdx].style.background = "orange";
+    });
+
     for (let j = 0; j < bars.length - i - 1; j++) {
       if (!isRunning) break;
 
@@ -49,11 +55,11 @@ async function bubbleSort() {
       if (bars[j] > bars[j + 1]) {
         bars.forEach((barValue, idx) => {
           selection[idx].style.height = `${barValue}%`;
-          // selection[idx].style.background = "green";
         });
         [bars[j], bars[j + 1]] = [bars[j + 1], bars[j]];
 
         [selection[j], selection[j + 1]].forEach((bar) => {
+          bar.style.background = "green";
           bar.classList.add("jump");
         });
 
