@@ -27,7 +27,7 @@ async function bubbleSort() {
       if (bars[j] > bars[j + 1]) {
         bars.forEach((barValue, idx) => {
           selection[idx].style.height = `${barValue}%`;
-          selection[idx].textContent = selection[idx].style.height;
+          selection[idx].textContent = barValue;
         });
         [bars[j], bars[j + 1]] = [bars[j + 1], bars[j]];
 
