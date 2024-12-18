@@ -8,6 +8,9 @@ const barValuesInput = document.getElementById("bar-values");
 const speedInput = document.querySelector("#speed");
 const startButton = document.querySelector("#start");
 
+const slap = new Audio("./assets/audio/slap.mp3");
+const jump = new Audio("./assets/audio/jump.mp3");
+
 let bars = [],
   speed = 300,
   isRunning = false,
@@ -17,6 +20,7 @@ function createBars() {
   const barCount = parseInt(barCountInput.value, 10);
   const barValues = barValuesInput.value;
   if (barValues) {
+    // Values from user.
     bars = barValues
       .split(",")
       .map((v) => +v.trim())
@@ -24,8 +28,6 @@ function createBars() {
   } else {
     bars = Array.from({ length: barCount }, () => Math.random() * 100);
   }
-
-  // bars = Array.from({ length: barCount }, () => Math.random() * 100);
 
   visualization.innerHTML = "";
   // bars.forEach((bar) => {
@@ -45,12 +47,6 @@ function createBars() {
     bar.className = "bar";
     bar.style.height = `${value}%`;
     bar.style.width = `${100 / bars.length - 1}%`;
-    bar.style.margin = "2px";
-    bar.style.display = "inline-block";
-    bar.style.background = "linear-gradient(to bottom, #0078d7, #005bb5)";
-    bar.style.borderRadius = "3px";
-    bar.style.textAlign = "center";
-
     bar.textContent = Math.floor(value);
     visualization.appendChild(bar);
   });
@@ -82,6 +78,7 @@ function createBars() {
 }
 
 // Bubble sort algorithm.
+// bubbleSort();
 
 function pause() {
   return new Promise((resolve) => setTimeout(resolve, speed));
@@ -114,3 +111,4 @@ document.querySelector("#reset").addEventListener("click", () => {
 });
 
 createBars(); // Initialize bars on load
+// bubbleSort();

@@ -62,9 +62,11 @@ button:hover {
 }
 
 .bar {
-  margin: 2px;
   display: inline-block;
+  margin: 2px;
   border-radius: 3px;
+  background: linear-gradient(to bottom, #0078d7, #005bb5);
+  text-align: center;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
