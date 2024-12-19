@@ -10,9 +10,11 @@ const startButton = document.querySelector("#start");
 
 const slap = new Audio("./assets/audio/slap.mp3");
 const jump = new Audio("./assets/audio/jump.mp3");
+const compare = new Audio("./assets/audio/nextLevel.mp3");
+const phase = new Audio("./assets/audio/finish.mp3");
 
 let bars = [],
-  speed = 300,
+  speed = speedInput,
   isRunning = false,
   animation = null;
 
@@ -30,55 +32,16 @@ function createBars() {
   }
 
   visualization.innerHTML = "";
-  // bars.forEach((bar) => {
-  //   const barDiv = document.createElement("div");
-  //   barDiv.className = "bar";
-  //   barDiv.style.height = `${bar}%`;
-  //   barDiv.style.width = `${100 / barCount - 1}%`;
-  //   barDiv.style.background = "orange";
-  //   barDiv.style.margin = "2px";
-  //   barDiv.style.borderRadius = "20px";
-  //   barDiv.textContent = barDiv.style.height;
-  //   visualization.appendChild(barDiv);
-  // });
-
   bars.forEach((value) => {
     const bar = document.createElement("div");
     bar.className = "bar";
     bar.style.height = `${value}%`;
+
     bar.style.width = `${100 / bars.length - 1}%`;
-    bar.textContent = Math.floor(value);
+    bar.textContent = Math.floor(value); // Inverts div positioning;
     visualization.appendChild(bar);
   });
-
-  // bars.forEach((value) => {
-  //   const bar = document.createElement("div");
-  //   bar.className = "bar";
-  //   bar.style.position = "relative"; // Set parent to relative
-  //   bar.style.height = `${value}%`;
-  //   bar.style.width = `${100 / bars.length - 1}%`;
-  //   bar.style.margin = "2px";
-  //   bar.style.display = "inline-block";
-  //   bar.style.background = "linear-gradient(to bottom, #0078d7, #005bb5)";
-  //   bar.style.borderRadius = "3px";
-
-  //   // Add text at bottom
-  //   const text = document.createElement("span");
-  //   text.textContent = Math.floor(value);
-  //   text.style.position = "absolute";
-  //   text.style.bottom = "0"; // Align text at bottom
-  //   text.style.left = "50%"; // Center text horizontally
-  //   text.style.transform = "translateX(-50%)"; // Adjust for centering
-  //   text.style.color = "white"; // Text color
-  //   text.style.fontSize = "12px"; // Adjust font size if needed
-
-  //   bar.appendChild(text);
-  //   visualization.appendChild(bar);
-  // });
 }
-
-// Bubble sort algorithm.
-// bubbleSort();
 
 function pause() {
   return new Promise((resolve) => setTimeout(resolve, speed));
@@ -111,4 +74,3 @@ document.querySelector("#reset").addEventListener("click", () => {
 });
 
 createBars(); // Initialize bars on load
-// bubbleSort();

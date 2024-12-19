@@ -17,9 +17,8 @@ async function bubbleSort() {
       currentOperation.textContent = `Comparing bars ${j} and ${j + 1}`;
 
       [selection[j], selection[j + 1]].forEach((bar) => {
-        bar.style.background = "red";
-        bar.classList.add("shake");
-        slap.play();
+        bar.style.background = "white";
+        // bar.classList.add("shake");
       });
 
       await pause();
@@ -48,6 +47,13 @@ async function bubbleSort() {
 
         currentOperation.textContent = `Swapped bars ${j} and ${j + 1}`;
         await pause();
+      } else {
+        [selection[j], selection[j + 1]].forEach((bar) => {
+          bar.style.background = "red";
+          bar.classList.add("shake");
+        });
+        slap.play();
+        await pause();
       }
 
       // Reset the colors and remove effects
@@ -56,8 +62,11 @@ async function bubbleSort() {
         bar.style.background = "blue";
       });
     }
+    compare.play();
+    await pause();
   }
 
   currentOperation.textContent = "Bubble Sort Complete";
   stopAnimation(); // Bubble sort ends here.
+  phase.play();
 }
