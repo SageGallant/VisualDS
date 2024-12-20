@@ -96,6 +96,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  overflow-x: auto;
 }
 
 button {
@@ -123,6 +124,8 @@ button:hover {
     var(--primary-dark)
   );
   text-align: center;
+  max-width: 40px;
+  min-height: 3px;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
@@ -165,8 +168,8 @@ button:hover {
   }
 
   .visualization {
-    width: 100%;
-    height: 300px;
+    flex: none;
+    height: 50vh;
   }
 
   .info-panel {
@@ -181,15 +184,18 @@ button:hover {
   }
 
   .visualization {
-    height: 250px;
+    flex: none;
+    height: 40vh;
   }
-
+  .bar {
+    margin: 0 1px;
+    max-width: 30px;
+  }
   .info-panel span {
     font-size: 0.875rem;
   }
 }
 
-/* Ensure buttons are properly spaced on smaller screens */
 @media screen and (max-width: 320px) {
   button {
     font-size: 0.875rem;
