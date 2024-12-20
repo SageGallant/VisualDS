@@ -14,7 +14,7 @@ const compare = new Audio("./assets/audio/nextLevel.mp3");
 const phase = new Audio("./assets/audio/finish.mp3");
 
 let bars = [],
-  speed = speedInput,
+  speed = parseInt(speedInput.value, 10),
   isRunning = false,
   animation = null;
 
@@ -49,22 +49,17 @@ function pause() {
 
 function startAnimation() {
   isRunning = true;
-  startButton.textContent = "Stop Visualization";
+  startButton.textContent = "Stop";
   bubbleSort();
 }
 
 function stopAnimation() {
   isRunning = false;
-  startButton.textContent = "Start Visualization";
+  startButton.textContent = "Start";
 }
 
 startButton.addEventListener("click", () => {
-  if (isRunning) {
-    stopAnimation();
-  } else {
-    speed = parseInt(speedInput.value, 10);
-    startAnimation();
-  }
+  isRunning ? stopAnimation() : startAnimation();
 });
 
 document.querySelector("#reset").addEventListener("click", () => {

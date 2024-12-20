@@ -21,23 +21,27 @@
     <main>
         <aside class="controls">
             <h2>Controls</h2>
-            <p><label for="algorithm">Choose Algorithm:</label></p>
-            <p><select id="algorithm"></p>
-            <option value="bubble">Bubble Sort</option>
-            <p></select></p>
-            <p><label for="bar-count">Number of Bars:</label></p>
-            <p><input type="number" id="bar-count" value="10" min="5" max="100"></p>
+            <p><label for="algorithm">Choose Algorithm:</label>
+                <select id="algorithm">
+                    <option value="bubble">Bubble Sort</option>
+                </select>
+            </p>
+            <p><label for="bar-count">Number of Bars:</label>
+                <input type="number" id="bar-count" value="10" min="5" max="100">
+            </p>
             <p><label for="bar-values">Enter Bar Values (comma separated):</label></p>
             <p><input type="text" id="bar-values" placeholder="e.g., 10,20,30"></p>
-            <p><label for="speed">Animation Speed (ms):</label></p>
-            <p><input type="number" id="speed" value="500" min="50" max="2000"></p>
-            <p><button id="start">Start Visualization</button></p>
-            <p><button id="reset">Reset</button></p>
+            <p><label for="speed">Animation Speed (ms):</label>
+                <input type="number" id="speed" value="500" min="50" max="2000">
+            </p>
+            <p><button id="start">Start</button>
+                <button id="reset">Reset</button>
+            </p>
         </aside>
 
-        <div class="visualization" id="visualization">
+        <section class="visualization" id="visualization">
             <!-- Visualization goes here -->
-        </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
