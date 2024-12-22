@@ -1,22 +1,26 @@
 // import { bubbleSort } from "./js/bubble.js";
 
-const visualization = document.querySelector("#visualization");
-const currentOperation = document.querySelector("#current-operation");
 const loopValues = document.querySelector("#loop-values");
+const currentOperation = document.querySelector("#current-operation");
 const barCountInput = document.querySelector("#bar-count");
 const barValuesInput = document.getElementById("bar-values");
 const speedInput = document.querySelector("#speed");
 const startButton = document.querySelector("#start");
+const visualization = document.querySelector("#visualization");
 
-const slap = new Audio("./assets/audio/slap.mp3");
-const jump = new Audio("./assets/audio/jump.mp3");
-const compare = new Audio("./assets/audio/nextLevel.mp3");
-const phase = new Audio("./assets/audio/finish.mp3");
-
+const sounds = {
+  slap: new Audio("./assets/audio/slap.mp3"),
+  jump: new Audio("./assets/audio/jump.mp3"),
+  compare: new Audio("./assets/audio/nextLevel.mp3"),
+  phase: new Audio("./assets/audio/finish.mp3"),
+};
 let bars = [],
-  speed = parseInt(speedInput.value, 10),
-  isRunning = false,
-  animation = null;
+  // speed = speedInput.value,
+  speed = parseInt(speedInput.value, 10);
+(isRunning = false), (animation = null);
+speedInput.addEventListener("input", () => {
+  speed = speedInput.value;
+});
 
 function createBars() {
   const barCount = parseInt(barCountInput.value, 10);
@@ -28,7 +32,9 @@ function createBars() {
       .map((v) => +v.trim())
       .filter((v) => !isNaN(v));
   } else {
-    bars = Array.from({ length: barCount }, () => Math.random() * 100);
+    bars = Array.from({ length: barCount }, () =>
+      Math.floor(Math.random() * 100)
+    );
   }
 
   visualization.innerHTML = "";
@@ -36,7 +42,6 @@ function createBars() {
     const bar = document.createElement("div");
     bar.className = "bar";
     bar.style.height = `${value}%`;
-
     bar.style.width = `${100 / bars.length - 1}%`;
     bar.textContent = Math.floor(value); // Inverts div positioning;
     visualization.appendChild(bar);
@@ -68,4 +73,4 @@ document.querySelector("#reset").addEventListener("click", () => {
   currentOperation.textContent = "Reset complete";
 });
 
-createBars(); // Initialize bars on load
+createBars();

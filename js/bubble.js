@@ -1,72 +1,65 @@
 async function bubbleSort() {
   const selection = Array.from(visualization.children);
-
-  for (let i = 0; i < bars.length - 1; i++) {
-    if (!isRunning) break;
-
-    // reset bars color on each phase start
+  for (let i = 0; i < bars.length - 1 && isRunning; i++) {
     bars.forEach((_barValue, idx) => {
       const adjustedIdx = idx - i;
-      if (adjustedIdx >= 0) selection[adjustedIdx].style.background = "orange";
+      if (adjustedIdx >= 0) selection[adjustedIdx].style.background = "white";
     });
-
-    for (let j = 0; j < bars.length - i - 1; j++) {
-      if (!isRunning) break;
-
+    for (let j = 0; j < bars.length - i - 1 && isRunning; j++) {
       loopValues.textContent = `Phase: ${i}, Compare: ${j}`;
       currentOperation.textContent = `Comparing bars ${j} and ${j + 1}`;
-
-      [selection[j], selection[j + 1]].forEach((bar) => {
-        bar.style.background = "white";
-        // bar.classList.add("shake");
-      });
-
+      selection[j].style.background = selection[j + 1].style.background =
+        "orange";
       await pause();
-
-      // Comparing bars.
       if (bars[j] > bars[j + 1]) {
-        // Update the DOM immediately before swapping the values in the array.
-        const tempHeight = selection[j].style.height;
-        const tempText = selection[j].textContent;
-
-        // Swap the visual elements
-        selection[j].style.height = selection[j + 1].style.height;
-        selection[j].textContent = selection[j + 1].textContent;
-        selection[j + 1].style.height = tempHeight;
-        selection[j + 1].textContent = tempText;
-
-        // Perform the array swap after the visual update
         [bars[j], bars[j + 1]] = [bars[j + 1], bars[j]];
-
-        // Highlight the swapped bars
-        [selection[j], selection[j + 1]].forEach((bar) => {
-          bar.style.background = "green";
-          bar.classList.add("jump");
-          jump.play();
-        });
+        [selection[j].style.height, selection[j + 1].style.height] = [
+          selection[j + 1].style.height,
+          selection[j].style.height,
+        ];
+        [selection[j].textContent, selection[j + 1].textContent] = [
+          bars[j],
+          bars[j + 1],
+        ];
+        updateBarsWithSound(
+          [selection[j], selection[j + 1]],
+          "green",
+          "jump",
+          sounds.jump
+        );
 
         currentOperation.textContent = `Swapped bars ${j} and ${j + 1}`;
         await pause();
       } else {
-        [selection[j], selection[j + 1]].forEach((bar) => {
-          bar.style.background = "red";
-          bar.classList.add("shake");
-        });
-        slap.play();
+        updateBarsWithSound(
+          [selection[j], selection[j + 1]],
+          "red",
+          "shake",
+          sounds.slap
+        );
+
         await pause();
       }
-
-      // Reset the colors and remove effects
-      [selection[j], selection[j + 1]].forEach((bar) => {
-        bar.classList.remove("shake", "jump");
-        bar.style.background = "blue";
-      });
+      updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "blue");
     }
-    compare.play();
+    sounds.compare.play();
     await pause();
   }
-
   currentOperation.textContent = "Bubble Sort Complete";
-  stopAnimation(); // Bubble sort ends here.
-  phase.play();
+  sounds.phase.play();
+  stopAnimation();
+}
+
+function updateBars(bars, classesToRemove, newBackground) {
+  bars.forEach((bar) => {
+    classesToRemove.forEach((cls) => bar.classList.remove(cls));
+    bar.style.background = newBackground;
+  });
+}
+function updateBarsWithSound(bars, backgroundColor, classToAdd, soundToPlay) {
+  bars.forEach((bar) => {
+    bar.style.background = backgroundColor;
+    bar.classList.add(classToAdd);
+    soundToPlay.play();
+  });
 }
