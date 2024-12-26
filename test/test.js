@@ -97,7 +97,7 @@ document.querySelector("#reset").addEventListener("click", () => {
 createBars();
 
 // Bubble sort
-/*
+
 const COLORS = {
   default: "white",
   compare: "orange",
@@ -166,5 +166,3 @@ async function bubbleSort() {
   sounds.phase.play();
   stopAnimation();
 }
-
-*/

@@ -36,7 +36,7 @@ body.dark {
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
@@ -127,7 +127,11 @@ button:hover {
   display: inline-block;
   margin: 0 2px;
   border-radius: 3px;
-  background: linear-gradient(to bottom, var(--primary-color), var(--primary-dark));
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--primary-dark)
+  );
 }
 
 /* @media Queries for Responsiveness */
