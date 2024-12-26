@@ -1,149 +1,129 @@
-/* Global Variables */
-
-/* Light Theme Colors */
+/* Modern UI Styles with Enhanced Readability and Accessibility */
 :root {
-  --primary-color: #0078d7; /* Primary color */
-  --primary-dark: #005bb5; /* Dark primary color */
-  --background-light: #f9f9f9; /* Light theme background */
-  --card-bg-light: #e8e8e8; /* Light card background */
-  --info-panel-bg-light: #f1f1f1; /* Info panel background */
-  --button-bg-light: #0078d7; /* Button background light theme */
-  --button-hover-light: #005bb5; /* Button hover light theme */
-  --text-light: #333; /* Light text color */
-  --border-color-light: #dcdcdc; /* Border color light theme */
-  --shadow-light: rgba(0, 0, 0, 0.1); /* Shadow for light theme */
+  --primary-color: #0a282f; /* Dark teal */
+  --secondary-color: #646669; /* Neutral gray */
+  --accent-color: #d64090; /* Vibrant pink */
+  --background-light: #edf8fa; /* Light teal */
+  --background-dark: #303030; /* Charcoal */
+  --text-light: #ffffff; /* White */
+  --text-dark: #000000; /* Black */
 }
 
-/* Dark Theme Colors */
-[data-theme="dark"] {
-  --primary-color: #1d1f20; /* Primary color for dark theme */
-  --primary-dark: #373a3f; /* Dark primary color for dark theme */
-  --background-dark: #121212; /* Dark theme background */
-  --card-bg-dark: #232323; /* Dark card background */
-  --info-panel-bg-dark: #222; /* Info panel background for dark theme */
-  --button-bg-dark: #3a8bb3; /* Button background dark theme */
-  --button-hover-dark: #307aa1; /* Button hover dark theme */
-  --text-dark: #fff; /* Dark text color */
-  --border-color-dark: #444; /* Border color dark theme */
-  --shadow-dark: rgba(0, 0, 0, 0.3); /* Shadow for dark theme */
-}
-
-/* General Styles */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
 }
 
 body {
-  font-family: "Arial", sans-serif;
   background-color: var(--background-light);
-  color: var(--text-light);
-  cursor: url("../assets/images/pointer.png"), auto;
-  min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
+  color: var(--text-dark);
+  line-height: 1.5;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 header {
   background-color: var(--primary-color);
   color: var(--text-light);
-  padding: 1rem;
+  padding: 1rem 2rem;
   text-align: center;
-  box-shadow: 0 4px 10px var(--shadow-light);
-  transition: background-color 0.3s, color 0.3s;
 }
 
 header h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: bold;
 }
 
 .info-panel {
-  background: var(--info-panel-bg-light);
+  background-color: var(--secondary-color);
+  color: var(--text-light);
   padding: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px var(--shadow-light);
   margin: 1rem;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 .info-panel span {
   display: block;
+  font-size: 1rem;
   margin: 0.5rem 0;
-  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 main {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  transition: background-color 0.3s;
 }
 
 .controls {
+  background-color: var(--background-dark);
+  color: var(--text-light);
   flex: 1;
   min-width: 250px;
-  background: var(--card-bg-light);
   padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px var(--shadow-light);
-  transition: background-color 0.3s, box-shadow 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .controls h2 {
+  font-size: 1.5rem;
   margin-bottom: 1rem;
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+.controls label {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .controls input,
-.controls select,
-.controls button {
+.controls select {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid var(--border-color-light);
+  margin-bottom: 1rem;
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
-  transition: background-color 0.3s, border-color 0.3s;
+  background: var(--text-light);
+  color: var(--text-dark);
 }
 
-button {
-  background-color: var(--button-bg-light);
+.controls button {
+  background-color: var(--accent-color);
   color: var(--text-light);
   border: none;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
-  border-radius: 5px;
-  margin: 0.5rem 0.5rem 0.5rem 0;
-  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--button-hover-light);
+.controls button:hover {
+  background-color: var(--primary-color);
 }
 
 .visualization {
   flex: 3;
-  min-width: 300px;
-  min-height: 400px;
-  background: var(--card-bg-light);
+  background-color: var(--background-dark);
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px var(--shadow-light);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: center;
   align-items: flex-end;
   overflow-x: auto;
-  transition: background-color 0.3s;
 }
 
 .bar {
   display: inline-block;
   margin: 0 2px;
   border-radius: 3px;
-  background: linear-gradient(
-    to bottom,
-    var(--primary-color),
-    var(--primary-dark)
-  );
+  background: var(--primary-color);
+  color: var(--text-light);
   text-align: center;
   max-width: 40px;
   min-height: 3px;
@@ -178,7 +158,19 @@ button:hover {
   }
 }
 
-/* Media Queries for Responsive Design */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+footer p {
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
 @media screen and (max-width: 768px) {
   main {
     flex-direction: column;
@@ -189,11 +181,8 @@ button:hover {
   }
 
   .visualization {
+    flex: none;
     height: 50vh;
-  }
-
-  .info-panel {
-    margin: 0.5rem;
   }
 }
 
@@ -211,88 +200,4 @@ button:hover {
     margin: 0 1px;
     max-width: 30px;
   }
-
-  .info-panel span {
-    font-size: 0.875rem;
-  }
-}
-
-/* Dark Mode Styles */
-body[data-theme="dark"] {
-  background-color: var(--background-dark);
-  color: var(--text-dark);
-}
-
-header[data-theme="dark"] {
-  background-color: var(--primary-color);
-  color: var(--text-dark);
-}
-
-.info-panel[data-theme="dark"] {
-  background: var(--info-panel-bg-dark);
-  box-shadow: 0 4px 6px var(--shadow-dark);
-}
-
-.controls[data-theme="dark"] {
-  background: var(--card-bg-dark);
-  box-shadow: 0 4px 6px var(--shadow-dark);
-}
-
-.controls input,
-.controls select,
-.controls button {
-  border: 1px solid var(--border-color-dark);
-}
-
-button[data-theme="dark"] {
-  background-color: var(--button-bg-dark);
-  color: var(--text-dark);
-}
-
-button[data-theme="dark"]:hover {
-  background-color: var(--button-hover-dark);
-}
-
-.visualization[data-theme="dark"] {
-  background: var(--card-bg-dark);
-  box-shadow: 0 4px 6px var(--shadow-dark);
-}
-
-.bar[data-theme="dark"] {
-  background: linear-gradient(
-    to bottom,
-    var(--primary-color),
-    var(--primary-dark)
-  );
-}
-
-/* Theme Toggle Button */
-#theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: var(--button-bg-light);
-  color: var(--text-light);
-  border: none;
-  padding: 1rem;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#theme-toggle:hover {
-  background-color: var(--button-hover-light);
-}
-
-/* Neumorphism Effect */
-.neumorphic {
-  background: var(--card-bg-light);
-  box-shadow: 8px 8px 15px var(--shadow-light),
-    -8px -8px 15px var(--shadow-light);
-  transition: box-shadow 0.3s;
-}
-
-body[data-theme="dark"] .neumorphic {
-  background: var(--card-bg-dark);
-  box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-dark);
 }
