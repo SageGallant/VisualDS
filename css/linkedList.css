@@ -1,14 +1,13 @@
-/* Define color variables for Light and Dark mode */
 :root {
   --light-bg-color: #f0f0f0;
   --dark-bg-color: #1e1e1e;
   --light-text-color: #333;
   --dark-text-color: #f0f0f0;
-  --button-bg-light: #4caf50;
+  --button-hover: #005bb5;
+  --button-bg-light: #0078d7;
   --button-bg-dark: #333;
 }
 
-/* Default (Light mode) */
 body {
   font-family: Arial, sans-serif;
   background-color: var(--light-bg-color);
@@ -18,7 +17,6 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Train Visualization */
 .train-visualization {
   margin-top: 30px;
   display: flex;
@@ -31,7 +29,6 @@ body {
   overflow-y: hidden;
 }
 
-/* Train Car Styles */
 .train-car {
   width: 120px;
   height: 100px;
@@ -97,7 +94,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--button-hover);
 }
 
 #theme-toggle {
