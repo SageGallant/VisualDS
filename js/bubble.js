@@ -1,4 +1,4 @@
-import { isRunning } from "../script.js";
+// import { isRunning } from "../script.js";
 const COLORS = {
   default: "white",
   compare: "orange",
@@ -6,7 +6,7 @@ const COLORS = {
   incorrect: "red",
 };
 
-export async function bubbleSort() {
+async function bubbleSort() {
   const selection = Array.from(visualization.children);
 
   if (isArraySorted(bars)) {

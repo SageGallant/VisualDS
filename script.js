@@ -1,4 +1,4 @@
-import { bubbleSort } from "./js/bubble.js";
+// import { bubbleSort } from "./js/bubble.js";
 
 const loopValues = document.querySelector("#loop-values");
 const currentOperation = document.querySelector("#current-operation");
@@ -14,9 +14,9 @@ const sounds = {
   compare: new Audio("./assets/audio/nextLevel.mp3"),
   phase: new Audio("./assets/audio/finish.mp3"),
 };
-export var isRunning = false;
+isRunning = false;
 
-export let bars = [],
+let bars = [],
   speed = parseInt(speedInput.value, 10),
   animation = null;
 speedInput.addEventListener("input", () => {
@@ -79,7 +79,7 @@ function updateBarsWithSound(bars, backgroundColor, classToAdd, soundToPlay) {
   soundToPlay.play();
 }
 
-export function isArraySorted(array) {
+function isArraySorted(array) {
   for (let i = 1; i < array.length; i++) {
     if (array[i - 1] > array[i]) return false;
   }
