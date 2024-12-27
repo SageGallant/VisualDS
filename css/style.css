@@ -1,11 +1,33 @@
-/* Base styles */
+/* Global Variables */
 :root {
+  font-size: 16px;
+}
+/* Light Theme Colors */
+body {
   --primary-color: #0078d7;
   --primary-dark: #005bb5;
-  --background-light: #f9f9f9;
-  --control-bg: rgb(189, 204, 175);
-  --visualization-bg: rgb(186, 196, 240);
-  --info-panel-bg: rgb(230, 220, 220);
+  --background-color: #f9f9f9;
+  --card-bg: #e8e8e8;
+  --info-panel-bg: #0078d7;
+  --button-bg: #0078d7;
+  --button-hover: #005bb5;
+  --text-color: #333;
+  --border-color: #dcdcdc;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme Colors */
+body.dark {
+  --primary-color: #1d1f20;
+  --primary-dark: #373a3f;
+  --background-color: #121212;
+  --card-bg: #232323;
+  --info-panel-bg: #222;
+  --button-bg: #3a8bb3;
+  --button-hover: #307aa1;
+  --text-color: #fff;
+  --border-color: #444;
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -15,29 +37,49 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: var(--background-light);
-  cursor: url("../assets/images/pointer.png"), auto;
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
 }
 
 header {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-color);
   padding: 1rem;
   text-align: center;
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 header h1 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+/* Theme Toggle Button */
+#theme-toggle {
+  position: fixed;
+  top: 0.5rem;
+  right: 1rem;
+  background: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--shadow);
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+  background-color: var(--button-hover);
+}
+
 .info-panel {
   background: var(--info-panel-bg);
   padding: 1rem;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+  box-shadow: 0 4px 6px var(--shadow);
+  margin: 0.3rem;
 }
 
 .info-panel span {
@@ -57,51 +99,30 @@ main {
 
 .controls {
   flex: 1;
-  min-width: 250px;
-  background: var(--control-bg);
+  background: var(--card-bg);
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--shadow);
 }
 
-.controls h2 {
+.controls h2,
+legend {
+  color: var(--text-color);
   margin-bottom: 1rem;
   font-size: clamp(1.25rem, 3vw, 1.5rem);
-}
-
-.controls p {
-  margin: 1rem 0;
-}
-
-.controls label {
-  display: block;
-  margin-bottom: 0.5rem;
 }
 
 .controls input,
 .controls select {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
 }
 
-.visualization {
-  flex: 3;
-  min-width: 300px;
-  min-height: 400px;
-  background: var(--visualization-bg);
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  overflow-x: auto;
-}
-
 button {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--text-color);
   border: none;
   padding: 0.75rem 1.25rem;
   cursor: pointer;
@@ -111,20 +132,35 @@ button {
 }
 
 button:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--button-hover);
+}
+
+.visualization {
+  flex: 3;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 70vh;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .bar {
   display: inline-block;
+  /* position: static; */
   margin: 0 2px;
-  border-radius: 3px;
+  border-radius: 10px;
   background: linear-gradient(
     to bottom,
     var(--primary-color),
     var(--primary-dark)
   );
   text-align: center;
-  max-width: 40px;
+  /* max-width: 40px; */
   min-height: 3px;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -136,7 +172,10 @@ button:hover {
 .bar.jump {
   animation: jump 0.6s;
 }
-
+.bar.finish {
+  -webkit-animation: finish 0.9s both;
+  animation: finish 0.9s both;
+}
 @keyframes shake {
   0%,
   100% {
@@ -157,7 +196,70 @@ button:hover {
   }
 }
 
-/* Media Queries */
+@-webkit-keyframes finish {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-vertical {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+footer {
+  text-align: center;
+}
+/* @media Queries for Responsiveness */
 @media screen and (max-width: 768px) {
   main {
     flex-direction: column;
