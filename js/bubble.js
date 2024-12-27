@@ -14,7 +14,7 @@ async function bubbleSort() {
     stopAnimation();
     return;
   }
-  
+
   for (let i = 0; i < bars.length - 1 && isRunning; i++) {
     bars.forEach((_barValue, idx) => {
       const adjustedIdx = idx - i;
@@ -61,7 +61,7 @@ async function bubbleSort() {
       }
       updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "blue");
     }
-    sounds.compare.play();
+    if (i < bars.length - 2) sounds.compare.play();
     await pause();
   }
   currentOperation.textContent = "Bubble Sort Complete";
