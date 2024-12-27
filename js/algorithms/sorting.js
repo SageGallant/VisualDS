@@ -11,7 +11,7 @@ export async function bubble() {
   const bar = selection.map((bar) => parseInt(bar.style.height, 10));
 
   for (let i = 0; i < bar.length - 1 && isRunning; i++) {
-    selection.forEach((idx) => {
+    selection.forEach((_barValues, idx) => {
       const adjustedIdx = idx - i;
       if (adjustedIdx >= 0)
         selection[adjustedIdx].style.background = COLORS.default;
