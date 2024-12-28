@@ -53,7 +53,7 @@ function updateVisualization() {
     carElement.classList.add("train-car");
     carElement.classList.add("add-car");
     carElement.classList.add("car-move");
-    carElement.style.backgroundImage = "url('../assets/images/train-car.png')";
+    carElement.style.backgroundImage = "url('./assets/images/train-car.png')";
     carElement.textContent = currentNode.value;
     visualization.appendChild(carElement);
     currentNode = currentNode.next;
