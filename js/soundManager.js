@@ -5,6 +5,11 @@ export const sounds = {
   complete: new Audio("./assets/audio/finish.mp3"),
 };
 
+export const listSounds = {
+  engine: new Audio("./assets/audio/engine.mp3"),
+  coach: new Audio("./assets/audio/coach.mp3"),
+};
+
 export function playSound(type) {
   sounds["complete"];
   if (sounds[type]) {
@@ -13,5 +18,11 @@ export function playSound(type) {
     sounds[type].play();
   } else {
     console.error(`Sound type "${type}" not found.`);
+  }
+}
+export function list(type) {
+  // listSounds["engine"];
+  if (listSounds[type]) {
+    listSounds[type].play();
   }
 }

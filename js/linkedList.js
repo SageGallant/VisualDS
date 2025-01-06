@@ -1,3 +1,5 @@
+import { list } from "./soundManager.js";
+
 const visualization = document.getElementById("train-visualization");
 const themeToggleButton = document.getElementById("theme-toggle");
 
@@ -34,7 +36,6 @@ class LinkedList {
 
 const linkedList = new LinkedList();
 
-// Update the visualization after any change
 function updateVisualization() {
   visualization.innerHTML = "";
   let currentNode = linkedList.head;
@@ -45,6 +46,7 @@ function updateVisualization() {
   const engineElement = document.createElement("div");
   engineElement.classList.add("train-engine");
   engineElement.classList.add("car-move");
+  list("engine");
   visualization.appendChild(engineElement);
 
   currentNode = currentNode.next;
@@ -54,6 +56,7 @@ function updateVisualization() {
     carElement.classList.add("add-car");
     carElement.classList.add("car-move");
     carElement.style.backgroundImage = "url('./assets/images/train-car.png')";
+    list("coach");
     carElement.textContent = currentNode.value;
     visualization.appendChild(carElement);
     currentNode = currentNode.next;
