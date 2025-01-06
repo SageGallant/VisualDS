@@ -7,7 +7,9 @@
   --button-bg-light: #0078d7;
   --button-bg-dark: #333;
 }
-
+* {
+  border: 1px solid black;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: var(--light-bg-color);
@@ -41,6 +43,8 @@ body {
   align-items: center;
   position: relative;
   font-size: 18px;
+  top: 4px;
+  margin: 0px;
   transition: transform 0.3s ease;
 }
 

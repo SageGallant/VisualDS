@@ -32,8 +32,8 @@ function sort() {
       });
       break;
     case "insertion":
-      currentSortingPromise = insertionSort().finally(() => {
-        isRunning = false;
+      currentSortingPromise = algorithms.insertionSort().finally(() => {
+        isRunning = true;
         startButton.textContent = "Start";
       });
       break;

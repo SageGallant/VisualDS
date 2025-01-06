@@ -1,4 +1,4 @@
-import { pause, COLORS, updateBarsWithOptions } from "../utils.js";
+import { pause, COLORS, updateBars } from "../utils.js";
 import { playSound } from "../soundManager.js";
 import { isRunning } from "../app.js";
 
@@ -34,7 +34,7 @@ export async function bubble() {
           bar[j],
           bar[j + 1],
         ];
-        updateBarsWithOptions(
+        updateBars(
           [selection[j], selection[j + 1]],
           COLORS.swap, // Background color
           "jump", // Class to add
@@ -45,13 +45,7 @@ export async function bubble() {
         currentOperation.textContent = `Swapped bars ${j} and ${j + 1}`;
         await pause();
       } else {
-        // updateBarsWithSound(
-        //   [selection[j], selection[j + 1]],
-        //   COLORS.incorrect,
-        //   "shake",
-        //   "noSwap"
-        // );
-        updateBarsWithOptions(
+        updateBars(
           [selection[j], selection[j + 1]],
           COLORS.incorrect, // Background color
           "shake", // Class to add
@@ -60,12 +54,7 @@ export async function bubble() {
         );
         await pause();
       }
-      // updateBars(
-      //   [selection[j], selection[j + 1]],
-      //   ["shake", "jump"],
-      //   COLORS.sorted
-      // );
-      updateBarsWithOptions(
+      updateBars(
         [selection[j], selection[j + 1]],
         COLORS.sorted, // Background color
         null, // No class to add
@@ -84,50 +73,56 @@ export async function bubble() {
   currentOperation.textContent = "Bubble Sort Complete";
 }
 
-export async function insertionSort() {
+export async function insertion() {
   const selection = Array.from(visualization.children);
   const bar = selection.map((bar) => parseInt(bar.style.height, 10));
 
-  for (let i = 1; i < bar.length; i++) {
-    loopbar.textContent = `Phase: ${i}`;
-    currentOperation.textContent = `Inserting bar ${i}`;
-
-    let currentVal = bar[i];
-    let currentBar = selection[i];
-
+  for (let i = 1; i < bar.length && isRunning; i++) {
+    selection[i].style.background = COLORS.current;
+    let key = bar[i];
     let j = i - 1;
-    // Highlight the current bar
-    currentBar.style.background = "orange";
-    await pause(500);
 
-    // Shift elements of the sorted portion of the array that are greater than currentVal
-    while (j >= 0 && bar[j] > currentVal) {
-      selection[j].style.background = "red"; // Highlight the bar that's being shifted
-      await pause(500);
+    loopvalues.textContent = `Phase: ${i}, Key: ${key}`;
+    currentOperation.textContent = `Placing bar ${i} in sorted section`;
+    await pause();
 
-      bar[j + 1] = bar[j]; // Shift the value to the right
-      selection[j + 1].style.height = selection[j].style.height; // Move the bar
+    while (j >= 0 && bar[j] > key && isRunning) {
+      selection[j].style.background = COLORS.compare;
+      selection[j + 1].style.height = selection[j].style.height;
+      selection[j + 1].textContent = bar[j];
 
-      selection[j].textContent = bar[j]; // Update the text on the selection
+      updateBars(
+        [selection[j], selection[j + 1]],
+        COLORS.swap,
+        "jump",
+        [null],
+        "shift"
+      );
+      bar[j + 1] = bar[j];
+
+      currentOperation.textContent = `Shifted bar ${j} to position ${j + 1}`;
       j--;
+      await pause();
 
-      // Reset the background color after the shift
-      if (j >= 0) {
-        selection[j].style.background = "blue"; // Reset the color for the bar that's not being moved
-      }
+      selection[j + 1].style.background = COLORS.default;
     }
 
-    // Insert the current value at its correct position
-    bar[j + 1] = currentVal;
-    selection[j + 1].style.height = `${currentVal}px`;
-    selection[j + 1].textContent = currentVal;
+    bar[j + 1] = key;
+    selection[j + 1].style.height = `${key}px`;
+    selection[j + 1].textContent = key;
 
-    // Reset the color of the inserted bar to blue
-    currentBar.style.background = "blue";
-    playSound("shift");
-    await pause(500);
+    updateBars([selection[j + 1]], COLORS.correct, "place", ["jump"], "place");
+
+    currentOperation.textContent = `Placed bar ${i} at position ${j + 1}`;
+    selection[j + 1].style.background = COLORS.sorted;
+    await pause();
+
+    // Reset colors for all previous elements
+    for (let k = 0; k <= i; k++) {
+      selection[k].style.background = COLORS.sorted;
+    }
   }
 
-  currentOperation.textContent = "Insertion Sort Complete";
   playSound("complete");
+  currentOperation.textContent = "Insertion Sort Complete";
 }

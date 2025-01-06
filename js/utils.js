@@ -4,6 +4,7 @@ const visualization = document.querySelector("#visualization");
 const barCountInput = document.querySelector("#bar-count");
 const barValuesInput = document.querySelector("#bar-values");
 const speedInput = document.querySelector("#speed");
+
 export const COLORS = {
   default: "white",
   compare: "orange",
@@ -11,11 +12,12 @@ export const COLORS = {
   incorrect: "red",
   sorted: "rebeccapurple",
 };
+
 let bars = [],
-  speed = parseInt(speedInput.value, 10),
-  animation = null;
+  speed = parseInt(speedInput.value, 10);
+
 speedInput.addEventListener("input", () => {
-  speed = parseInt(speedInput.value, 10); // Parse to integer here as well!
+  speed = parseInt(speedInput.value, 10);
 });
 
 export function createBars() {
@@ -26,7 +28,7 @@ export function createBars() {
       bars = barValues.split(",").map((v) => +v.trim());
     } else {
       alert("Please enter valid numeric values for bars.");
-      return; // Return early if invalid input
+      return;
     }
   } else {
     bars = Array.from({ length: barCount }, () =>
@@ -54,28 +56,7 @@ export function handleReset() {
   document.querySelector("#current-operation").textContent = "Reset complete";
 }
 
-// export function updateBars(bars, classesToRemove, newBackground) {
-//   bars.forEach((bar) => {
-//     classesToRemove.forEach((cls) => bar.classList.remove(cls));
-//     bar.style.background = newBackground;
-//   });
-// }
-
-// export function updateBarsWithSound(
-//   bars,
-//   backgroundColor,
-//   classToAdd,
-//   soundToPlay
-// ) {
-//   bars.forEach((bar) => {
-//     bar.style.background = backgroundColor;
-//     bar.classList.add(classToAdd);
-//     setTimeout(() => bar.classList.remove(classToAdd), 500); // Remove class after animation duration
-//   });
-//   playSound(soundToPlay);
-//   pause();
-// }
-export function updateBarsWithOptions(
+export function updateBars(
   bars,
   backgroundColor = null, // Optional background color
   classToAdd = null, // Optional class to add
@@ -85,15 +66,12 @@ export function updateBarsWithOptions(
   animationDuration = 0 // Optional animation duration (in milliseconds)
 ) {
   bars.forEach((bar) => {
-    // Remove classes if provided
     classToRemove.forEach((cls) => bar.classList.remove(cls));
 
-    // Update background color if provided
     if (backgroundColor) {
       bar.style.background = backgroundColor;
     }
 
-    // Add class if provided
     if (classToAdd) {
       bar.classList.add(classToAdd);
       // Remove class after animation duration if animation is enabled
@@ -102,7 +80,6 @@ export function updateBarsWithOptions(
       }
     }
   });
-
   // Play sound if provided
   if (soundToPlay) {
     playSound(soundToPlay);
