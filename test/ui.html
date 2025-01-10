@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -165,4 +165,252 @@
         &copy; 2024 VisualizeDSA. All rights reserved.
     </footer>
 </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1px solid;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .section-navbar {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-content {
+            text-align: left;
+            color: #333;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .left-section,
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .title-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .cta-button,
+        .about-us {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover,
+        .about-us:hover {
+            background: #f8f8f8;
+        }
+
+        .slider-about-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 300px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .slider {
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prev-button {
+            left: 1rem;
+        }
+
+        .next-button {
+            right: 1rem;
+        }
+
+        .arrow {
+            border: solid #333;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 4px;
+        }
+
+        .arrow-right {
+            transform: rotate(-45deg);
+        }
+
+        .arrow-left {
+            transform: rotate(135deg);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slider-about-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="left-section">
+            <div class="section-navbar">
+                <div class="nav-content">
+                    Navbar
+                </div>
+            </div>
+            <div class="title-section">
+                <h1>Welcome to Our Platform</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+            </div>
+            <div class="footer-section">
+                <p>© 2025 Your Company. All rights reserved.</p>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="cta-button">
+                <span>Get Started Today</span>
+                <span class="arrow arrow-right"></span>
+            </div>
+
+            <div class="slider-about-container">
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">Slide 1</div>
+                        <div class="slide">Slide 2</div>
+                        <div class="slide">Slide 3</div>
+                    </div>
+                    <button class="slider-button prev-button">
+                        <span class="arrow arrow-left"></span>
+                    </button>
+                    <button class="slider-button next-button">
+                        <span class="arrow arrow-right"></span>
+                    </button>
+                </div>
+
+                <div class="about-us">
+                    <span>About Us</span>
+                    <span class="arrow arrow-right"></span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Slider functionality
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            let currentSlide = 0;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            prevButton.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            });
+
+            // Add click handlers for CTA and About Us
+            document.querySelector('.cta-button').addEventListener('click', () => {
+                alert('CTA clicked! Add your action here.');
+            });
+
+            document.querySelector('.about-us').addEventListener('click', () => {
+                alert('About Us clicked! Add your action here.');
+            });
+        </script>
+</body>
+
 </html>
