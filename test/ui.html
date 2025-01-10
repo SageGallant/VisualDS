@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-primary: #2c2e31;
@@ -140,7 +141,6 @@
 
         /* The Original file CSS */
         body {
-            font-family: Arial, sans-serif;
             background-color: #f5f5f5;
         }
 
@@ -309,7 +309,7 @@
                 </header>
             </div>
             <div class="footer-section">
-                <p>© 2025 Your Company. All rights reserved.</p>
+                <p>© 2025 VisualDSA. All rights reserved.</p>
             </div>
         </div>
 
@@ -324,7 +324,7 @@
                 </section>
             </div>
 
-            <div class="slider-about-container">
+            <div id="about" class="slider-about-container">
                 <div class="slider-container">
                     <div class="slider">
                         <div class="slide">Slide 1</div>
@@ -350,25 +350,54 @@
         </div>
 
         <script>
-            // Slider functionality
             const slider = document.querySelector('.slider');
             const slides = document.querySelectorAll('.slide');
             const prevButton = document.querySelector('.prev-button');
             const nextButton = document.querySelector('.next-button');
             let currentSlide = 0;
+            let slideInterval;
+            const intervalTime = 2000; // Time between slides in milliseconds
 
             function updateSlider() {
                 slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
 
-            prevButton.addEventListener('click', () => {
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            }
+
+            function prevSlide() {
                 currentSlide = (currentSlide - 1 + slides.length) % slides.length;
                 updateSlider();
+            }
+
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, intervalTime);
+            }
+
+            function pauseSlideShow() {
+                clearInterval(slideInterval);
+            }
+
+            // Start the slideshow
+            startSlideShow();
+
+            // Add event listeners for hover
+            slider.addEventListener('mouseenter', pauseSlideShow);
+            slider.addEventListener('mouseleave', startSlideShow);
+
+            // Add event listeners for buttons
+            prevButton.addEventListener('click', () => {
+                pauseSlideShow();
+                prevSlide();
+                startSlideShow();
             });
 
             nextButton.addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateSlider();
+                pauseSlideShow();
+                nextSlide();
+                startSlideShow();
             });
 
             // Add click handlers for CTA and About Us
