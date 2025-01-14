@@ -1,0 +1,306 @@
+:root {
+  --color-primary: #2c2e31;
+  --color-secondary: #da3333;
+  --color-accent: #e2b714;
+  --color-background: #e5e8ff;
+  --color-text: #333333;
+  --color-light: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  /* border: 1px solid; */
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.main-container {
+  background-color: #fffdfd;
+  max-width: 1200px;
+  margin: 0.9rem auto;
+  padding: 1rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 24px;
+  gap: 2rem;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* left section styling. */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 1rem 0;
+  background: var(--color-primary);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: #333;
+}
+
+nav a {
+  color: var(--color-light);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--color-secondary);
+}
+
+.header {
+  background: var(--color-primary);
+  color: var(--color-light);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.footer {
+  background: var(--color-primary);
+  color: var(--color-light);
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* right section styling. */
+.feature {
+  text-align: center;
+  padding: 1rem;
+  background: var(--color-accent);
+  color: var(--color-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.feature h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.feature p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feature button {
+  background: var(--color-secondary);
+  color: var(--color-light);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.feature button:hover {
+  background: var(--color-primary);
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.5rem;
+}
+
+.slider {
+  position: relative;
+  height: 300px;
+  background: var(--color-primary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.slides {
+  height: 100%;
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Add these styles to your existing CSS file */
+
+.slide {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.profile-card {
+  background: var(--color-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.profile-img {
+  width: 100px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img-placeholder {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-light);
+}
+
+.profile-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--color-secondary);
+  color: var(--color-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.profile-info {
+  margin-bottom: 1.5rem;
+}
+
+.profile-info h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.profile-info .title {
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.profile-info .bio {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+/* slider styling ends here */
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev-button {
+  left: 1rem;
+}
+
+.next-button {
+  right: 1rem;
+}
+
+.arrow {
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+}
+
+.arrow-left {
+  transform: rotate(135deg);
+}
+
+.contact {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background: rebeccapurple;
+  border-radius: 8px;
+}
+
+.contact h3 {
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+/* media query for responsiveness */
+
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+
+  .slider-about-container {
+    grid-template-columns: 1fr;
+  }
+}

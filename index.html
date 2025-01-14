@@ -1,76 +1,125 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta name="description" content="Visualize algorithms like Bubble Sort and Insertion Sort interactively.">
-    <meta name="author" content="Ram Chouhan">
-    <title>Algorithm Visualizer</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="./js/app.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    </link>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <a href="linkedList.html">
-                <button style="background-color: orange;" aria-label="LinkedList hyperlink">LinkedList</button>
-            </a>
-            <h1>Algorithm Visualizer</h1>
-            <button id="theme-toggle" aria-label="Toggle Dark/Light Theme">🌙</button>
-        </nav>
-    </header>
-
-    <section class="info-panel" id="info-panel">
-        <p>
-            <strong id="loop-values">Phase: 0, Compare: 0</strong>
-            Current Operation: <strong id="current-operation">Idle</strong>
-        </p>
-    </section>
-
-    <main>
-        <section class="controls">
-            <h2>Controls</h2>
-            <form id="controls-form">
-                <fieldset>
-                    <legend>Algorithm Options</legend>
-                    <label for="algorithm">Choose Sorting:</label>
-                    <select id="algorithm" name="algorithm">
-                        <option value="bubble">Bubble Sort</option>
-                        <option value="insertion">Insertion Sort</option>
-                    </select>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Visualization Settings</legend>
-                    <label for="bar-count">Number of Bars:</label>
-                    <input type="number" id="bar-count" name="bar-count" value="10" min="5" max="100">
-
-                    <label for="bar-values">Enter Bar Values (comma separated):</label>
-                    <input type="text" id="bar-values" name="bar-values" placeholder="e.g., 10,20,30">
-
-                    <label for="speed">Animation Speed (ms):</label>
-                    <input type="number" id="speed" name="speed" value="500" min="50" max="2000">
-                </fieldset>
-
-                <div class="buttons">
-                    <button type="button" id="start" aria-label="Start/Stop Sorting">Start</button>
-                    <button type="button" id="reset" aria-label="Reset the Visualization">Reset</button>
-                </div>
-            </form>
+    <main class="main-container">
+        <section class="left-section">
+            <nav class="navbar">
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <header class="header">
+                <div class="logo">VisualDSA</div>
+                <h1>Master Data Structures and Algorithms</h1>
+                <p>Learn through interactive visualizations and grow your skills in Computer Science.</p>
+            </header>
+            <footer class="footer">
+                <p>© 2025 VisualDSA. All rights reserved.</p>
+            </footer>
         </section>
 
-        <section class="visualization" id="visualization" role="region" aria-live="polite">
-            <!-- Visualization goes here -->
+        <section class="right-section">
+            <section class="feature">
+                <h2>Discover, Learn, Succeed</h2>
+                <p>Our platform provides in-depth visualizations of complex data structures and algorithms to help
+                    you succeed
+                    in your Computer Science journey.</p>
+                <button>Get Started</button>
+            </section>
+
+            <div id="about" class="about-section">
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide">
+                            <div class="profile-card">
+                                <div class="profile-header">
+                                    <div class="profile-img">
+                                        <div class="profile-img-placeholder">AA</div>
+                                    </div>
+                                    <div class="profile-badges">
+                                        <span class="badge">Front-End</span>
+                                        <span class="badge">UI/UX Designer</span>
+                                    </div>
+                                </div>
+                                <div class="profile-info">
+                                    <h3>Ayaz Ahmad</h3>
+                                    <p class="bio">Specializing in graph algorithms and dynamic programming. 5+ years
+                                        teaching experience.</p>
+                                </div>
+
+                                <!-- <div class="profile-links">
+                                    <a href="#" class="profile-btn github">GitHub</a>
+                                    <a href="#" class="profile-btn linkedin">LinkedIn</a>
+                                    <a href="#" class="profile-btn portfolio">Portfolio</a>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="profile-card">
+                                <div class="profile-header">
+                                    <div class="profile-img">
+                                        <div class="profile-img-placeholder">KP</div>
+                                    </div>
+                                    <div class="profile-badges">
+                                        <span class="badge">Full Stack</span>
+                                        <span class="badge">Java Developer</span>
+                                    </div>
+                                </div>
+                                <div class="profile-info">
+                                    <h3>Komal Parihar</h3>
+                                    <p class="bio">Passionate about making complex algorithms accessible to everyone.
+                                        Data structure visualization expert.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="profile-card">
+                                <div class="profile-header">
+                                    <div class="profile-img">
+                                        <div class="profile-img-placeholder">RC</div>
+                                    </div>
+                                    <div class="profile-badges">
+                                        <span class="badge">HTML Developer</span>
+                                        <span class="badge">CSS Developer</span>
+                                    </div>
+                                </div>
+                                <div class="profile-info">
+                                    <h3>Ram Chouhan</h3>
+                                    <p class="bio">PhD in Computer Science. Specialized in optimization algorithms and
+                                        competitive programming.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-button prev-button">
+                        <span class="arrow arrow-left"></span>
+                    </button>
+                    <button class="slider-button next-button">
+                        <span class="arrow arrow-right"></span>
+                    </button>
+                </div>
+
+                <div id="contact" class="contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@VisualDSA.com</p>
+                    <p>Phone: +123 456 7890</p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Ram Chouhan All rights reserved. Developed for learning and educational
-            purposes.</p>
-    </footer>
-
+    <script src="scripts/main.js" defer>
+    </script>
 </body>
 
 </html>

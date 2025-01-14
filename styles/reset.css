@@ -1,0 +1,68 @@
+/* CSS Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%; /* Base font size */
+}
+
+body {
+  line-height: 1.5; /* Set a default line height */
+  font-family: Verdana, Geneva, Tahoma, sans-serif; /*Default font family*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal; /* Remove default boldness */
+}
+
+ul,
+ol {
+  list-style: none; /* Remove default list styles */
+}
+
+a {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit color from parent */
+}
+
+img {
+  max-width: 100%; /* Responsive images */
+  height: auto; /* Maintain aspect ratio */
+}
+
+table {
+  border-collapse: collapse; /* Remove space between table cells */
+  width: 100%; /* Make tables responsive */
+}
+
+button {
+  cursor: pointer; /* Change cursor for buttons */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+}
+
+input,
+textarea,
+select {
+  font-family: inherit; /* Inherit font family */
+  font-size: inherit; /* Inherit font size */
+}
+
+/* Additional resets for common elements */
+blockquote {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+code {
+  font-family: monospace; /* Use monospace font for code */
+}

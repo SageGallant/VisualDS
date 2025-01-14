@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort - Theory | VisualDSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Progress Navigation -->
+        <nav class="progress-nav">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+                <div class="progress-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <span class="step-label">Theory</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <span class="step-label">Algorithm</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <span class="step-label">Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="content-grid">
+            <!-- Theory Section -->
+            <section class="theory-section">
+                <h1>Bubble Sort</h1>
+                <div class="theory-content">
+                    <h2>What is Bubble Sort?</h2>
+                    <p>Bubble Sort is one of the simplest sorting algorithms that repeatedly steps through the list,
+                        compares adjacent elements and swaps them if they are in the wrong order.</p>
+
+                    <div class="concept-box">
+                        <h3>Key Concepts</h3>
+                        <ul>
+                            <li>Comparison-based algorithm</li>
+                            <li>In-place sorting</li>
+                            <li>Stable sorting algorithm</li>
+                        </ul>
+                    </div>
+
+                    <div class="performance-metrics">
+                        <h3>Performance</h3>
+                        <div class="metric">
+                            <span class="metric-label">Time Complexity:</span>
+                            <span class="metric-value">O(n²)</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Space Complexity:</span>
+                            <span class="metric-value">O(1)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visual Example Section -->
+            <section class="visual-section">
+                <h2>How It Works</h2>
+                <div class="array-demo" id="arrayDemo">
+                    <div class="array-element">5</div>
+                    <div class="array-element">3</div>
+                    <div class="array-element">8</div>
+                    <div class="array-element">4</div>
+                    <div class="array-element">2</div>
+                </div>
+                <div class="demo-controls">
+                    <button id="resetDemo" class="control-btn">Reset</button>
+                    <button id="nextStep" class="control-btn primary">Next Step</button>
+                </div>
+                <div class="step-explanation" id="stepExplanation">
+                    Click 'Next Step' to start the demonstration
+                </div>
+            </section>
+        </main>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn next">Continue to Algorithm →</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
