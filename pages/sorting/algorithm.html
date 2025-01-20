@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Algorithm | VisualDSA</title>
+    <base href="/" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="styles/pages/sorting/algorithm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Progress Navigation -->
+        <nav class="progress-nav">
+            <div class="progress-bar">
+                <div class="progress-completed"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <span class="step-label">Theory</span>
+                </div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <span class="step-label">Algorithm</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span class="step-label">Visualization</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Left Panel: Pseudocode -->
+            <section class="panel code-panel">
+                <h2>Bubble Sort Pseudocode</h2>
+                <div class="code-container">
+                    <pre class="pseudocode">
+procedure bubbleSort(A: list of sortable items)
+    n = length(A)
+    repeat
+        swapped = false
+        for i = 1 to n-1 inclusive do
+            if A[i-1] > A[i] then
+                swap(A[i-1], A[i])
+                swapped = true
+            end if
+        end for
+        n = n - 1
+    until not swapped
+end procedure</pre>
+                </div>
+            </section>
+
+            <!-- Right Panel: Implementation -->
+            <section class="panel implementation-panel">
+                <h2>Implementation Details</h2>
+                <div class="implementation-container">
+                    <div class="implementation-section">
+                        <h3>Time Complexity</h3>
+                        <div class="complexity-box">
+                            <div class="complexity-item">
+                                <span class="label">Best Case:</span>
+                                <span class="value">O(n)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="label">Average Case:</span>
+                                <span class="value">O(n²)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="label">Worst Case:</span>
+                                <span class="value">O(n²)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="implementation-section">
+                        <h3>Space Complexity</h3>
+                        <div class="complexity-box">
+                            <div class="complexity-item">
+                                <span class="label">Auxiliary Space:</span>
+                                <span class="value">O(1)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="implementation-section">
+                        <h3>Key Characteristics</h3>
+                        <ul class="characteristics-list">
+                            <li>Simple implementation</li>
+                            <li>Stable sorting algorithm</li>
+                            <li>In-place algorithm</li>
+                            <li>Adaptive</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="nav-btn prev-btn" onclick="location.href='pages/sorting/theory.html'">Previous</button>
+            <button class="nav-btn next-btn" onclick="location.href='pages/sorting/visualization.html'">Next</button>
+        </div>
+    </div>
+</body>
+
+</html>

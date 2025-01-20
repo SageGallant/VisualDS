@@ -1,0 +1,121 @@
+.theory-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.theory-intro {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-hover);
+}
+
+.key-points {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+}
+
+.key-points h2 {
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.key-points ul {
+  list-style-type: none;
+}
+
+.key-points li {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.key-points li::before {
+  content: "•";
+  color: var(--color-accent);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.example-section {
+  margin-top: 2rem;
+}
+
+.example-section h2 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.example-steps {
+  background: var(--color-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+
+.step {
+  padding: 1rem;
+  background: var(--color-light);
+  border-radius: var(--border-radius);
+}
+
+.step p {
+  margin: 0.5rem 0;
+  color: var(--color-primary);
+}
+
+.visual-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.array-visual {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 200px;
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+}
+
+.array-element {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.array-element.comparing {
+  background: var(--color-secondary);
+  color: var(--color-light);
+  transform: translateY(-5px);
+}
+
+.visual-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.button-secondary {
+  background: var(--color-hover);
+  color: var(--color-primary);
+}
+
+.button-secondary:hover {
+  background: var(--color-border);
+}

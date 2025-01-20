@@ -1,0 +1,254 @@
+:root {
+  --color-primary: #2c2e31;
+  --color-secondary: #da3333;
+  --color-accent: #e2b714;
+  --color-background: #f8f9fa;
+  --color-text: #333333;
+  --color-light: #ffffff;
+  --color-border: #e0e0e0;
+  --color-success: #28a745;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Progress Navigation */
+.progress-nav {
+  background: var(--color-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.progress-completed {
+  position: absolute;
+  height: 100%;
+  width: 66%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.step.completed .step-number {
+  background: var(--color-success);
+  color: var(--color-light);
+}
+
+.step.active .step-number {
+  background: var(--color-accent);
+  color: var(--color-light);
+}
+
+.step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Main Content */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.panel {
+  background: var(--color-light);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.panel h2 {
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Code Panel */
+.code-container {
+  background: var(--color-primary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.pseudocode {
+  color: var(--color-light);
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* Implementation Panel */
+.implementation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.implementation-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.complexity-box {
+  background: var(--color-background);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.complexity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.complexity-item .label {
+  font-weight: 600;
+}
+
+.complexity-item .value {
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-family: "Courier New", monospace;
+}
+
+.characteristics-list {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.characteristics-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.characteristics-list li::before {
+  content: "•";
+  color: var(--color-accent);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prev-btn {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.next-btn {
+  background: var(--color-secondary);
+  color: var(--color-light);
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-steps {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .progress-bar {
+    display: none;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    width: 100%;
+  }
+}
