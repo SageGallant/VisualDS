@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bubble Sort - Theory</title>
-    <base href="/" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/pages/sorting/styles.css">
-    <link rel="stylesheet" href="styles/pages/sorting/theory.css">
+    <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
+    <link rel="stylesheet" href="../../styles/pages/sorting/theory.css">
 </head>
 
 <body>
@@ -33,16 +32,7 @@
                     <p class="theory-intro">Bubble Sort is one of the simplest sorting algorithms that repeatedly steps
                         through the list, compares adjacent elements and swaps them if they are in the wrong order.</p>
 
-                    <div class="key-points">
-                        <h2>Key Characteristics</h2>
-                        <ul>
-                            <li>Simple implementation</li>
-                            <li>O(n²) time complexity</li>
-                            <li>Stable sorting algorithm</li>
-                            <li>In-place algorithm</li>
-                        </ul>
-                    </div>
-
+                    
                     <div class="example-section">
                         <h2>How It Works</h2>
                         <p>Consider an unsorted array: [64, 34, 25, 12, 22, 11, 90]</p>
@@ -54,10 +44,20 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
 
             <div class="card visual-card">
+                <div class="key-points">
+                    <h2>Key Characteristics</h2>
+                    <ul>
+                        <li>Simple implementation</li>
+                        <li>O(n²) time complexity</li>
+                        <li>Stable sorting algorithm</li>
+                        <li>In-place algorithm</li>
+                    </ul>
+                </div>
                 <div class="card-header">
                     <h2 class="card-title">Visual Representation</h2>
                 </div>
@@ -73,13 +73,13 @@
 
         <div class="navigation">
             <div></div>
-            <button class="button button-primary" onclick="window.location.href='pages/sorting/algorithm.html'">Next:
+            <button class="button button-primary" onclick="window.location.href='./algorithm.html'">Next:
                 Algorithm
                 →</button>
         </div>
     </div>
 
-    <script src="scripts/sorting/bubble/script.js"></script>
+    <script src="../../scripts/sorting/bubble/script.js"></script>
 </body>
 
 </html>
