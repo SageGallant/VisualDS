@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedList - Data Structures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span>VisualDSA</span>
+            </div>
+            <div class="progress-steps">
+                <a href="../index.html" class="step-btn completed">Theory</a>
+                <a href="algorithm.html" class="step-btn active">Algorithm</a>
+                <a href="visualization.html" class="step-btn">Visualization</a>
+            </div>
+            <div class="topics-menu">
+                <h3>Topics</h3>
+                <a href="#insertion">Insertion</a>
+                <a href="#deletion">Deletion</a>
+                <a href="#complexity">Complexity</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>LinkedList Operations</h1>
+                <div class="header-actions">
+                    <button id="themeToggle" class="theme-toggle">🌙</button>
+                </div>
+            </header>
+
+            <!-- Content Slider -->
+            <div class="content-slider">
+                <div class="slider-container">
+                    <!-- Insertion Section -->
+                    <div class="slide" id="insertion">
+                        <h2>Insertion Operations</h2>
+                        <div class="code-section">
+                            <h3>Insert at Beginning</h3>
+                            <pre class="code-block">
+function insertAtBeginning(value) {
+    const newNode = new Node(value);
+    newNode.next = head;
+    head = newNode;
+}</pre>
+                        </div>
+                        <div class="code-section">
+                            <h3>Insert at End</h3>
+                            <pre class="code-block">
+function insertAtEnd(value) {
+    const newNode = new Node(value);
+    if (!head) {
+        head = newNode;
+        return;
+    }
+    let current = head;
+    while (current.next) {
+        current = current.next;
+    }
+    current.next = newNode;
+}</pre>
+                        </div>
+                    </div>
+
+                    <!-- Deletion Section -->
+                    <div class="slide" id="deletion">
+                        <h2>Deletion Operations</h2>
+                        <div class="code-section">
+                            <h3>Delete from Beginning</h3>
+                            <pre class="code-block">
+function deleteFromBeginning() {
+    if (!head) return null;
+    head = head.next;
+}</pre>
+                        </div>
+                        <div class="code-section">
+                            <h3>Delete from End</h3>
+                            <pre class="code-block">
+function deleteFromEnd() {
+    if (!head) return null;
+    if (!head.next) {
+        head = null;
+        return;
+    }
+    let current = head;
+    while (current.next.next) {
+        current = current.next;
+    }
+    current.next = null;
+}</pre>
+                        </div>
+                    </div>
+
+                    <!-- Complexity Section -->
+                    <div class="slide" id="complexity">
+                        <h2>Time Complexity Analysis</h2>
+                        <div class="complexity-grid">
+                            <div class="complexity-card">
+                                <h3>Insertion</h3>
+                                <p>Beginning: O(1)</p>
+                                <p>End: O(n)</p>
+                                <p>At Position: O(n)</p>
+                            </div>
+                            <div class="complexity-card">
+                                <h3>Deletion</h3>
+                                <p>Beginning: O(1)</p>
+                                <p>End: O(n)</p>
+                                <p>At Position: O(n)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="slider-nav">
+                    <button class="nav-btn prev-btn">←</button>
+                    <button class="nav-btn next-btn">→</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
