@@ -1,99 +1,130 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intermediate Page Designs</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Data Structures and Algorithms</title>
+ <style>
+   /* Color Palette */
+   :root {
+     --primary-color: #4CAF50;
+     --secondary-color: #2196F3;
+     --tertiary-color: #00BCD4;
+     --bg-color: #f2f2f2;
+     --card-bg-color: #fff;
+     --text-color: #333;
+   }
+
+   /* Global Styles */
+   body {
+     font-family: Arial, sans-serif;
+     background-color: var(--bg-color);
+     margin: 0;
+     padding: 0;
+   }
+
+   /* Sidebar */
+   .sidebar {
+     background-color: var(--primary-color);
+     color: #fff;
+     padding: 20px;
+     width: 200px;
+     height: 100vh;
+     float: left;
+   }
+
+   .sidebar h2 {
+     margin-top: 0;
+   }
+
+   .sidebar ul {
+     list-style-type: none;
+     padding: 0;
+   }
+
+   .sidebar li {
+     margin-bottom: 10px;
+     cursor: pointer;
+   }
+
+   /* Main Content */
+   .main-content {
+     margin-left: 220px;
+     padding: 20px;
+   }
+
+   .card {
+     background-color: var(--card-bg-color);
+     border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+     margin-bottom: 20px;
+   }
+
+   .card h3 {
+     color: var(--text-color);
+     margin-top: 0;
+   }
+
+   .card button {
+     background-color: var(--secondary-color);
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     padding: 10px 20px;
+     cursor: pointer;
+   }
+ </style>
 </head>
-<body class="font-sans bg-gray-100">
-  <div class="container mx-auto py-12">
-    <h1 class="text-3xl font-bold mb-8">Intermediate Page Design Concepts</h1>
+<body>
+ <div class="sidebar">
+   <h2>Data Structures and Algorithms</h2>
+   <ul>
+     <li>Sorting</li>
+     <li>Searching</li>
+     <li>Tree</li>
+     <li>Graph</li>
+   </ul>
+ </div>
 
-    <div class="grid grid-cols-2 gap-8">
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">Concept, Algorithm, Visualization</h2>
-        <p class="mb-4">This design presents the three main sections (Concept, Algorithm, Visualization) upfront, allowing users to select the one they want to explore.</p>
-        <div class="grid grid-cols-3 gap-4">
-          <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Concept</a>
-          <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Algorithm</a>
-          <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Visualization</a>
-        </div>
-      </div>
+ <div class="main-content">
+   <h2>Selected Category</h2>
+   <div class="card-container">
+     <div class="card">
+       <h3>Concept</h3>
+       <p>Learn the core concepts of the selected algorithm.</p>
+       <button>View Concept</button>
+     </div>
+     <div class="card">
+       <h3>Algorithm</h3>
+       <p>Explore the implementation details of the algorithm.</p>
+       <button>View Algorithm</button>
+     </div>
+     <div class="card">
+       <h3>Visualization</h3>
+       <p>Interactive visualizations to understand the algorithm.</p>
+       <button>View Visualization</button>
+     </div>
+   </div>
+ </div>
 
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">Stepwise Progression</h2>
-        <p class="mb-4">This design guides users through a step-by-step progression, starting with Concept, then Algorithm, and finally Visualization.</p>
-        <div class="space-y-4">
-          <a href="#" class="flex items-center space-x-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            <div class="w-8 h-8 rounded-full bg-white text-blue-500 flex items-center justify-center">1</div>
-            <span>Concept</span>
-          </a>
-          <a href="#" class="flex items-center space-x-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-            <div class="w-8 h-8 rounded-full bg-white text-green-500 flex items-center justify-center">2</div>
-            <span>Algorithm</span>
-          </a>
-          <a href="#" class="flex items-center space-x-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-            <div class="w-8 h-8 rounded-full bg-white text-red-500 flex items-center justify-center">3</div>
-            <span>Visualization</span>
-          </a>
-        </div>
-      </div>
+ <script>
+   // Add event listeners to sidebar links
+   const sidebarLinks = document.querySelectorAll('.sidebar li');
+   sidebarLinks.forEach(link => {
+     link.addEventListener('click', () => {
+       // Update the selected category
+       const selectedCategory = link.textContent.toLowerCase();
+       // Update the main content based on the selected category
+       updateMainContent(selectedCategory);
+     });
+   });
 
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">Expandable Sections</h2>
-        <p class="mb-4">This design presents the three sections (Concept, Algorithm, Visualization) in an expandable format, allowing users to focus on the content they need.</p>
-        <div class="space-y-4">
-          <div>
-            <button class="w-full flex items-center justify-between bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              <span>Concept</span>
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="mt-4 hidden">
-              <!-- Concept content goes here -->
-            </div>
-          </div>
-          <div>
-            <button class="w-full flex items-center justify-between bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-              <span>Algorithm</span>
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="mt-4 hidden">
-              <!-- Algorithm content goes here -->
-            </div>
-          </div>
-          <div>
-            <button class="w-full flex items-center justify-between bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-              <span>Visualization</span>
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="mt-4 hidden">
-              <!-- Visualization content goes here -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">Tabbed Interface</h2>
-        <p class="mb-4">This design uses a tabbed interface to allow users to switch between the Concept, Algorithm, and Visualization sections.</p>
-        <div>
-          <div class="flex justify-around border-b border-gray-300 mb-4">
-            <button class="py-2 px-4 font-bold text-blue-500 border-b-2 border-blue-500">Concept</button>
-            <button class="py-2 px-4 font-bold text-gray-500 hover:text-gray-700">Algorithm</button>
-            <button class="py-2 px-4 font-bold text-gray-500 hover:text-gray-700">Visualization</button>
-          </div>
-          <div>
-            <!-- Concept content goes here -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+   function updateMainContent(category) {
+     // Update the main content based on the selected category
+     // (e.g., fetch data, populate the card containers, etc.)
+     console.log(`Selected category: ${category}`);
+   }
+ </script>
 </body>
 </html>

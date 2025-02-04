@@ -1,102 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkedList - Theory | VisualDSA</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Structures and Algorithms</title>
+  <style>
+    /* Color Palette */
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #2196F3;
+      --tertiary-color: #00BCD4;
+      --bg-color: #f2f2f2;
+      --card-bg-color: #fff;
+      --text-color: #333;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 20px;
+      width: 20vw;
+      min-width: 150px;
+      max-width: 250px;
+      height: 100vh;
+      position: fixed;
+      left: -20vw;
+      transition: left 0.3s ease, width 0.3s ease;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      background-color: var(--secondary-color);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .main-content {
+      margin-left: 20px;
+      padding: 20px;
+      width: calc(100% - 20px);
+      transition: margin-left 0.3s ease;
+    }
+
+    .main-content.shift {
+      margin-left: 22vw;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg-color);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .button-group {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .button-group button {
+      background-color: var(--secondary-color);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      flex: 1;
+      min-width: 80px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="logo">
-                <h1>VisualDSA</h1>
-            </div>
-            <nav class="nav-steps">
-                <button class="nav-step active">
-                    <span class="step-number">1</span>
-                    <span class="step-text">Theory</span>
-                </button>
-                <button class="nav-step">
-                    <span class="step-number">2</span>
-                    <span class="step-text">Algorithm</span>
-                </button>
-                <button class="nav-step">
-                    <span class="step-number">3</span>
-                    <span class="step-text">Visualization</span>
-                </button>
-            </nav>
-        </aside>
+  <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
 
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Header Section -->
-            <header class="content-header">
-                <h2>Linked List: Insertion & Deletion</h2>
-                <div class="header-actions">
-                    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
-                </div>
-            </header>
+  <div class="sidebar">
+    <h2>Data Structures</h2>
+    <ul>
+      <li>Sorting</li>
+      <li>Searching</li>
+      <li>Tree</li>
+      <li>Graph</li>
+      <li>Heap</li>
+      <li>Stack</li>
+      <li>Queue</li>
+    </ul>
+  </div>
 
-            <!-- Theory Content -->
-            <section class="content-section">
-                <div class="theory-card">
-                    <h3>What is a Linked List?</h3>
-                    <p>A Linked List is a linear data structure where elements are stored in nodes, and each node points to the next node in the sequence. Unlike arrays, linked lists don't store elements in contiguous memory locations.</p>
-                    
-                    <div class="interactive-diagram">
-                        <div class="node-container">
-                            <!-- Nodes will be added dynamically via JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="theory-card">
-                    <h3>Types of Insertion</h3>
-                    <div class="operation-tabs">
-                        <button class="tab-btn active" data-tab="insert-beginning">At Beginning</button>
-                        <button class="tab-btn" data-tab="insert-end">At End</button>
-                        <button class="tab-btn" data-tab="insert-position">At Position</button>
-                    </div>
-                    <div class="tab-content active" id="insert-beginning">
-                        <h4>Insertion at Beginning</h4>
-                        <p>Time Complexity: O(1)</p>
-                        <ol class="steps-list">
-                            <li>Create a new node with given data</li>
-                            <li>Make new node's next point to current head</li>
-                            <li>Update head to point to new node</li>
-                        </ol>
-                    </div>
-                    <!-- Other tab contents -->
-                </div>
-
-                <div class="theory-card">
-                    <h3>Types of Deletion</h3>
-                    <div class="operation-tabs">
-                        <button class="tab-btn active" data-tab="delete-beginning">From Beginning</button>
-                        <button class="tab-btn" data-tab="delete-end">From End</button>
-                        <button class="tab-btn" data-tab="delete-position">From Position</button>
-                    </div>
-                    <div class="tab-content active" id="delete-beginning">
-                        <h4>Deletion from Beginning</h4>
-                        <p>Time Complexity: O(1)</p>
-                        <ol class="steps-list">
-                            <li>Store head node in temp</li>
-                            <li>Move head to next node</li>
-                            <li>Free temp node memory</li>
-                        </ol>
-                    </div>
-                    <!-- Other tab contents -->
-                </div>
-            </section>
-
-            <!-- Navigation Buttons -->
-            <footer class="content-footer">
-                <button class="nav-button next">Next: Algorithm →</button>
-            </footer>
-        </main>
+  <div class="main-content">
+    <h1>Data Structures and Algorithms</h1>
+    <div class="card-grid">
+      <div class="card">
+        <img src="sorting.jpg" alt="Sorting Algorithm" />
+        <h3>Sorting</h3>
+        <div class="button-group">
+          <button onclick="handleClick('sorting','concept')">Concept</button>
+          <button onclick="handleClick('sorting','algorithm')">Algorithm</button>
+          <button onclick="handleClick('sorting','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="searching.jpg" alt="Searching Algorithm" />
+        <h3>Searching</h3>
+        <div class="button-group">
+          <button onclick="handleClick('searching','concept')">Concept</button>
+          <button onclick="handleClick('searching','algorithm')">Algorithm</button>
+          <button onclick="handleClick('searching','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="sorting.jpg" alt="Sorting Algorithm" />
+        <h3>Sorting</h3>
+        <div class="button-group">
+          <button onclick="handleClick('sorting','concept')">Concept</button>
+          <button onclick="handleClick('sorting','algorithm')">Algorithm</button>
+          <button onclick="handleClick('sorting','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="searching.jpg" alt="Searching Algorithm" />
+        <h3>Searching</h3>
+        <div class="button-group">
+          <button onclick="handleClick('searching','concept')">Concept</button>
+          <button onclick="handleClick('searching','algorithm')">Algorithm</button>
+          <button onclick="handleClick('searching','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="sorting.jpg" alt="Sorting Algorithm" />
+        <h3>Sorting</h3>
+        <div class="button-group">
+          <button onclick="handleClick('sorting','concept')">Concept</button>
+          <button onclick="handleClick('sorting','algorithm')">Algorithm</button>
+          <button onclick="handleClick('sorting','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="searching.jpg" alt="Searching Algorithm" />
+        <h3>Searching</h3>
+        <div class="button-group">
+          <button onclick="handleClick('searching','concept')">Concept</button>
+          <button onclick="handleClick('searching','algorithm')">Algorithm</button>
+          <button onclick="handleClick('searching','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="sorting.jpg" alt="Sorting Algorithm" />
+        <h3>Sorting</h3>
+        <div class="button-group">
+          <button onclick="handleClick('sorting','concept')">Concept</button>
+          <button onclick="handleClick('sorting','algorithm')">Algorithm</button>
+          <button onclick="handleClick('sorting','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="searching.jpg" alt="Searching Algorithm" />
+        <h3>Searching</h3>
+        <div class="button-group">
+          <button onclick="handleClick('searching','concept')">Concept</button>
+          <button onclick="handleClick('searching','algorithm')">Algorithm</button>
+          <button onclick="handleClick('searching','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="sorting.jpg" alt="Sorting Algorithm" />
+        <h3>Sorting</h3>
+        <div class="button-group">
+          <button onclick="handleClick('sorting','concept')">Concept</button>
+          <button onclick="handleClick('sorting','algorithm')">Algorithm</button>
+          <button onclick="handleClick('sorting','visualization')">Visualization</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="searching.jpg" alt="Searching Algorithm" />
+        <h3>Searching</h3>
+        <div class="button-group">
+          <button onclick="handleClick('searching','concept')">Concept</button>
+          <button onclick="handleClick('searching','algorithm')">Algorithm</button>
+          <button onclick="handleClick('searching','visualization')">Visualization</button>
+        </div>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      sidebar.classList.toggle('open');
+      mainContent.classList.toggle('shift');
+    }
+
+    function handleClick(topic, type) {
+      console.log(`Clicked on ${type} for ${topic}`);
+    }
+  </script>
 </body>
+
 </html>
