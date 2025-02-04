@@ -1,0 +1,83 @@
+:root {
+  /* Color Palette */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-yellow: #ffc107; /* A vibrant yellow */
+  --color-red: #ff3b30; /* A bold red */
+  --background-color: #f7f7f7; /* Light gray/off-white for readability */
+  --text-color: #333333;
+
+  /* Typography */
+  --font-family-primary: "Montserrat", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Layout & Spacing */
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --padding-base: 16px;
+
+  /* Buttons */
+  --button-bg-color: var(--color-red);
+  --button-text-color: var(--color-white);
+  --button-border-radius: var(--border-radius);
+  --button-padding: 12px 24px;
+  --button-hover-bg-color: var(--color-yellow);
+
+  /* Cards & Sections */
+  --card-bg-color: var(--color-white);
+  --card-border-radius: var(--border-radius);
+  --card-box-shadow: var(--box-shadow);
+}
+
+/* Example usage of the variables */
+
+/* Global styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+}
+
+/* Cards & Sections */
+.card,
+.section {
+  background-color: var(--card-bg-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
+  padding: var(--padding-base);
+  margin: var(--padding-base);
+}
+
+/* Buttons */
+.button,
+button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover,
+button:hover {
+  background-color: var(--button-hover-bg-color);
+}
