@@ -1,130 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Data Structures and Algorithms</title>
- <style>
-   /* Color Palette */
-   :root {
-     --primary-color: #4CAF50;
-     --secondary-color: #2196F3;
-     --tertiary-color: #00BCD4;
-     --bg-color: #f2f2f2;
-     --card-bg-color: #fff;
-     --text-color: #333;
-   }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Sort Visualization</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      transition: background-color 0.5s, color 0.5s;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-   /* Global Styles */
-   body {
-     font-family: Arial, sans-serif;
-     background-color: var(--bg-color);
-     margin: 0;
-     padding: 0;
-   }
+    body.dark-mode {
+      background-color: #333;
+      color: #eee;
+    }
 
-   /* Sidebar */
-   .sidebar {
-     background-color: var(--primary-color);
-     color: #fff;
-     padding: 20px;
-     width: 200px;
-     height: 100vh;
-     float: left;
-   }
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #222;
+      color: white;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 10;
+    }
 
-   .sidebar h2 {
-     margin-top: 0;
-   }
+    .site-title {
+      flex: 1;
+      text-align: center;
+      margin: 0;
+    }
 
-   .sidebar ul {
-     list-style-type: none;
-     padding: 0;
-   }
+    .site-title a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.5rem;
+    }
 
-   .sidebar li {
-     margin-bottom: 10px;
-     cursor: pointer;
-   }
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+    }
 
-   /* Main Content */
-   .main-content {
-     margin-left: 220px;
-     padding: 20px;
-   }
+    #theme-toggle,
+    #menu-toggle {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+    }
 
-   .card {
-     background-color: var(--card-bg-color);
-     border-radius: 8px;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-     padding: 20px;
-     margin-bottom: 20px;
-   }
+    /* Menu Dropdown Styles */
+    #menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px;
+      z-index: 10;
+    }
 
-   .card h3 {
-     color: var(--text-color);
-     margin-top: 0;
-   }
+    #menu.active {
+      display: block;
+    }
 
-   .card button {
-     background-color: var(--secondary-color);
-     color: #fff;
-     border: none;
-     border-radius: 4px;
-     padding: 10px 20px;
-     cursor: pointer;
-   }
- </style>
+    #menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #menu ul li {
+      padding: 10px;
+    }
+
+    #menu ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* Progress Navigation (Timeline) */
+    .progress-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .circle {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: gray;
+      color: white;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .circle.active {
+      background: green;
+    }
+
+    /* Main Content Area */
+    main {
+      position: relative;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    /* Page Section Styles with Roll Transition */
+    .page-section {
+      position: absolute;
+      left: 50%;
+      top: 100px;
+      /* adjust vertical position as needed */
+      width: 80%;
+      opacity: 0;
+      transform: translateX(100%) rotateY(30deg);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .page-section.active {
+      transform: translateX(-50%) rotateY(0deg);
+      opacity: 1;
+    }
+
+    /* Buttons */
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+    }
+
+    .next-btn {
+      background: blue;
+      color: white;
+    }
+
+    .prev-btn {
+      background: gray;
+      color: white;
+    }
+
+    #complete-btn {
+      background: green;
+      color: white;
+    }
+  </style>
 </head>
+
 <body>
- <div class="sidebar">
-   <h2>Data Structures and Algorithms</h2>
-   <ul>
-     <li>Sorting</li>
-     <li>Searching</li>
-     <li>Tree</li>
-     <li>Graph</li>
-   </ul>
- </div>
+  <header>
+    <h1 class="site-title"><a href="index.html">VisualDSA</a></h1>
+    <div class="header-buttons">
+      <button id="theme-toggle">🌙</button>
+      <button id="menu-toggle">☰</button>
+      <nav id="menu">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Sorting</a></li>
+          <li><a href="#">Search</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <!-- Timeline-style progress navigation -->
+    <div class="progress-nav">
+      <span class="circle active" data-page="1">1</span>
+      <span class="circle" data-page="2">2</span>
+      <span class="circle" data-page="3">3</span>
+    </div>
+    <!-- Page Sections with roll transitions -->
+    <section class="page-section active" id="page1">
+      <h2>Bubble Sort - Introduction</h2>
+      <p>Content for page 1...</p>
+      <!-- Only Next button on first page -->
+      <button class="next-btn" data-next="2">Next</button>
+    </section>
+    <section class="page-section" id="page2">
+      <h2>Bubble Sort - Algorithm</h2>
+      <p>Content for page 2...</p>
+      <button class="prev-btn" data-prev="1">Previous</button>
+      <button class="next-btn" data-next="3">Next</button>
+    </section>
+    <section class="page-section" id="page3">
+      <h2>Bubble Sort - Visualization</h2>
+      <p>Content for page 3...</p>
+      <button class="prev-btn" data-prev="2">Previous</button>
+      <button class="next-btn" id="complete-btn">Complete</button>
+    </section>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll(".page-section");
+      const circles = document.querySelectorAll(".circle");
+      const nextButtons = document.querySelectorAll(".next-btn");
+      const prevButtons = document.querySelectorAll(".prev-btn");
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+      const completeBtn = document.getElementById("complete-btn");
+      const themeToggle = document.getElementById("theme-toggle");
 
- <div class="main-content">
-   <h2>Selected Category</h2>
-   <div class="card-container">
-     <div class="card">
-       <h3>Concept</h3>
-       <p>Learn the core concepts of the selected algorithm.</p>
-       <button>View Concept</button>
-     </div>
-     <div class="card">
-       <h3>Algorithm</h3>
-       <p>Explore the implementation details of the algorithm.</p>
-       <button>View Algorithm</button>
-     </div>
-     <div class="card">
-       <h3>Visualization</h3>
-       <p>Interactive visualizations to understand the algorithm.</p>
-       <button>View Visualization</button>
-     </div>
-   </div>
- </div>
+      let currentPage = 1;
 
- <script>
-   // Add event listeners to sidebar links
-   const sidebarLinks = document.querySelectorAll('.sidebar li');
-   sidebarLinks.forEach(link => {
-     link.addEventListener('click', () => {
-       // Update the selected category
-       const selectedCategory = link.textContent.toLowerCase();
-       // Update the main content based on the selected category
-       updateMainContent(selectedCategory);
-     });
-   });
+      // Function to show a page with a roll transition effect.
+      function showPage(pageNumber) {
+        // Remove active class from all sections.
+        sections.forEach(section => section.classList.remove("active"));
+        // Activate the desired section.
+        document.getElementById(`page${pageNumber}`).classList.add("active");
+        currentPage = pageNumber;
 
-   function updateMainContent(category) {
-     // Update the main content based on the selected category
-     // (e.g., fetch data, populate the card containers, etc.)
-     console.log(`Selected category: ${category}`);
-   }
- </script>
+        // Update progress circles (mark completed pages with a tick).
+        circles.forEach(circle => {
+          if (parseInt(circle.dataset.page) <= pageNumber) {
+            circle.classList.add("active");
+            circle.textContent = "✔";
+          } else {
+            circle.classList.remove("active");
+            circle.textContent = circle.dataset.page;
+          }
+        });
+      }
+
+      // Next button functionality.
+      nextButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+          const nextPage = parseInt(event.target.dataset.next);
+          if (nextPage) {
+            showPage(nextPage);
+          }
+        });
+      });
+
+      // Previous button functionality.
+      prevButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+          const prevPage = parseInt(event.target.dataset.prev);
+          if (prevPage) {
+            showPage(prevPage);
+          }
+        });
+      });
+
+      // Toggle the menu dropdown.
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+      });
+
+      // When the Complete button is clicked, redirect to homepage.
+      completeBtn.addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+
+      // Theme toggle functionality.
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+      });
+
+      // Initialize view.
+      showPage(1);
+    });
+  </script>
 </body>
+
 </html>
