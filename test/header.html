@@ -1,0 +1,67 @@
+<style>
+    .header {
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-bar {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #eee;
+        height: 30px;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: var(--accent);
+        border-radius: 15px;
+        transition: transform 0.3s;
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .progress-steps {
+        display: flex;
+        justify-content: space-between;
+        max-width: 600px;
+        margin: 1rem auto;
+    }
+
+    .step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #666;
+    }
+
+    .step.active {
+        background: var(--accent);
+        color: white;
+    }
+
+    .step.completed {
+        background: var(--success);
+        color: white;
+    }
+</style>
+<header class="header">
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-steps">
+        <div class="step completed">✓</div>
+        <div class="step completed">✓</div>
+        <div class="step active">3</div>
+    </div>
+</header>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Modular HTML</title>
+    <link rel="stylesheet" href="../../styles/pages/sorting/visualization.css">
+</head>
+
+<body>
+
+    <div id="header-container"></div>
+
+    <main>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('header-container').innerHTML = html);
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+    <script src="../../scripts/sorting/bubble/visualization.js"></script>
+</body>
+
+</html>
