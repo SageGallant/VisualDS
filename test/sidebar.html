@@ -1,0 +1,148 @@
+<style>
+    :root {
+        --primary-color: #007AFF;
+        --secondary-color: #FF3B30;
+        --tertiary-color: #34C759;
+        --bg-color: #F8F9FB;
+        --card-bg-color: #FFFFFF;
+        --text-color: #1A1D26;
+        --text-muted: #6B7280;
+        --border-color: #E5E7EB;
+        --header-bg: #F0F2F5;
+        --header-text: #0056B3;
+        --button-bg: #E3E6EB;
+        --button-hover: #D6DAE0;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --sidebar-width: 250px;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: var(--primary-color);
+        overflow: hidden;
+        transition: width 0.3s ease;
+        padding: 20px;
+    }
+
+    .sidebar.collapsed {
+        width: 0;
+        padding: 0;
+    }
+
+
+    /* Sidebar Toggle Button (Outside the Sidebar) */
+    .sidebar-toggle {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: var(--secondary-color);
+        border: none;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s, background-color 0.3s;
+        z-index: 10;
+    }
+
+    .sidebar-toggle:hover {
+        background-color: var(--tertiary-color);
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    /* Dropdown Menu in Sidebar */
+    .dropdown {
+        background-color: var(--secondary-color);
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+    }
+
+    .dropdown:hover {
+        background-color: var(--tertiary-color);
+    }
+
+    .dropdown span.icon {
+        font-size: 1rem;
+        transition: transform 0.3s;
+    }
+
+    .dropdown.active span.icon {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+        display: none;
+        padding-left: 15px;
+        margin-top: 5px;
+    }
+
+    .dropdown.active+.dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content div {
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+</style>
+<section>
+    <!-- Sidebar Toggle Button (outside the sidebar) -->
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <!-- Sidebar (open by default) -->
+    <aside class="sidebar" id="sidebar">
+        <h2>Algorithms</h2>
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            Sorting <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+        </div>
+        <div class="dropdown-content">
+            <div>Bubble</div>
+            <div>Selection</div>
+            <div>Insertion</div>
+            <div>Heap</div>
+        </div>
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            Searching <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+        </div>
+        <div class="dropdown-content">
+            <div>Binary Search</div>
+            <div>Linear Search</div>
+        </div>
+        <div class="dropdown" onclick="toggleDropdown(this)">
+            Linked List <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+        </div>
+        <div class="dropdown-content">
+            <div>Singly</div>
+            <div>Doubly</div>
+        </div>
+    </aside>
+</section>

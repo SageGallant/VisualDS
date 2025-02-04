@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Example</title>
+    <style>
+        /* Default Light Theme */
+:root {
+  --primary-color: #007AFF; /* Vibrant Blue */
+  --secondary-color: #FF3B30; /* Soft Red */
+  --tertiary-color: #34C759; /* Fresh Green */
+  --bg-color: #F8F9FB; /* Soft Off-White */
+  --card-bg-color: #FFFFFF; /* Pure White */
+  --text-color: #1A1D26; /* Dark Gray */
+  --text-muted: #6B7280; /* Muted Gray */
+  --border-color: #E5E7EB; /* Soft Gray */
+  --header-bg: #F0F2F5; /* Slightly darker than bg */
+  --header-text: #0056B3; /* Deeper Blue */
+  --button-bg: #E3E6EB; /* Light Gray */
+  --button-hover: #D6DAE0; /* Darker Gray */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #BB86FC; /* Soft Purple */
+  --secondary-color: #CF6679; /* Warm Red */
+  --tertiary-color: #03DAC6; /* Teal */
+  --bg-color: #121212; /* Dark Background */
+  --card-bg-color: #1E1E1E; /* Slightly lighter */
+  --text-color: #E0E0E0; /* Light Gray */
+  --text-muted: #A0A0A0; /* Muted Light Gray */
+  --border-color: #333333; /* Dark Border */
+  --header-bg: #1F1F1F; /* Slightly different from bg */
+  --header-text: #BB86FC; /* Soft Purple */
+  --button-bg: #333333; /* Dark Gray */
+  --button-hover: #444444; /* Slightly brighter */
+  --shadow-color: rgba(0, 0, 0, 0.2); /* Softer Shadow */
+}
+
+/* Vibrant Theme */
+[data-theme="vibrant"] {
+  --primary-color: #FF6F61; /* Coral */
+  --secondary-color: #6B5B95; /* Deep Purple */
+  --tertiary-color: #88B04B; /* Lime Green */
+  --bg-color: #FFF8E1; /* Cream */
+  --card-bg-color: #FFFFFF; /* Pure White */
+  --text-color: #330000; /* Dark Reddish Brown */
+  --text-muted: #993333; /* Muted Red */
+  --border-color: #FFE0B3; /* Soft Orange */
+  --header-bg: #FFB6C1; /* Light Pink */
+  --header-text: #990000; /* Deep Red */
+  --button-bg: #FFE0B3; /* Soft Orange */
+  --button-hover: #FFB6C1; /* Light Pink */
+  --shadow-color: rgba(51, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+/* Pastel Theme */
+[data-theme="pastel"] {
+  --primary-color: #FFB3BA; /* Soft Pink */
+  --secondary-color: #FFDFBA; /* Soft Yellow */
+  --tertiary-color: #BAFFC9; /* Mint Green */
+  --bg-color: #F8F8F8; /* Very Light Gray */
+  --card-bg-color: #FFFFFF; /* Pure White */
+  --text-color: #333333; /* Dark Gray */
+  --text-muted: #666666; /* Muted Gray */
+  --border-color: #E0E0E0; /* Light Gray */
+  --header-bg: #FFB3BA; /* Soft Pink */
+  --header-text: #333333; /* Dark Gray */
+  --button-bg: #FFDFBA; /* Soft Yellow */
+  --button-hover: #BAFFC9; /* Mint Green */
+  --shadow-color: rgba(0, 0, 0, 0.05); /* Very Subtle Shadow */
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+  --primary-color: #39FF14; /* Electric Green */
+  --secondary-color: #FF00FF; /* Magenta */
+  --tertiary-color: #00FFFF; /* Cyan */
+  --bg-color: #000000; /* Black */
+  --card-bg-color: #111111; /* Dark Gray */
+  --text-color: #FFFFFF; /* White */
+  --text-muted: #AAAAAA; /* Light Gray */
+  --border-color: #333333; /* Dark Gray */
+  --header-bg: #333333; /* Dark Gray */
+  --header-text: #39FF14; /* Electric Green */
+  --button-bg: #FF00FF; /* Magenta */
+  --button-hover: #00FFFF; /* Cyan */
+  --shadow-color: rgba(255, 255, 255, 0.2); /* Glow Effect */
+}
+
+/* Retro Theme */
+[data-theme="retro"] {
+  --primary-color: #FF6347; /* Tomato */
+  --secondary-color: #FFD700; /* Gold */
+  --tertiary-color: #00FA9A; /* Medium Spring Green */
+  --bg-color: #F5F5DC; /* Beige */
+  --card-bg-color: #FFFFFF; /* Pure White */
+  --text-color: #333333; /* Dark Gray */
+  --text-muted: #666666; /* Muted Gray */
+  --border-color: #D2B48C; /* Tan */
+  --header-bg: #FFD700; /* Gold */
+  --header-text: #333333; /* Dark Gray */
+  --button-bg: #FF6347; /* Tomato */
+  --button-hover: #FF4500; /* Orange Red */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+main {
+  padding: 1rem;
+}
+
+.card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Theme Example</h1>
+    <div class="theme-toggle">
+      <label for="theme-selector">Choose a Theme:</label>
+      <select id="theme-selector">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="vibrant">Vibrant</option>
+        <option value="pastel">Pastel</option>
+        <option value="neon">Neon</option>
+        <option value="retro">Retro</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Welcome to the Dummy Page</h2>
+      <p>This is a card component styled with your custom theme.</p>
+    </div>
+    <div class="card">
+      <h3>Buttons</h3>
+      <button>Primary Action</button>
+      <button class="secondary">Secondary Action</button>
+    </div>
+  </main>
+  <script>
+    // Select the theme selector dropdown
+const themeSelector = document.getElementById('theme-selector');
+
+// Check for saved user preference in localStorage
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+// Set the dropdown to the saved theme
+themeSelector.value = savedTheme;
+
+// Change theme function
+function changeTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+// Add event listener to the dropdown
+themeSelector.addEventListener('change', (event) => {
+  changeTheme(event.target.value);
+});
+  </script>
+</body>
+</html>
