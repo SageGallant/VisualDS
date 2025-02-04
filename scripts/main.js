@@ -1,49 +1,40 @@
-const slider = document.querySelector(".slides");
-const slides = document.querySelectorAll(".slide");
-const prevButton = document.querySelector(".prev-button");
-const nextButton = document.querySelector(".next-button");
-let currentSlide = 0;
-let slideInterval;
-const intervalTime = 2000; // Time between slides in milliseconds
-
-function updateSlider() {
-  slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+// Sidebar Toggle
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.getElementById("sidebar-toggle");
+  sidebar.classList.toggle("collapsed");
+  if (sidebar.classList.contains("collapsed")) {
+    toggleBtn.style.left = "0px";
+    toggleBtn.innerHTML =
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    toggleBtn.style.left = "var(--sidebar-width)";
+    toggleBtn.innerHTML =
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
 }
 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  updateSlider();
+// Dropdown Toggle
+function toggleDropdown(element) {
+  element.classList.toggle("active");
 }
 
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  updateSlider();
+// Dummy button handler for cards
+function handleClick(topic, type) {
+  console.log(`Clicked on ${type} for ${topic}`);
 }
 
-function startSlideShow() {
-  slideInterval = setInterval(nextSlide, intervalTime);
-}
-
-function pauseSlideShow() {
-  clearInterval(slideInterval);
-}
-
-// Start the slideshow
-startSlideShow();
-
-// Add event listeners for hover
-slider.addEventListener("mouseenter", pauseSlideShow);
-slider.addEventListener("mouseleave", startSlideShow);
-
-// Add event listeners for buttons
-prevButton.addEventListener("click", () => {
-  pauseSlideShow();
-  prevSlide();
-  startSlideShow();
+// Theme Toggle
+const themeToggle = document.getElementById("theme-toggle");
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  themeToggle.textContent = document.body.classList.contains("dark")
+    ? "Light Mode"
+    : "Dark Mode";
 });
 
-nextButton.addEventListener("click", () => {
-  pauseSlideShow();
-  nextSlide();
-  startSlideShow();
+// On page load, ensure the toggle button is positioned correctly (sidebar open by default)
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("sidebar-toggle");
+  toggleBtn.style.left = "var(--sidebar-width)";
 });

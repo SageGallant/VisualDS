@@ -257,16 +257,16 @@
 <body>
     <!-- Header with hamburger menu, logo and website name -->
     <header class="site-header">
-        <a href="index.html" class="logo">
-            <img src="../images/logo.png" alt="Logo">
+        <a href="../../index.html" class="logo">
+            <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
         </a>
-        <h1 id="site-title"><a href="index.html">VisualDSA</a></h1>
+        <h1 id="site-title"><a href="../../index.html">VisualDSA</a></h1>
         <div class="header-buttons">
             <button id="theme-toggle">🌙</button>
             <button id="menu-toggle">☰</button>
             <nav id="menu">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="../home.html">Home</a></li>
                     <li><a href="#">Sorting</a></li>
                     <li><a href="#">Search</a></li>
                     <li><a href="#">Help</a></li>
@@ -431,6 +431,25 @@
             menuToggle.addEventListener("click", () => {
                 menu.classList.toggle("active");
             });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const section = urlParams.get("section");
+
+                const sectionMap = {
+                    concept: "section-0",
+                    algorithm: "section-1",
+                    visualization: "section-2"
+                };
+
+                if (section && sectionMap[section]) {
+                    const targetSection = document.getElementById(sectionMap[section]);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            });
+
 
             showSection(currentStep);
             updateNav();

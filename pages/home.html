@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Structures and Algorithms</title>
+  <link href="../styles/main.css" rel="stylesheet" />
+</head>
+
+<body class="light">
+  <header class="header">
+    <a href="../index.html">
+      <h1>VisualDS</h1>
+    </a>
+    <button class="theme-toggle" id="theme-toggle">Dark Mode</button>
+  </header>
+
+  <section class="container">
+    <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+      <h2>Algorithms</h2>
+      <div class="dropdown" onclick="toggleDropdown(this)">
+        Sorting <span class="icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>
+      <div class="dropdown-content">
+        <div>Bubble</div>
+        <div>Selection</div>
+        <div>Insertion</div>
+        <div>Heap</div>
+      </div>
+      <div class="dropdown" onclick="toggleDropdown(this)">
+        Searching <span class="icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>
+      <div class="dropdown-content">
+        <div>Binary Search</div>
+        <div>Linear Search</div>
+      </div>
+      <div class="dropdown" onclick="toggleDropdown(this)">
+        Linked List <span class="icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>
+      <div class="dropdown-content">
+        <div>Singly</div>
+        <div>Doubly</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="card-grid">
+        <!-- Card 1 -->
+        <div class="card">
+          <img src="../assets/images/sorting.gif" alt="Bubble Sort">
+          <h3>Bubble Sort</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('bubble', 'concept')">Concept</button>
+              <button onclick="handleClick('bubble', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('bubble', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card">
+          <img src="../assets/images/list.gif" alt="Linked List">
+          <h3>Linked List</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('linkedList', 'concept')">Concept</button>
+              <button onclick="handleClick('linkedList', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('linkedList', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card">
+          <img src="../assets/images/tree.gif" alt="Tree">
+          <h3>Tree</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('tree', 'concept')">Concept</button>
+              <button onclick="handleClick('tree', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('tree', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="card">
+          <img src="../assets/images/recursion.gif" alt="Recursion">
+          <h3>Recursion</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('recursion', 'concept')">Concept</button>
+              <button onclick="handleClick('recursion', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('recursion', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="card">
+          <img src="../assets/images/graph.gif" alt="graph">
+          <h3>Graph</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('graph', 'concept')">Concept</button>
+              <button onclick="handleClick('graph', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('graph', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="card">
+          <img src="../assets/images/hashtable.gif" alt="Hash Table">
+          <h3>Hash Table</h3>
+          <div class="button-group">
+            <div class="button-row">
+              <button onclick="handleClick('hashTable', 'concept')">Concept</button>
+              <button onclick="handleClick('hashTable', 'algorithm')">Algorithm</button>
+            </div>
+            <div class="button-row">
+              <button onclick="handleClick('hashTable', 'visualization')">Visualization</button>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards here -->
+      </div>
+    </main>
+  </section>
+  <script src="../scripts/main.js"></script>
+</body>
+
+</html>
