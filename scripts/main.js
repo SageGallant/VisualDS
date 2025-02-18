@@ -20,9 +20,9 @@ function toggleDropdown(element) {
 }
 
 // Dummy button handler for cards
-function handleClick(topic, type) {
-  console.log(`Clicked on ${type} for ${topic}`);
-}
+// function handleClick(topic, type) {
+//   console.log(`Clicked on ${type} for ${topic}`);
+// }
 
 // Theme Toggle
 const themeToggle = document.getElementById("theme-toggle");

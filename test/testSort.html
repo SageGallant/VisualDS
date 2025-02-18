@@ -1,338 +1,297 @@
+<!-- Claude generated code html buttons problem -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Sort Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bubble Sort – Interactive Learning</title>
     <style>
         :root {
-            --primary: #2c2e31;
-            --secondary: #da3333;
-            --accent: #e2b714;
-            --background: #f8f9fa;
-            --success: #28a745;
-            --comparing: #17a2b8;
-            --swapping: #dc3545;
-            --sorted: #28a745;
+            --primary-blue: #0088FF;
+            --secondary-green: #47B881;
+            --background-white: #FFFFFF;
+            --text-dark: #333333;
+            --nav-bg: #F8F9FA;
+            --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --coral-red: #FF4757;
+            --turquoise: #2ED3B7;
         }
 
-        * {
+        [data-theme="dark"] {
+            --primary-blue: #3399FF;
+            --secondary-green: #5CCA91;
+            --background-white: #1A1A1A;
+            --text-dark: #FFFFFF;
+            --nav-bg: #2D2D2D;
+        }
+
+        /* Global Styles */
+        body {
             margin: 0;
             padding: 0;
+            background-color: var(--background-white);
+            color: var(--text-dark);
+            font-family: 'Inter', Arial, sans-serif;
+            text-align: center;
+            transition: background-color 0.5s, color 0.5s;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Section Container and Sliding Sections */
+        .section-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 200px);
+            /* Adjust based on your header/nav height */
+            overflow: hidden;
+        }
+
+        .page-section {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            /* Start position outside viewport */
+            width: 100%;
+            height: 100%;
+            transition: left 0.5s ease;
+            overflow-y: auto;
+            padding: 20px;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
-            background-color: var(--background);
+        .page-section.active {
+            left: 0;
         }
 
-        .main-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .page-section.previous {
+            left: -100%;
         }
 
-        .visualization-container {
-            background: white;
+        /* Theory Section Styles */
+        #section-0 .theory-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            background: var(--background-white);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Algorithm Section Styles */
+        #section-1 .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .code-panel,
+        .implementation-panel {
+            background: var(--background-white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Visualization Section Styles */
+        #section-2 .visualization-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--background-white);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+        }
+
+        /* Navigation Styles */
+        .progress-nav {
+            background: var(--nav-bg);
+            padding: 1.5rem;
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
-        .array-container {
-            height: 300px;
+        .progress-track {
+            max-width: 600px;
+            margin: 0 auto;
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 4px;
-            padding: 1rem;
-            background: var(--background);
-            border-radius: 10px;
-        }
-
-        .array-bar {
-            width: 40px;
-            background: var(--primary);
-            transition: height 0.3s, background-color 0.3s;
-            border-radius: 4px 4px 0 0;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
         }
 
-        .array-bar::after {
-            content: attr(data-value);
+        .progress-line {
             position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            font-weight: bold;
+            top: 35%;
+            left: 15%;
+            right: 15%;
+            height: 4px;
+            background: var(--nav-bg);
+            z-index: 1;
         }
 
-        .controls {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .progress-line-fill {
+            height: 100%;
+            width: 0;
+            background: var(--primary-blue);
+            transition: width 0.3s;
         }
 
-        .control-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
+        /* Other styles remain the same as in the previous version */
+        /* ... (Keep all other styles from the previous version) ... */
+
+        /* Additional styles for smooth sliding */
+        .section-container {
+            perspective: 1000px;
         }
 
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .page-section {
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .page-section.sliding-left {
+            animation: slideLeft 0.5s forwards;
         }
 
-        .btn-primary {
-            background: var(--accent);
-            color: white;
+        .page-section.sliding-right {
+            animation: slideRight 0.5s forwards;
         }
 
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .speed-control {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .slider {
-            flex: 1;
-            height: 8px;
-            border-radius: 4px;
-            background: #eee;
-            appearance: none;
-            cursor: pointer;
-        }
-
-        .slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-        }
-
-        .status {
-            text-align: center;
-            margin: 1rem 0;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .array-bar.comparing {
-            background: var(--comparing);
-        }
-
-        .array-bar.swapping {
-            background: var(--swapping);
-        }
-
-        .array-bar.sorted {
-            background: var(--sorted);
-        }
-
-        @media (max-width: 768px) {
-            .array-bar {
-                width: 20px;
+        @keyframes slideLeft {
+            from {
+                left: 100%;
             }
 
-            .control-buttons {
-                flex-wrap: wrap;
+            to {
+                left: 0;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                left: -100%;
             }
 
-            .btn {
-                flex: 1;
-                min-width: 120px;
+            to {
+                left: 0;
             }
         }
     </style>
 </head>
 
 <body>
-    <main class="main-container">
-        <div class="visualization-container">
-            <div class="array-container" id="arrayContainer"></div>
-            <div class="status" id="status">Ready to sort!</div>
-        </div>
-        <div class="controls">
-            <div class="control-buttons">
-                <button class="btn btn-primary" id="generateBtn">Generate New Array</button>
-                <button class="btn btn-secondary" id="sortBtn">Start Sorting</button>
-                <button class="btn btn-outline" id="pauseBtn">Pause</button>
-                <button class="btn btn-outline" id="resetBtn">Reset</button>
+    <!-- Header remains the same -->
+    <header class="site-header">
+        <!-- ... header content ... -->
+    </header>
+
+    <!-- Progress Navigation -->
+    <nav class="progress-nav">
+        <div class="progress-track">
+            <div class="progress-line">
+                <div class="progress-line-fill"></div>
             </div>
-            <div class="speed-control">
-                <span>Speed:</span>
-                <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
-            </div>
+            <!-- ... progress steps ... -->
         </div>
-    </main>
+    </nav>
+
+    <!-- Sliding Sections Container -->
+    <div class="section-container">
+        <!-- Theory Section -->
+        <section id="section-0" class="page-section active">
+            <div class="theory-content">
+                <!-- ... theory content ... -->
+            </div>
+        </section>
+
+        <!-- Algorithm Section -->
+        <section id="section-1" class="page-section">
+            <div class="content-wrapper">
+                <div class="code-panel">
+                    <!-- ... algorithm content ... -->
+                </div>
+                <div class="implementation-panel">
+                    <!-- ... implementation details ... -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization Section -->
+        <section id="section-2" class="page-section">
+            <div class="visualization-container">
+                <!-- ... visualization content ... -->
+            </div>
+        </section>
+    </div>
 
     <script>
-        // Sound effects
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        (function () {
+            const sections = document.querySelectorAll('.page-section');
+            const progressFill = document.querySelector('.progress-line-fill');
+            let currentSection = 0;
 
-        function playNote(frequency, duration) {
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
+            function updateSection(newIndex) {
+                const direction = newIndex > currentSection ? 'left' : 'right';
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
+                // Remove all transition classes
+                sections.forEach(section => {
+                    section.classList.remove('active', 'previous', 'sliding-left', 'sliding-right');
+                });
 
-            oscillator.type = 'sine';
-            oscillator.frequency.value = frequency;
+                // Add appropriate classes for sliding animation
+                sections[currentSection].classList.add(direction === 'left' ? 'previous' : 'sliding-right');
+                sections[newIndex].classList.add(direction === 'left' ? 'sliding-left' : 'active');
 
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                // Update progress bar
+                const progress = (newIndex / (sections.length - 1)) * 100;
+                progressFill.style.width = `${progress}%`;
 
-            oscillator.start(audioCtx.currentTime);
-            oscillator.stop(audioCtx.currentTime + duration);
-        }
+                currentSection = newIndex;
 
-        // Visualization logic
-        let array = [];
-        let sortingInProgress = false;
-        let isPaused = false;
-        const arrayContainer = document.getElementById('arrayContainer');
-        const status = document.getElementById('status');
-        const speedSlider = document.getElementById('speedSlider');
-
-        function generateArray() {
-            array = [];
-            for (let i = 0; i < 12; i++) {
-                array.push(Math.floor(Math.random() * 80) + 20);
+                // Update local storage
+                localStorage.setItem('currentSection', currentSection);
             }
-            renderArray();
-            status.textContent = 'Ready to sort!';
-        }
 
-        function renderArray() {
-            arrayContainer.innerHTML = '';
-            array.forEach((value, idx) => {
-                const bar = document.createElement('div');
-                bar.className = 'array-bar';
-                bar.style.height = `${value * 2}px`;
-                bar.setAttribute('data-value', value);
-                arrayContainer.appendChild(bar);
+            // Initialize from localStorage if available
+            const savedSection = localStorage.getItem('currentSection');
+            if (savedSection !== null) {
+                updateSection(parseInt(savedSection));
+            }
+
+            // Add event listeners for navigation
+            document.querySelectorAll('.next-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (currentSection < sections.length - 1) {
+                        updateSection(currentSection + 1);
+                    }
+                });
             });
-        }
 
-        async function bubbleSort() {
-            const bars = document.querySelectorAll('.array-bar');
-            let n = array.length;
-
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < n - i - 1; j++) {
-                    if (isPaused) {
-                        await new Promise(resolve => {
-                            const checkPause = setInterval(() => {
-                                if (!isPaused) {
-                                    clearInterval(checkPause);
-                                    resolve();
-                                }
-                            }, 100);
-                        });
+            document.querySelectorAll('.prev-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (currentSection > 0) {
+                        updateSection(currentSection - 1);
                     }
+                });
+            });
 
-                    bars[j].classList.add('comparing');
-                    bars[j + 1].classList.add('comparing');
-                    playNote(300 + array[j] * 3, 0.1);
-
-                    await new Promise(resolve =>
-                        setTimeout(resolve, 1000 - speedSlider.value * 9)
-                    );
-
-                    if (array[j] > array[j + 1]) {
-                        bars[j].classList.add('swapping');
-                        bars[j + 1].classList.add('swapping');
-                        playNote(500 + array[j] * 3, 0.15);
-
-                        // Swap animation
-                        const tempHeight = bars[j].style.height;
-                        const tempValue = bars[j].getAttribute('data-value');
-
-                        bars[j].style.height = bars[j + 1].style.height;
-                        bars[j].setAttribute('data-value', bars[j + 1].getAttribute('data-value'));
-
-                        bars[j + 1].style.height = tempHeight;
-                        bars[j + 1].setAttribute('data-value', tempValue);
-
-                        // Swap array values
-                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
-
-                        await new Promise(resolve =>
-                            setTimeout(resolve, 1000 - speedSlider.value * 9)
-                        );
+            // Add progress step click handlers
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    if (index <= currentSection + 1) {
+                        updateSection(index);
                     }
+                });
+            });
+        })();
 
-                    bars[j].classList.remove('comparing', 'swapping');
-                    bars[j + 1].classList.remove('comparing', 'swapping');
-                }
-                bars[n - i - 1].classList.add('sorted');
-                playNote(800 + array[n - i - 1] * 3, 0.1);
-            }
-
-            sortingInProgress = false;
-            status.textContent = 'Sorting completed!';
-        }
-
-        // Event Listeners
-        document.getElementById('generateBtn').addEventListener('click', () => {
-            if (!sortingInProgress) {
-                generateArray();
-            }
-        });
-
-        document.getElementById('sortBtn').addEventListener('click', async () => {
-            if (!sortingInProgress) {
-                sortingInProgress = true;
-                status.textContent = 'Sorting in progress...';
-                await bubbleSort();
-            }
-        });
-
-        document.getElementById('pauseBtn').addEventListener('click', () => {
-            if (sortingInProgress) {
-                isPaused = !isPaused;
-                status.textContent = isPaused ? 'Paused' : 'Resuming...';
-            }
-        });
-
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            if (sortingInProgress) {
-                location.reload();
-            }
-        });
-
-        // Initialize
-        generateArray();
     </script>
 </body>
 

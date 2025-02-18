@@ -64,94 +64,126 @@
 
     <main class="main-content">
       <div class="card-grid">
-        <!-- Card 1 -->
+        <!-- Card 1: Bubble Sort -->
         <div class="card">
           <img src="../assets/images/sorting.gif" alt="Bubble Sort">
           <h3>Bubble Sort</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('bubble', 'concept')">Concept</button>
-              <button onclick="handleClick('bubble', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="bubble" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="bubble" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('bubble', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="bubble" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Card 2 -->
+        <!-- Card 2: Linked List -->
         <div class="card">
           <img src="../assets/images/list.gif" alt="Linked List">
           <h3>Linked List</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('linkedList', 'concept')">Concept</button>
-              <button onclick="handleClick('linkedList', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="linkedList" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="linkedList" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('linkedList', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="linkedList" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Card 3 -->
+        <!-- Card 3: Tree -->
         <div class="card">
           <img src="../assets/images/tree.gif" alt="Tree">
           <h3>Tree</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('tree', 'concept')">Concept</button>
-              <button onclick="handleClick('tree', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="tree" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="tree" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('tree', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="tree" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Card 4 -->
+        <!-- Card 4: Recursion -->
         <div class="card">
           <img src="../assets/images/recursion.gif" alt="Recursion">
           <h3>Recursion</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('recursion', 'concept')">Concept</button>
-              <button onclick="handleClick('recursion', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="recursion" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="recursion" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('recursion', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="recursion" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Card 5 -->
+        <!-- Card 5: Graph -->
         <div class="card">
-          <img src="../assets/images/graph.gif" alt="graph">
+          <img src="../assets/images/graph.gif" alt="Graph">
           <h3>Graph</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('graph', 'concept')">Concept</button>
-              <button onclick="handleClick('graph', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="graph" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="graph" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('graph', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="graph" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Card 6 -->
+        <!-- Card 6: Hash Table -->
         <div class="card">
           <img src="../assets/images/hashtable.gif" alt="Hash Table">
           <h3>Hash Table</h3>
           <div class="button-group">
             <div class="button-row">
-              <button onclick="handleClick('hashTable', 'concept')">Concept</button>
-              <button onclick="handleClick('hashTable', 'algorithm')">Algorithm</button>
+              <button class="nav-button" data-page="hashTable" data-section="concept">Concept</button>
+              <button class="nav-button" data-page="hashTable" data-section="algorithm">Algorithm</button>
             </div>
             <div class="button-row">
-              <button onclick="handleClick('hashTable', 'visualization')">Visualization</button>
+              <button class="nav-button" data-page="hashTable" data-section="visualization">Visualization</button>
             </div>
           </div>
         </div>
-        <!-- Add more cards here -->
+        <!-- Add more cards as needed -->
       </div>
     </main>
   </section>
+
+  <!-- Attach event listeners after DOM loads -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navButtons = document.querySelectorAll('.nav-button');
+      // Mapping for each card type to its corresponding target page
+      const urlMap = {
+        'bubble': 'sorting/wantedSorting.html',
+        'linkedList': 'linkedList/wantedLinkedList.html',
+        'tree': 'tree/wantedTree.html',
+        'recursion': 'recursion/wantedRecursion.html',
+        'graph': 'graph/wantedGraph.html',
+        'hashTable': 'hashTable/wantedHashTable.html'
+      };
+
+      navButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          const page = this.getAttribute('data-page');
+          const section = this.getAttribute('data-section');
+          console.log("Button clicked for", page, section);
+          // Determine the target URL based on the page mapping
+          let targetUrl = urlMap[page];
+          if (targetUrl) {
+            window.location.href = targetUrl + '?section=' + section;
+          } else {
+            console.error("No target URL found for page:", page);
+          }
+        });
+      });
+    });
+  </script>
+
   <script src="../scripts/main.js"></script>
 </body>
 
