@@ -4,243 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bubble Sort – Interactive Learning</title>
-    <style>
-        /* Define your original color palette via CSS variables */
-        :root {
-            --primary-color: #4285f4;
-            --secondary-color: #34a853;
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --nav-bg-color: #f7f7f7;
-            --header-bg: #ffffff;
-            --border-color: #e0e0e0;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Dark theme variables */
-        [data-theme="dark"] {
-            --primary-color: #8ab4f8;
-            --secondary-color: #81c784;
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --nav-bg-color: #1e1e1e;
-            --header-bg: #1e1e1e;
-            --border-color: #333333;
-        }
-
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            transition: background-color 0.5s, color 0.5s;
-            position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Header Styles */
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--header-bg);
-            color: var(--text-color);
-            padding: 10px 20px;
-            position: relative;
-        }
-
-        .page-title {
-            flex: 1;
-            text-align: center;
-            margin: 0;
-        }
-
-        .page-title a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-        }
-
-        #theme-toggle,
-        #menu-toggle {
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
-        /* Navigation Menu Styles */
-        .nav-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 40px;
-            background: var(--bg-color);
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            padding: 10px;
-            z-index: 10;
-        }
-
-        .nav-menu.visible {
-            display: block;
-        }
-
-        #menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #menu ul li {
-            padding: 10px;
-        }
-
-        #menu ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        /* Progress Navigation */
-        .progress-bar {
-            background: var(--bg-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 2rem;
-        }
-
-        .progress-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .progress-indicator {
-            position: absolute;
-            top: 35%;
-            left: 15%;
-            right: 15%;
-            height: 4px;
-            background: var(--primary-color);
-            z-index: 1;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0;
-            background: var(--secondary-color);
-            border-radius: 2px;
-            transition: width 0.3s;
-        }
-
-        .step-item {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .step-circle {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto;
-            border-radius: 50%;
-            background-color: var(--border-color);
-            color: var(--text-color);
-            line-height: 40px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .step-item.active .step-circle {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .step-item.completed .step-circle {
-            background-color: var(--secondary-color);
-            color: #fff;
-        }
-
-        .step-label {
-            margin-top: 5px;
-            font-size: 0.9em;
-            color: var(--text-color);
-        }
-
-        /* Content Sections */
-        .content-wrapper {
-            position: relative;
-            overflow: hidden;
-            height: calc(100vh - 120px);
-        }
-
-        .content-section {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            opacity: 0;
-            transition: all 0.5s ease;
-            overflow-y: auto;
-        }
-
-        .content-section.active {
-            left: 0;
-            opacity: 1;
-        }
-
-        /* Navigation Controls */
-        .navigation-controls {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .navigation-controls button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: var(--primary-color);
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .navigation-controls button:disabled {
-            background-color: var(--border-color);
-            cursor: not-allowed;
-        }
-
-        .navigation-controls button:hover:not(:disabled) {
-            background-color: var(--secondary-color);
-        }
-    </style>
+    <title>Bubble Sort</title>
+    <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
 </head>
 
 <body>
@@ -265,6 +30,7 @@
     </header>
 
     <nav class="progress-bar">
+        <button class="prev-btn">Previous</button>
         <div class="progress-container">
             <div class="progress-indicator">
                 <div class="progress-fill"></div>
@@ -282,33 +48,23 @@
                 <div class="step-label">Visualization</div>
             </div>
         </div>
+        <button class="next-btn">Next</button>
     </nav>
 
     <div class="content-wrapper">
         <section id="section-0" class="content-section active">
             <!-- <h1>Theory of Bubble Sort</h1> -->
             <div id="theory-content"></div>
-            <div class="navigation-controls">
-                <button class="next-btn">Next</button>
-            </div>
         </section>
 
         <section id="section-1" class="content-section">
             <!-- <h1>Bubble Sort Algorithm</h1> -->
             <div id="algorithm-content"></div>
-            <div class="navigation-controls">
-                <button class="prev-btn">Previous</button>
-                <button class="next-btn">Next</button>
-            </div>
         </section>
 
         <section id="section-2" class="content-section">
             <!-- <h1>Visualization of Bubble Sort</h1> -->
             <div id="visualization-content"></div>
-            <div class="navigation-controls">
-                <button class="prev-btn">Previous</button>
-                <button class="next-btn">Next</button>
-            </div>
         </section>
 
     </div>

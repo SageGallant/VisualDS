@@ -2,7 +2,7 @@
   --color-primary: #2c2e31;
   --color-secondary: #da3333;
   --color-accent: #e2b714;
-  --color-background: #f8f9fa;
+  --color-background: #e5e8ff;
   --color-text: #333333;
   --color-light: #ffffff;
   --color-border: #e0e0e0;
@@ -16,7 +16,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  /* border: 1px solid; */
+  border: 1px solid;
 }
 
 body {
@@ -26,70 +26,112 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: var(--spacing-unit);
+  padding: 5px var(--spacing-unit);
 }
 
 /* Progress Bar Styles */
 .progress-bar {
-  background: var(--color-light);
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  width: 100%;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  background-color: green;
 }
 
-.progress-track {
+.progress-container {
+  flex: 1;
+  margin: 0 20px;
+  width: 100%;
   max-width: 600px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
 }
 
-.progress-step {
+.progress-indicator {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  right: 15%;
+  height: 4px;
+  background: var(--primary-color);
+  z-index: 1;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--secondary-color);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+.step-circle {
   width: 40px;
   height: 40px;
+  margin: 0 auto;
   border-radius: 50%;
-  background: var(--color-hover);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--border-color);
+  color: var(--text-color);
+  line-height: 40px;
   font-weight: bold;
-  position: relative;
-  z-index: 1;
+  transition: background-color 0.3s;
 }
 
-.progress-step.active {
-  background: var(--color-accent);
-  color: var(--color-light);
+.step-item.active .step-circle {
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
-.progress-step.completed {
-  background: var(--color-accent);
-  color: var(--color-light);
+.step-item.completed .step-circle {
+  background-color: var(--secondary-color);
+  color: #fff;
 }
 
-.progress-line {
-  position: absolute;
-  height: 4px;
-  background: var(--color-hover);
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 0;
+.step-label {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: var(--text-color);
 }
 
-.progress-line-fill {
-  height: 100%;
-  background: var(--color-accent);
-  width: 0%;
-  transition: width 0.3s ease;
-  z-index: 1;
+.prev-btn,
+.next-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
+.prev-btn:hover,
+.next-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.prev-btn:disabled,
+.next-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 /* Progress Bar Styles end here */
 
 /* Content Layout */
@@ -97,7 +139,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 @media (max-width: 768px) {
@@ -109,7 +151,7 @@ body {
 .card {
   background: var(--color-light);
   border-radius: var(--border-radius);
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,4 +188,157 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+}
+
+/* bubble.html file styling */
+:root {
+  --primary-color: #4285f4;
+  --secondary-color: #34a853;
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --nav-bg-color: #f7f7f7;
+  --header-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --primary-color: #8ab4f8;
+  --secondary-color: #81c784;
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --nav-bg-color: #1e1e1e;
+  --header-bg: #1e1e1e;
+  --border-color: #333333;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  transition: background-color 0.5s, color 0.5s;
+  overflow-x: hidden;
+}
+
+.main-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-bg);
+  color: var(--text-color);
+  padding: 0 20px;
+  position: relative;
+}
+
+.page-title {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.page-title a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+#theme-toggle,
+#menu-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Navigation Menu Styles */
+.nav-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: var(--bg-color);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.nav-menu.visible {
+  display: block;
+}
+
+#menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu ul li {
+  padding: 10px;
+}
+
+#menu ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Content Sections */
+.content-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 120px);
+}
+
+.content-section {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.5s ease;
+  overflow-y: auto;
+}
+
+.content-section.active {
+  left: 0;
+  opacity: 1;
+}
+
+/* Navigation Controls */
+.navigation-controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.navigation-controls button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navigation-controls button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.navigation-controls button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
 }
