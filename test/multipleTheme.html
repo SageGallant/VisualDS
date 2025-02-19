@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxurious Theme Toggle</title>
+    <style>
+        /* Default variables (Classic Dark) */
+        :root {
+            --bg-color: #1c1c1c;
+            --text-color: #ffffff;
+            --accent-color: #d4af37;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header,
+        footer {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 10px;
+            border: none;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-size: 16px;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Theme Definitions */
+        body.theme-classic {
+            --bg-color: #1c1c1c;
+            --text-color: #ffffff;
+            --accent-color: #d4af37;
+        }
+
+        body.theme-elegant {
+            --bg-color: #fdf6e3;
+            --text-color: #3d3d3d;
+            --accent-color: #b8860b;
+        }
+
+        body.theme-royal {
+            --bg-color: #003366;
+            --text-color: #ffffff;
+            --accent-color: #ffd700;
+        }
+
+        body.theme-modern {
+            --bg-color: #f4f4f4;
+            --text-color: #333333;
+            --accent-color: #c0c0c0;
+        }
+
+        body.theme-luxe {
+            --bg-color: #000000;
+            --text-color: #f2f2f2;
+            --accent-color: #daa520;
+        }
+    </style>
+</head>
+
+<body class="theme-classic">
+    <header>
+        <h1>Welcome to the Luxurious Theme Toggle Page</h1>
+    </header>
+
+    <div class="container">
+        <p>
+            This page demonstrates theme toggling with five different luxurious themes.
+            Use the selector below to change the look and feel of the website.
+        </p>
+
+        <label for="theme-select">Choose Theme:</label>
+        <select id="theme-select">
+            <option value="classic">Classic Dark</option>
+            <option value="elegant">Elegant Gold</option>
+            <option value="royal">Royal Blue</option>
+            <option value="modern">Modern Silver</option>
+            <option value="luxe">Luxe Black</option>
+        </select>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet facilisis urna.
+            Praesent ac bibendum ligula. Pellentesque consequat, justo non tincidunt vehicula, lacus
+            quam egestas elit, a hendrerit neque urna quis tellus.
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Luxurious Themes. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const themeSelect = document.getElementById('theme-select');
+
+        themeSelect.addEventListener('change', function () {
+            // Remove any existing theme classes from the body
+            document.body.classList.remove(
+                'theme-classic',
+                'theme-elegant',
+                'theme-royal',
+                'theme-modern',
+                'theme-luxe'
+            );
+
+            // Add the new theme class based on the selected value
+            const selectedTheme = this.value; // e.g., "classic", "elegant", etc.
+            document.body.classList.add('theme-' + selectedTheme);
+        });
+    </script>
+</body>
+
+</html>

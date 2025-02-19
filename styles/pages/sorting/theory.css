@@ -1,14 +1,16 @@
+@import "../../common/base.css";
+
 .theory-content {
   font-size: 1.1rem;
   line-height: 1.6;
 }
 
 .theory-intro {
-  color: var(--color-primary);
+  color: var(--text-color);
   font-size: 1.2rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--color-hover);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .key-points {
@@ -59,7 +61,7 @@
 
 .step {
   padding: 1rem;
-  background: var(--color-light);
+  background: var(--bg-color);
   border-radius: var(--border-radius);
 }
 
@@ -74,14 +76,13 @@
 }
 
 .array-visual {
-  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   min-height: 200px;
   padding: 1rem;
-  background: var(--color-background);
+  background: var(--bg-color);
   border-radius: var(--border-radius);
   margin-bottom: 1rem;
 }
@@ -92,16 +93,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-accent);
-  color: var(--color-primary);
+  background: var(--tertiary-color);
+  color: var(--text-color);
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s ease;
 }
 
 .array-element.comparing {
-  background: var(--color-secondary);
-  color: var(--color-light);
+  background: var(--comparing-color);
+  color: var(--card-bg-color);
   transform: translateY(-5px);
 }
 

@@ -1,183 +1,141 @@
 class BubbleSortVisualizer {
   constructor() {
     this.array = [];
-    this.arraySize = 20;
-    this.maxValue = 100;
-    this.delay = 100;
-    this.isRunning = false;
-    this.isPaused = false;
-
-    // DOM Elements
     this.arrayContainer = document.getElementById("arrayContainer");
-    this.startButton = document.getElementById("startSort");
-    this.pauseButton = document.getElementById("pauseSort");
-    this.resetButton = document.getElementById("resetSort");
-    this.generateButton = document.getElementById("generateArray");
+    this.generateArrayBtn = document.getElementById("generateArray");
+    this.startSortBtn = document.getElementById("startSort");
+    this.pauseSortBtn = document.getElementById("pauseSort");
+    this.resetSortBtn = document.getElementById("resetSort");
     this.speedControl = document.getElementById("sortingSpeed");
-
-    // Statistics Elements
-    this.comparisonsElement = document.getElementById("comparisons");
-    this.swapsElement = document.getElementById("swaps");
-    this.currentPassElement = document.getElementById("currentPass");
-
-    // Statistics
     this.comparisons = 0;
     this.swaps = 0;
     this.currentPass = 0;
+    this.isPaused = false;
+    this.isRunning = false;
 
-    // Bind event listeners
-    this.bindEvents();
-
-    // Initialize
+    this.initializeEventListeners();
     this.generateNewArray();
   }
 
-  bindEvents() {
-    this.startButton.addEventListener("click", () => this.startSorting());
-    this.pauseButton.addEventListener("click", () => this.pauseSorting());
-    this.resetButton.addEventListener("click", () => this.resetSorting());
-    this.generateButton.addEventListener("click", () =>
+  initializeEventListeners() {
+    this.generateArrayBtn.addEventListener("click", () =>
       this.generateNewArray()
     );
-    this.speedControl.addEventListener("input", (e) => {
-      this.delay = 1000 / e.target.value;
-    });
+    this.startSortBtn.addEventListener("click", () => this.startSort());
+    this.pauseSortBtn.addEventListener("click", () => this.togglePause());
+    this.resetSortBtn.addEventListener("click", () => this.reset());
   }
 
   generateNewArray() {
     this.array = Array.from(
-      { length: this.arraySize },
-      () => Math.floor(Math.random() * this.maxValue) + 1
+      { length: 20 },
+      () => Math.floor(Math.random() * 100) + 1
     );
-    this.resetStatistics();
-    this.visualizeArray();
+    this.updateVisuals();
+    this.resetCounters();
   }
 
-  resetStatistics() {
-    this.comparisons = 0;
-    this.swaps = 0;
-    this.currentPass = 0;
-    this.updateStatistics();
-  }
-
-  updateStatistics() {
-    this.comparisonsElement.textContent = this.comparisons;
-    this.swapsElement.textContent = this.swaps;
-    this.currentPassElement.textContent = this.currentPass;
-  }
-
-  visualizeArray(
-    comparingIndices = [],
-    swappingIndices = [],
-    sortedIndices = []
-  ) {
+  updateVisuals() {
     this.arrayContainer.innerHTML = "";
-
-    this.array.forEach((value, index) => {
+    this.array.forEach((value) => {
       const bar = document.createElement("div");
       bar.className = "array-bar";
-      bar.style.height = `${(value / this.maxValue) * 100}%`;
-
-      if (comparingIndices.includes(index)) {
-        bar.classList.add("comparing");
-      }
-      if (swappingIndices.includes(index)) {
-        bar.classList.add("swapping");
-      }
-      if (sortedIndices.includes(index)) {
-        bar.classList.add("sorted");
-      }
-
+      bar.style.height = `${value * 3}px`;
       this.arrayContainer.appendChild(bar);
     });
   }
 
-  async startSorting() {
-    if (this.isRunning && this.isPaused) {
-      this.isPaused = false;
-      this.pauseButton.textContent = "Pause";
-      return;
-    }
-
+  async startSort() {
     if (this.isRunning) return;
-
     this.isRunning = true;
-    this.startButton.disabled = true;
-    this.generateButton.disabled = true;
-    this.pauseButton.disabled = false;
+    this.startSortBtn.disabled = true;
+    this.pauseSortBtn.disabled = false;
 
     const n = this.array.length;
-    const sortedIndices = [];
-
     for (let i = 0; i < n - 1; i++) {
       this.currentPass = i + 1;
-      let swapped = false;
+      document.getElementById("currentPass").textContent = this.currentPass;
 
       for (let j = 0; j < n - i - 1; j++) {
         if (this.isPaused) {
           await new Promise((resolve) => {
-            const checkPause = () => {
+            const checkPause = setInterval(() => {
               if (!this.isPaused) {
+                clearInterval(checkPause);
                 resolve();
-              } else {
-                setTimeout(checkPause, 100);
               }
-            };
-            checkPause();
+            }, 100);
           });
         }
 
-        // Visualize comparison
         this.comparisons++;
-        this.visualizeArray([j, j + 1], [], sortedIndices);
-        await this.sleep(this.delay);
+        document.getElementById("comparisons").textContent = this.comparisons;
+
+        const bars = this.arrayContainer.children;
+        bars[j].classList.add("comparing");
+        bars[j + 1].classList.add("comparing");
+
+        await this.delay();
 
         if (this.array[j] > this.array[j + 1]) {
-          // Visualize swap
           this.swaps++;
-          this.visualizeArray([j, j + 1], [j, j + 1], sortedIndices);
-          await this.sleep(this.delay);
+          document.getElementById("swaps").textContent = this.swaps;
 
-          // Perform swap
+          bars[j].classList.add("swapping");
+          bars[j + 1].classList.add("swapping");
+
+          await this.delay();
+
           [this.array[j], this.array[j + 1]] = [
             this.array[j + 1],
             this.array[j],
           ];
-          swapped = true;
+          this.updateVisuals();
         }
+
+        bars[j].classList.remove("comparing", "swapping");
+        bars[j + 1].classList.remove("comparing", "swapping");
       }
-
-      sortedIndices.push(n - i - 1);
-      this.visualizeArray([], [], sortedIndices);
-
-      if (!swapped) break;
     }
 
     this.isRunning = false;
-    this.pauseButton.disabled = true;
-    this.startButton.disabled = false;
-    this.generateButton.disabled = false;
+    this.startSortBtn.disabled = false;
+    this.pauseSortBtn.disabled = true;
   }
 
-  async pauseSorting() {
-    if (!this.isRunning) return;
-
+  togglePause() {
     this.isPaused = !this.isPaused;
-    this.pauseButton.textContent = this.isPaused ? "Resume" : "Pause";
+    this.pauseSortBtn.textContent = this.isPaused ? "Resume" : "Pause";
   }
 
-  resetSorting() {
-    if (this.isRunning) {
-      this.isRunning = false;
-      this.isPaused = false;
-    }
+  reset() {
+    this.isPaused = false;
+    this.isRunning = false;
+    this.startSortBtn.disabled = false;
+    this.pauseSortBtn.disabled = true;
     this.generateNewArray();
-    this.pauseButton.disabled = true;
-    this.startButton.disabled = false;
-    this.generateButton.disabled = false;
   }
 
-  sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  resetCounters() {
+    this.comparisons = 0;
+    this.swaps = 0;
+    this.currentPass = 0;
+    document.getElementById("comparisons").textContent = "0";
+    document.getElementById("swaps").textContent = "0";
+    document.getElementById("currentPass").textContent = "0";
+  }
+
+  delay() {
+    const speed = this.speedControl.value;
+    const delayTime = 1000 - speed * 9;
+    return new Promise((resolve) => setTimeout(resolve, delayTime));
   }
 }
+
+// Initialize the visualizer when the DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  new BubbleSortVisualizer();
+});
+
+// Add this line at the end of the file to make the class globally available
+window.BubbleSortVisualizer = BubbleSortVisualizer;

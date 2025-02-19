@@ -1,15 +1,4 @@
-:root {
-  --color-primary: #2c2e31;
-  --color-secondary: #da3333;
-  --color-accent: #e2b714;
-  --color-background: #f8f9fa;
-  --color-text: #333333;
-  --color-light: #ffffff;
-  --color-border: #e0e0e0;
-  --color-success: #28a745;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+@import "../../common/base.css";
 
 * {
   margin: 0;
@@ -20,8 +9,8 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
@@ -34,28 +23,28 @@ body {
 }
 
 .panel {
-  background: var(--color-light);
+  background: var(--card-bg-color);
   border-radius: 10px;
   padding: 2rem;
   box-shadow: var(--shadow-md);
 }
 
 .panel h2 {
-  color: var(--color-primary);
+  color: var(--text-color);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
 
 /* Code Panel */
 .code-container {
-  background: var(--color-primary);
+  background: var(--text-color);
   border-radius: 8px;
   padding: 1.5rem;
   overflow-x: auto;
 }
 
 .pseudocode {
-  color: var(--color-light);
+  color: var(--card-bg-color);
   font-family: "Courier New", monospace;
   font-size: 1rem;
   line-height: 1.8;
@@ -76,7 +65,7 @@ body {
 }
 
 .complexity-box {
-  background: var(--color-background);
+  background: var(--bg-color);
   border-radius: 8px;
   padding: 1.5rem;
 }
@@ -93,7 +82,7 @@ body {
 }
 
 .complexity-item .value {
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   font-weight: 700;
   font-family: "Courier New", monospace;
 }
@@ -111,7 +100,7 @@ body {
 
 .characteristics-list li::before {
   content: "•";
-  color: var(--color-accent);
+  color: var(--tertiary-color);
   font-weight: bold;
   position: absolute;
   left: 0;
@@ -139,8 +128,8 @@ body {
 }
 
 .next-btn {
-  background: var(--color-secondary);
-  color: var(--color-light);
+  background: var(--secondary-color);
+  color: var(--card-bg-color);
 }
 
 .nav-btn:hover {
