@@ -1,35 +1,34 @@
-:root {
-  --color-primary: #2c2e31;
-  --color-secondary: #da3333;
-  --color-accent: #e2b714;
-  --color-background: #e5e8ff;
-  --color-text: #333333;
-  --color-light: #ffffff;
-}
+@import "common/theme.css";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
-  /* border: 1px solid; */
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Update main container styles */
 .main-container {
-  background-color: #fffdfd;
+  width: 95%;
   max-width: 1200px;
-  margin: 0.9rem auto;
-  padding: 1rem 1rem;
+  margin: .5rem auto 2rem; 
+  padding: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-radius: 24px;
   gap: 2rem;
+  background: var(--card-bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
 }
 
 .left-section,
@@ -39,33 +38,41 @@ body {
   gap: 0.5rem;
 }
 
+/* Update right section layout */
+.right-section {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* left section styling. */
 .navbar {
+  background: var(--header-bg);
+  color: var(--text-color);
   display: flex;
   justify-content: space-around;
   gap: 2rem;
   padding: 1rem 0;
-  background: var(--color-primary);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 1.5rem;
   text-align: left;
-  color: #333;
 }
 
 nav a {
-  color: var(--color-light);
+  color: var(--text-color);
   text-decoration: none;
   font-weight: 600;
 }
 
 nav a:hover {
-  color: var(--color-secondary);
+  color: var(--secondary-color);
 }
 
 .header {
-  background: var(--color-primary);
-  color: var(--color-light);
+  background: var(--header-bg);
+  color: var(--text-color);
   padding: 1rem 2rem;
   text-align: center;
   border-radius: 8px;
@@ -87,20 +94,87 @@ header p {
   font-weight: bold;
 }
 
+/* Update footer styles */
 .footer {
-  background: var(--color-primary);
-  color: var(--color-light);
+  background: var(--header-bg);
+  color: var(--text-color);
   text-align: center;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 8px;
+  margin-top: auto;
+}
+
+/* Remove unused footer grid */
+.footer-content {
+  display: none;
+}
+
+.footer-section h4 {
+  color: var(--header-text);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: var(--primary-color);
+}
+
+/* Add social icons styles */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: var(--card-bg-color);
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  background: var(--secondary-color);
+}
+
+/* Update copyright position */
+.copyright {
+  position: relative;
+  margin-top: auto;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: right;
+  border-top: 1px solid var(--border-color);
 }
 
 /* right section styling. */
 .feature {
+  background: var(--primary-color);
+  color: var(--text-color);
   text-align: center;
   padding: 1rem;
-  background: var(--color-accent);
-  color: var(--color-light);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
@@ -117,8 +191,8 @@ header p {
 }
 
 .feature button {
-  background: var(--color-secondary);
-  color: var(--color-light);
+  background: var(--secondary-color);
+  color: var(--text-color);
   border: none;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
@@ -127,19 +201,23 @@ header p {
 }
 
 .feature button:hover {
-  background: var(--color-primary);
+  background: var(--tertiary-color);
 }
 
 .about-section {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 0.5rem;
+  gap: 1rem;
+  flex: 1;
+  margin-bottom: 60px; /* Space for copyright */
 }
 
+/* Update slider for better responsiveness */
 .slider {
+  min-height: 300px; /* Change from fixed height to min-height */
+  height: auto;
   position: relative;
-  height: 300px;
-  background: var(--color-primary);
+  background: var(--card-bg-color);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -169,7 +247,7 @@ header p {
 }
 
 .profile-card {
-  background: var(--color-light);
+  background: var(--card-bg-color);
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
@@ -189,7 +267,7 @@ header p {
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--color-accent);
+  background: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,8 +286,8 @@ header p {
 }
 
 .badge {
-  background: var(--color-secondary);
-  color: var(--color-light);
+  background: var(--secondary-color);
+  color: var(--text-color);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -245,8 +323,8 @@ header p {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
-  border: none;
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -266,7 +344,7 @@ header p {
 }
 
 .arrow {
-  border: solid #333;
+  border: solid var(--text-color);
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 4px;
@@ -281,26 +359,119 @@ header p {
 }
 
 .contact {
+  background: var(--primary-color);
+  color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  background: var(--color-accent);
-  border-radius: 8px;
 }
 
 .contact h3 {
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   margin-bottom: 1rem;
 }
 
 /* media query for responsiveness */
 
-@media (max-width: 768px) {
-  .main-container {
+@media (max-width: 1200px) {
+  .about-section {
     grid-template-columns: 1fr;
   }
 
-  .slider-about-container {
+  .slider {
+    margin-bottom: 1rem;
+  }
+
+  .contact {
+    max-width: 600px; /* Limit width on smaller screens */
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    width: 90%;
+    margin-top: 4rem;
+    padding: 1rem;
     grid-template-columns: 1fr;
   }
+
+  .profile-card {
+    max-width: 100%;
+  }
+
+  body {
+    padding: 1rem 0;
+  }
+}
+
+/* Add/update theme selector styles */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.theme-select {
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.theme-select:hover {
+  border-color: var(--primary-color);
+}
+
+.theme-select option {
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  padding: 0.5rem;
+}
+
+/* Remove old theme selector styles */
+.theme-selector {
+  display: none;
+}
+
+/* Update header styles */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-bg);
+  padding: 0.5rem 2rem;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+}
+
+.page-title {
+  text-align: center;
+  margin: 0;
+  flex: 1;
+}
+
+.page-title a {
+  text-decoration: none;
+  color: var(--header-text);
+  font-size: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

@@ -1,17 +1,5 @@
 @import "../../common/base.css";
-
-:root {
-  --color-primary: var(--text-color);
-  --color-secondary: var(--secondary-color);
-  --color-accent: var(--primary-color);
-  --color-background: var(--bg-color);
-  --color-surface: var(--card-bg-color);
-  --color-comparing: var(--comparing-color);
-  --color-swapping: var(--swapping-color);
-  --color-sorted: var(--sorted-color);
-  --shadow-sm: var(--shadow-sm);
-  --shadow-md: var(--shadow-md);
-}
+@import "../../common/theme.css";
 
 * {
   margin: 0;

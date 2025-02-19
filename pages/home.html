@@ -5,15 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Structures and Algorithms</title>
-  <link href="../styles/main.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/common/theme.css">
+  <link rel="stylesheet" href="../styles/main.css">
 </head>
 
-<body class="light">
-  <header class="header">
-    <a href="../index.html">
-      <h1>VisualDS</h1>
+<body class="theme-light">
+  <header class="main-header">
+    <a href="../index.html" class="logo">
+      <img src="../assets/images/Icon.gif" width="40" alt="Logo">
     </a>
-    <button class="theme-toggle" id="theme-toggle">Dark Mode</button>
+    <h1 class="page-title"><a href="../index.html">VisualDSA</a></h1>
+    <div class="header-controls">
+      <label for="theme-select">Theme:</label>
+      <select id="theme-select" class="theme-select">
+        <option value="theme-light">Light Theme</option>
+        <option value="theme-dark">Dark Theme</option>
+        <option value="theme-modern">Modern Theme</option>
+        <option value="theme-royal">Royal Theme</option>
+        <option value="theme-elegant">Elegant Theme</option>
+      </select>
+    </div>
   </header>
 
   <section class="container">
@@ -153,14 +164,31 @@
     </main>
   </section>
 
-  <!-- Attach event listeners after DOM loads -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const themeSelect = document.getElementById('theme-select');
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'theme-light';
+      document.body.className = savedTheme;
+      themeSelect.value = savedTheme;
+
+      // Theme change handler
+      themeSelect.addEventListener('change', function () {
+        const selectedTheme = this.value;
+        document.body.className = selectedTheme;
+        localStorage.setItem('theme', selectedTheme);
+      });
+    });
+  </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const navButtons = document.querySelectorAll('.nav-button');
       // Mapping for each card type to its corresponding target page
       const urlMap = {
         'bubble': 'sorting/bubble.html',
-        'linkedList': 'linkedList/wantedLinkedList.html',
+        'linkedList': 'linkedList/LinkedList.html',
         'tree': 'tree/wantedTree.html',
         'recursion': 'recursion/wantedRecursion.html',
         'graph': 'graph/wantedGraph.html',

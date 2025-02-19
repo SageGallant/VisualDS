@@ -1,91 +1,4 @@
-/* Default theme */
-:root {
-  --primary-color: #007aff;
-  --secondary-color: #ff3b30;
-  --tertiary-color: #34c759;
-  --bg-color: #f8f9fb;
-  --card-bg-color: #ffffff;
-  --text-color: #1a1d26;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --header-bg: #f0f2f5;
-  --header-text: #0056b3;
-  --button-bg: #e3e6eb;
-  --button-hover: #d6dae0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --comparing-color: #e2b714;
-  --swapping-color: #ff3b30;
-  --sorted-color: #34c759;
-  --border-radius: 15px;
-  --spacing-unit: 1rem;
-  --shadow-sm: 0 2px 4px var(--shadow-color);
-  --shadow-md: 0 4px 6px var(--shadow-color);
-}
-
-/* Dark theme */
-body.theme-dark {
-  --bg-color: #111827;
-  --card-bg-color: #1f2937;
-  --text-color: #f0f0f0; /* Changed from #ffffff to off-white */
-  --text-muted: #d1d5db; /* Lighter muted text */
-  --border-color: #374151;
-  --header-bg: #1f2937;
-  --header-text: #f0f0f0; /* Changed from #ffffff to off-white */
-  --button-bg: #374151;
-  --button-hover: #4b5563;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --primary-color: #60a5fa;
-  --secondary-color: #f87171;
-  --tertiary-color: #4ade80;
-}
-
-/* Modern theme */
-body.theme-modern {
-  --bg-color: #f5f6fa;
-  --card-bg-color: #ffffff;
-  --text-color: #2c3e50;
-  --text-muted: #7f8c8d;
-  --border-color: #dcdde1;
-  --header-bg: #f1f2f6;
-  --header-text: #2980b9;
-  --button-bg: #ecf0f1;
-  --button-hover: #bdc3c7;
-  --primary-color: #3498db;
-  --secondary-color: #e74c3c;
-  --tertiary-color: #2ecc71;
-}
-
-/* Royal theme */
-body.theme-royal {
-  --bg-color: #2c3e50;
-  --card-bg-color: #34495e;
-  --text-color: #ecf0f1;
-  --text-muted: #bdc3c7;
-  --border-color: #465671;
-  --header-bg: #2c3e50;
-  --header-text: #ecf0f1;
-  --button-bg: #465671;
-  --button-hover: #576883;
-  --primary-color: #9b59b6;
-  --secondary-color: #e67e22;
-  --tertiary-color: #1abc9c;
-}
-
-/* Elegant theme */
-body.theme-elegant {
-  --bg-color: #fdf6e3;
-  --card-bg-color: #fff8e7;
-  --text-color: #2c3e50;
-  --text-muted: #7f8c8d;
-  --border-color: #eee8d5;
-  --header-bg: #fdf6e3;
-  --header-text: #b58900;
-  --button-bg: #eee8d5;
-  --button-hover: #e0d6c3;
-  --primary-color: #c0392b;
-  --secondary-color: #8e44ad;
-  --tertiary-color: #16a085;
-}
+@import "theme.css";
 
 /* Common Reset and Base Styles */
 * {
@@ -93,7 +6,6 @@ body.theme-elegant {
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  /* border: 1px solid; */
 }
 
 body {
@@ -103,13 +15,13 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 60px; /* Match header height */
 }
 
 /* Common Layout Components */
 .container {
   margin: 0 auto;
   padding: 0.5rem;
-  /* var(--spacing-unit); */
 }
 
 .card {
@@ -165,8 +77,16 @@ section,
 
 .main-header {
   margin: 0;
-  padding: 0.5rem 1rem; /* Reduced padding */
+  padding: 0.5rem 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Define fixed height */
+  background: var(--header-bg);
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
 }
 
 .nested-container,
@@ -200,7 +120,6 @@ section,
   justify-content: space-between;
   align-items: center;
   position: relative;
-  /* background-color: #0056b3; */
 }
 
 /* Common Button Styles */

@@ -23,11 +23,11 @@
 }
 
 .progress-bar {
-  position: relative;
+  position: sticky;
+  top: 60px; /* Position below header */
+  z-index: 100;
+  background: var(--bg-color);
   padding: 1rem;
-  background: var(--card-bg-color);
-  /* margin: 0;  */
-  width: 100%;
 }
 
 .progress-container {
@@ -121,6 +121,8 @@
   ); /* Adjusted to account for header and progress bar */
   background: var(--card-bg-color);
   margin: 0; /* Added to remove any default margins */
+  padding-top: 80px; /* Match container padding-top */
+  min-height: calc(100vh - 80px); /* Subtract header height */
 }
 
 .content-section {

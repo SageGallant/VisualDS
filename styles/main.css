@@ -46,16 +46,42 @@ body {
   color: var(--text-color);
 }
 
-/* Header */
-.header {
-  background-color: var(--header-bg);
-  color: var(--header-text);
-  padding: 15px 20px;
-  text-align: center;
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--header-bg);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-select {
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.theme-select:hover {
+  border-color: var(--primary-color);
+}
+
+/* Header */
+.header {
+  display: none;
 }
 
 .header h1 {
@@ -84,10 +110,12 @@ body {
 
 /* Layout Container */
 .container {
+  margin-top: 4rem;
   display: flex;
   min-height: calc(100vh - 60px);
-  /* subtract header height */
   position: relative;
+  padding-top: 40px; /* Increase this value if header is taller */
+  min-height: 100vh;
 }
 
 .sidebar {
@@ -173,6 +201,7 @@ body {
   flex: 1;
   padding: 20px;
   transition: margin 0.3s;
+  padding-top: 20px;
 }
 
 /* Card Grid: Utilize all available space */
