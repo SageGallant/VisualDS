@@ -89,7 +89,7 @@ if (mysqli_query($conn, $sql)) {
                      ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP";
     mysqli_query($conn, $default_pages);
     
-    echo "Database setup completed successfully";
+    // echo "Database setup completed successfully";
 } else {
     echo "Error creating database: " . mysqli_error($conn);
 }

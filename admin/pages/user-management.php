@@ -65,9 +65,6 @@ if ($filter != 'All') {
 $users = mysqli_query($conn, "SELECT * FROM users WHERE $where ORDER BY id DESC LIMIT $offset, $limit");
 $total = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as count FROM users WHERE $where"))['count'];
 $total_pages = ceil($total / $limit);
-
-include('../includes/header.php');
-include('../includes/sidebar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +74,8 @@ include('../includes/sidebar.php');
     <title>Document</title>
 </head>
 <body>
+<?include('../includes/header.php');?>
+<?include('../includes/sidebar.php');?>
     
 <div class="main-content">
     <div class="card">

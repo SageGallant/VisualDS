@@ -1,10 +1,16 @@
-<?// File Path: admin/includes/auth.php
+<?php
+// File Path: admin/includes/auth.php
 
 function checkLogin() {
-    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-        header('Location: ' . ADMIN_URL . '/login.php');
+    session_start();
+    if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
+        header("Location: ../login.php");
         exit();
     }
+}
+
+function isLoggedIn() {
+    return isset($_SESSION['admin_id']) && !empty($_SESSION['admin_id']);
 }
 
 function login($username, $password) {
@@ -36,8 +42,9 @@ function login($username, $password) {
 }
 
 function logout() {
+    session_start();
     session_destroy();
-    header('Location: ' . ADMIN_URL . '/login.php');
+    header("Location: ../login.php");
     exit();
 }
 ?>
