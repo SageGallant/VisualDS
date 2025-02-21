@@ -156,44 +156,43 @@ body {
 
 /* Dropdown Menu in Sidebar */
 .dropdown {
-  background-color: var(--secondary-color);
   padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
+  background-color: var(--sidebar-bg);
+  border: none;
+  width: 100%;
+  color: var(--text-color);
 }
 
 .dropdown:hover {
-  background-color: var(--tertiary-color);
+  background-color: var(--hover-color);
 }
 
-.dropdown span.icon {
-  font-size: 1rem;
-  transition: transform 0.3s;
+.dropdown .icon {
+  transition: transform 0.3s ease;
 }
 
-.dropdown.active span.icon {
+.dropdown.active .icon {
   transform: rotate(180deg);
 }
 
 .dropdown-content {
-  display: none;
-  padding-left: 15px;
-  margin-top: 5px;
-}
-
-.dropdown.active + .dropdown-content {
-  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: var(--dropdown-bg, rgba(255, 255, 255, 0.05));
 }
 
 .dropdown-content div {
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--hover-color);
 }
 
 /* Main Content */

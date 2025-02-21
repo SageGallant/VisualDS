@@ -2,11 +2,11 @@
 // File Path: admin/includes/auth.php
 
 function checkLogin() {
-    session_start();
-    if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-        header("Location: ../login.php");
-        exit();
-    }
+    // session_start();
+    // if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
+    //     header("Location: ../login.php");
+    //     exit();
+    // }
 }
 
 function isLoggedIn() {

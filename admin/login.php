@@ -1,81 +1,149 @@
 <?php
-// Enable error reporting (for debugging purposes - remove in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Start session if not already started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Clear cache
-header("Cache-Control: no-cache, must-revalidate, max-age=0");
-header("Pragma: no-cache");
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-
-// Ensure config.php exists and includes necessary functions (like login() and getTheme())
+// File Path: admin/login.php
 require_once('includes/config.php');
 
-// Uncomment the block below if you want to redirect users who are already logged in
+// If already logged in, redirect to dashboard
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: ' . ADMIN_URL . '/pages/dashboard.php');
+    header('Location: pages/dashboard.php');
     exit();
 }
-
-$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    if (empty($username) || empty($password)) {
-        $error = 'Please enter both username and password';
-    } else if (login($username, $password)) {
-        // Optionally, set a session variable upon successful login
-        $_SESSION['admin_logged_in'] = true;
-        header('Location: ' . ADMIN_URL . '/pages/dashboard.php');
+    if (login($username, $password)) {
+        header('Location: pages/dashboard.php');
         exit();
     } else {
-        $error = 'Invalid username or password';
+        $error = "Invalid username or password";
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php echo getTheme(); ?>">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - VisualDS Admin Panel</title>
-    <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>/assets/css/main.css">
+    <title>VisualDS Admin Login</title>
+    <style>
+        :root {
+            --primary-color: #26A69A;
+            --dark-bg: #2C3E50;
+            --light-bg: #F5F5F5;
+            --error-color: #E74C3C;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--dark-bg);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-bg);
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2196F3;
+        }
+
+        .error {
+            color: var(--error-color);
+            margin-bottom: 1rem;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-<body class="login-page">
+<body>
     <div class="login-container">
-        <div class="login-box">
-            <div class="login-logo">
-                <img src="<?php echo ADMIN_URL; ?>/assets/images/logo.svg" alt="VisualDS">
-                <h1>VisualDS Admin Login</h1>
+        <svg class="logo" viewBox="0 0 100 100">
+            <path d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" fill="#26A69A"/>
+            <path d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z" fill="white"/>
+        </svg>
+        <h1>VisualDS Admin Login</h1>
+        
+        <?php if (isset($error)): ?>
+            <div class="error"><?php echo $error; ?></div>
+        <?php endif; ?>
+
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
             </div>
-            
-            <?php if ($error): ?>
-                <div class="alert alert-error"><?php echo $error; ?></div>
-            <?php endif; ?>
 
-            <form method="POST" action="" class="login-form" onsubmit="return validateLoginForm()">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+            <button type="submit">Login</button>
+        </form>
 
-                <button type="submit" class="login-btn">Login</button>
-            </form>
+        <div class="copyright">
+            © 2025 VisualDS Admin Panel
         </div>
-        <p class="copyright">© <?php echo date('Y'); ?> VisualDS Admin Panel</p>
     </div>
-    <script src="<?php echo ADMIN_URL; ?>/assets/js/validation.js"></script>
 </body>
 </html>

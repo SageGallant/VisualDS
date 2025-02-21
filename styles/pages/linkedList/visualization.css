@@ -1,0 +1,646 @@
+:root {
+  --train-speed: 20s;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f0f4f8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-field {
+  padding: 10px 15px;
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #2d73c3;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  background: #4a90e2;
+  color: white;
+  font-size: 16px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: #357abd;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.visualization {
+  height: 400px;
+  position: relative;
+  scrollbar-width: none;
+  overflow-x: unset;
+  overflow-y: hidden;
+  background: linear-gradient(180deg, #87ceeb 0%, #e0f4ff 100%);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.moving-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M0,500 C200,400 300,600 500,500 C700,400 800,600 1000,500" stroke="%23E6E6FA" fill="none" stroke-width="2"/></svg>')
+    repeat-x;
+  animation: moveBackground var(--train-speed) linear infinite;
+}
+
+.track {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 200%;
+  height: 12px;
+  background: linear-gradient(to bottom, #666 0%, #333 100%);
+  border-top: 2px solid #888;
+  border-bottom: 2px solid #222;
+}
+
+.sleepers {
+  position: absolute;
+  z-index: 1;
+  bottom: 40px;
+  left: 0;
+  width: 200%;
+  height: 30px;
+  background-image: linear-gradient(
+    90deg,
+    #4a4a4a 0%,
+    #4a4a4a 20%,
+    transparent 20%
+  );
+  background-size: 100px 100%;
+  animation: moveSleepers var(--train-speed) linear infinite;
+}
+
+.train-container {
+  position: absolute;
+  bottom: 80px;
+  left: 70%;
+  display: flex;
+  gap: 10px;
+  transition: all 0.8s ease-in-out;
+}
+
+.engine {
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(to bottom, #e74c3c 0%, #c0392b 100%);
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.engine::before {
+  content: "START";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.chimney {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  width: 20px;
+  height: 30px;
+  background: #333;
+  border-radius: 5px 5px 0 0;
+}
+
+.smoke {
+  position: absolute;
+  top: -60px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+}
+
+.smoke::before,
+.smoke::after,
+.smoke::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: rgba(200, 200, 200, 0.8);
+  border-radius: 50%;
+  animation: multiSmoke 2s infinite;
+  opacity: 0;
+}
+
+.smoke::after {
+  left: 10px;
+  animation-delay: 0.4s;
+}
+
+.smoke::before {
+  left: -10px;
+  animation-delay: 0.8s;
+}
+
+.connector {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  width: 20px;
+  height: 6px;
+  background: linear-gradient(to bottom, #888 0%, #666 100%);
+  border-radius: 3px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.compartment {
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(to bottom, #3498db 0%, #2980b9 100%);
+  position: relative;
+  border-radius: 8px;
+  transition: all 0.5s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wheel {
+  width: 30px;
+  height: 30px;
+  background: #333;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -15px;
+  border: 3px solid #666;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: rotate 2s linear reverse infinite;
+  overflow: hidden;
+}
+
+.wheel::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #999;
+  top: 50%;
+  transform-origin: center;
+  animation: spokeRotate 2s linear infinite;
+}
+
+.wheel.front {
+  left: 10px;
+}
+
+.wheel.back {
+  right: 10px;
+}
+
+.last-compartment {
+  background: linear-gradient(to bottom, #2ecc71 0%, #27ae60 100%);
+}
+
+.last-compartment::after {
+  content: "Last";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.ticket-collector {
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  background: #ff9800;
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+  display: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-collector.active {
+  display: block;
+  animation: hop 1s infinite;
+}
+
+.bomb {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  z-index: 3;
+  display: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bomb.throwing {
+  display: block;
+  animation: throw 1s forwards;
+}
+
+.flagman {
+  position: absolute;
+  top: -50px;
+  right: 10px;
+  width: 20px;
+  height: 40px;
+  background: #f4a460;
+  border-radius: 50% 50% 0 0;
+}
+
+.flagman::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  width: 10px;
+  height: 20px;
+  background: #2ecc71;
+  border-radius: 5px;
+}
+
+.flag {
+  position: absolute;
+  top: 5px;
+  right: -20px;
+  width: 30px;
+  height: 20px;
+  background: #2ecc71;
+  animation: wave 2s infinite;
+  transform-origin: left center;
+  border-radius: 0 5px 5px 0;
+}
+
+.value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveSleepers {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spokeRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes smoke {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-20px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-20px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes throw {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(100px, -100px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(200px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(0, -50px) scale(1.2);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(0, -100px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Add these new CSS rules after other animations */
+@keyframes detachRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes attachFromRight {
+  from {
+    transform: translateX(200%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.detaching {
+  animation: detachRight 1s ease-in-out forwards;
+}
+
+.attaching {
+  animation: attachFromRight 1s ease-in-out forwards;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes multiSmoke {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(-40px) scale(2);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateY(-80px) scale(3);
+    opacity: 0;
+  }
+}
+
+.train-move-left {
+  animation: moveTrainLeft 0.8s ease-in-out forwards;
+}
+
+.train-move-right {
+  animation: moveTrainRight 0.8s ease-in-out forwards;
+}
+
+@keyframes moveTrainLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-120px);
+  }
+}
+
+@keyframes moveTrainRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120px);
+  }
+}
+
+.delete-animation {
+  animation: deleteEffect 1.5s ease-out forwards;
+}
+
+.explosion {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.explosion::before,
+.explosion::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 87, 34, 0.8) 0%,
+    rgba(255, 193, 7, 0.6) 30%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  animation: explodeEffect 1.5s ease-out forwards;
+}
+
+.explosion::after {
+  background: radial-gradient(
+    circle,
+    rgba(255, 87, 34, 0.6) 0%,
+    rgba(255, 193, 7, 0.4) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  animation-delay: 0.2s;
+}
+
+.delete-smoke {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  pointer-events: none;
+}
+
+.delete-smoke::before,
+.delete-smoke::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(100, 100, 100, 0.8) 0%,
+    rgba(100, 100, 100, 0.4) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: smokeEffect 2s ease-out forwards;
+}
+
+.delete-smoke::after {
+  left: 25%;
+  top: 25%;
+  animation-delay: 0.3s;
+}
+
+@keyframes deleteEffect {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  20% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  40% {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  60% {
+    transform: scale(1) rotate(0) translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.5) rotate(45deg) translateY(-200px);
+    opacity: 0;
+  }
+}
+
+@keyframes explodeEffect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes smokeEffect {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2) translateY(-100px);
+    opacity: 0;
+  }
+}

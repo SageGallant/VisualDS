@@ -1,0 +1,242 @@
+Figure 2.1: A timeline graphic illustrating early natural observations of swarms.
+Suggested image prompt: "A timeline diagram showing ants, bees, birds, and fish with simple icons representing group behavior."
+Suggested search keywords: "swarm behavior timeline illustration"
+
+
+Figure 4.1: A vibrant illustration of an ant colony in action with visible pheromone trails.
+Suggested image prompt: "Colorful depiction of ants following pheromone trails in a natural setting."
+Suggested search keywords: "ant colony pheromone trail illustration"
+
+
+Figure 4.2: An engaging diagram of bees performing the waggle dance inside a hive.
+Suggested image prompt: "Illustration of bees doing a waggle dance inside a vibrant beehive."
+Suggested search keywords: "bee waggle dance illustration
+
+
+Figure 4.3: A dynamic illustration showing birds in flight forming shifting patterns, or fish swimming in a coordinated school.
+Suggested image prompt: "Dynamic illustration of a flock of birds or a school of fish in coordinated motion."
+Suggested search keywords: "flocking birds schooling fish dynamic illustration
+
+
+Figure 5.1: A dynamic illustration showing particles moving in a search space with trails indicating their paths.
+*Suggested image prompt: "Colorful particle swarm moving through a gradient search space with trails, emphasizing dynamic movement."
+Suggested search keywords: "particle swarm optimization illustration dynamic
+
+
+Figure 5.2: An animated diagram showing ants moving along different paths, with pheromone trails varying in intensity.
+*Suggested image prompt: "Animated diagram of ants following pheromone trails on a network of paths, with fading and reinforcing effects."
+Suggested search keywords: "ant colony optimization animation diagram
+
+
+Figure 5.3: A futuristic diagram of robots using hybrid swarm algorithms in a search and rescue mission.
+*Suggested image prompt: "Futuristic robots in action using hybrid swarm intelligence in a disaster area, with vibrant colors and clear details."
+Suggested search keywords: "hybrid swarm robotics search rescue illustration
+
+
+Figure 6.1: An illustration showing delivery trucks and vehicles following optimal routes on a city map.
+Suggested image prompt: "Vibrant city map with dynamic route lines representing swarm-based logistics."
+Suggested search keywords: "swarm intelligence logistics transportation diagram
+
+
+Figure 6.2: A futuristic scene of robots collaborating in a warehouse or disaster zone.
+Suggested image prompt: "Modern robots in a warehouse or search and rescue scenario, working collaboratively in a swarm pattern."
+Suggested search keywords: "swarm robotics warehouse search rescue illustration
+
+
+Figure 6.3: A colorful infographic of a smart factory with interconnected machines and dynamic workflows.
+Suggested image prompt: "Infographic of a smart factory with interconnected machines showing dynamic workflow and swarm intelligence application."
+Suggested search keywords: "smart factory swarm intelligence infographic
+
+
+Figure 6.4: A forward-looking diagram showing hybrid systems in energy, healthcare, and technology.
+Suggested image prompt: "Futuristic diagram illustrating hybrid swarm intelligence applications in energy management and healthcare."
+Suggested search keywords: "hybrid swarm intelligence emerging trends illustration
+
+
+Figure 9.1: A detailed illustration showing a group of robots navigating through debris, each robot marked with a small communication icon.
+Suggested image prompt: "Realistic illustration of swarm robots working together in a disaster zone with clear communication links."
+Suggested search keywords: "swarm robotics disaster response illustration
+
+Figure 9.2: An engaging map-based illustration highlighting dynamic delivery routes with arrows and color-coded segments.
+Suggested image prompt: "Illustration of a city map showing optimized delivery routes using swarm intelligence, with vibrant route lines and icons for vehicles."
+Suggested search keywords: "swarm intelligence e-commerce delivery route illustration"
+
+
+Figure 9.3: A vibrant aerial view of drones flying in formation over a forest or coastline, with icons indicating sensor data collection.
+Suggested image prompt: "Aerial illustration of a swarm of drones monitoring an environment, with clear sensor icons and flight paths."
+Suggested search keywords: "drone swarm environmental monitoring illustration
+
+
+Figure 9.4: A creative urban scene with smart traffic lights, showing dynamic changes in signal patterns and vehicle movement.
+Suggested image prompt: "Illustration of a smart city with adaptive traffic lights using swarm intelligence principles, with vehicles moving smoothly through intersections."
+Suggested search keywords: "smart traffic swarm intelligence illustration
+
+Final Figure: An abstract, vibrant illustration symbolizing interconnected nodes and dynamic collaboration, representing the unity of swarm intelligence.
+Suggested image prompt: "Abstract illustration of interconnected nodes symbolizing unity and the dynamic essence of swarm intelligence."
+Suggested search keywords: "swarm intelligence abstract unity illustration
+
+
+
+
+
+Older Seminar:
+
+1.1 Image Suggestion: A diagram comparing centralized systems and decentralized swarm systems to illustrate the distinction.
+Search Keywords: "Swarm intelligence definition diagram," "decentralized system vs centralized system."
+
+1.2 Image Suggestion: Timeline chart depicting key milestones in the evolution of swarm intelligence, starting from 1989.
+Search Keywords: "Swarm intelligence timeline," "history of swarm intelligence."
+
+1.3 Image Suggestion: Illustrated examples of ant trails, bee dances, bird flocks, and fish schools, with annotations highlighting key behaviours.
+Search Keywords: "natural examples of swarm intelligence," "ant colony behaviour diagram," "bee waggle dance illustration."
+
+
+2
+
+2.1 Image Suggestion: Diagram illustrating self-organization in an ant colony, showcasing pheromone trails and foraging.
+Search Keywords: "self-organization in swarm systems," "ant colony self-organization diagram."
+
+2.2 Image Suggestion: Visualization of bird flocking behaviour with arrows depicting local interactions.
+Search Keywords: "decentralized control in swarm intelligence," "bird flocking behaviour illustration."
+
+2.3 Image Suggestion: A schematic showing emergent patterns in fish schooling, transitioning from individual to group behaviour.
+Search Keywords: "emergence in natural systems," "fish schooling emergent behaviour diagram."
+
+2.4 Image Suggestion: Diagram showing pheromone-based stigmergy in an ant colony, with trails marked by intensity levels.
+Search Keywords: "stigmergy in swarm systems," "ant pheromone trail diagram."
+
+
+3
+
+Image Suggestion: Diagram showing the process of ant foraging and pheromone trail reinforcement.
+Search Keywords: "ant colony foraging diagram," "pheromone trail optimization."
+
+Image Suggestion: Illustration of a waggle dance, showing the directional encoding.
+Search Keywords: "bee waggle dance illustration," "honeybee communication."
+
+Image Suggestion: Visualization of bird flocking with arrows indicating alignment, cohesion, and separation forces.
+Search Keywords: "bird flocking behaviour," "flocking simulation diagram."
+
+Image Suggestion: Depiction of fish schooling, highlighting safety and efficiency in numbers.
+Search Keywords: "fish schooling diagram," "adaptive fish behaviour."
+
+
+4
+
+Image Suggestion: Visual comparison of Reynolds' Boids, cellular automata, and agent-based models.
+Search Keywords: "swarm modeling techniques," "Boids model visualization."
+
+Image Suggestion: Visual comparison of Reynolds' Boids, cellular automata, and agent-based models.
+Search Keywords: "swarm modeling techniques," "Boids model visualization."
+
+Image Suggestion: Diagram showing pheromone trail updates in ACO.
+Search Keywords: "ant colony optimization process," "ACO algorithm visualization."
+
+Image Suggestion: Visualization of particles converging towards the optimal solution.
+Search Keywords: "particle swarm optimization visualization," "PSO algorithm diagram."
+
+Image Suggestion: Diagram showing the phases of the ABC algorithm.
+Search Keywords: "artificial bee colony phases," "ABC algorithm example."
+
+Image Suggestion: Diagram of chemotaxis and reproduction phases in BFO.
+Search Keywords: "bacterial foraging optimization diagram," "BFO algorithm visualization."
+
+Image Suggestion: Graphs depicting convergence time and efficiency comparisons for ACO.
+Search Keywords: "ACO efficiency analysis," "statistical metrics in swarm algorithms."
+
+5
+
+
+Suggestion: Flowchart detailing ACO steps and an example TSP graph illustrating pheromone updates.
+Search Keywords: "ACO algorithm workflow," "ant colony optimization process."
+
+Suggestion: Diagram showing particles moving in a 3D search space toward the global optimum.
+Search Keywords: "PSO algorithm in neural networks," "particle swarm optimization visualization."
+
+Suggestion: Workflow diagram illustrating the roles of employed, onlooker, and scout bees.
+Search Keywords: "ABC algorithm roles," "artificial bee colony in clustering."
+
+Suggestion: Diagram depicting chemotaxis and reproduction phases in BFO.
+Search Keywords: "bacterial foraging algorithm overview," "BFO optimization steps."
+
+Suggestion: Table or chart summarizing the comparison of algorithms.
+Search Keywords: "swarm algorithms comparison," "ACO vs PSO vs ABC vs BFO."
+
+
+6
+
+
+
+Suggestion: Diagram of swarm robots performing warehouse tasks or a search operation.
+Search Keywords: "swarm robotics applications," "robots in disaster recovery," "swarm robots for environment."
+
+Suggestion: Flowchart of a network system optimized using ACO.
+Search Keywords: "swarm intelligence in networks," "ACO for load balancing," "swarm in wireless sensors."
+
+Suggestion: Diagram showing a supply chain optimized with swarm intelligence.
+Search Keywords: "swarm intelligence in business," "PSO supply chain optimization," "swarm marketing analytics."
+
+Suggestion: Diagram showing machine learning workflows enhanced by swarm-based optimization.
+Search Keywords: "swarm intelligence in ML," "PSO in neural networks," "swarm optimization for deep learning."
+
+Suggestion: Diagram of a swarm-based healthcare resource management system.
+Search Keywords: "swarm intelligence in healthcare," "medical imaging optimization."
+
+
+7
+
+Suggestion: Visualization of swarm robots exploring a planetary surface or satellites in coordinated formations.
+Search Keywords: "swarm intelligence in space exploration," "swarm robots for Mars," "satellite swarm coordination."
+
+Suggestion: Diagram of autonomous drones in a swarm formation performing surveillance.
+Search Keywords: "swarm drones military applications," "autonomous swarms for defence."
+
+Suggestion: Illustration of nanobots delivering medication to specific cells in the body.
+Search Keywords: "nanobot’ swarms’ healthcare," "swarm intelligence in medicine."
+
+Suggestion: Diagram showing swarm applications in traffic control and waste management.
+Search Keywords: "swarm intelligence in smart cities," "traffic optimization swarm," "swarm energy grids."
+
+
+8
+
+Suggestion: Diagram illustrating the impact of swarm size on communication complexity.
+Search Keywords: "swarm scalability issues," "communication challenges in large swarms."
+
+Suggestion: Chart comparing static versus adaptive parameter tuning effects on algorithm performance.
+Search Keywords: "parameter tuning in swarm algorithms," "adaptive parameter control in PSO."
+
+Suggestion: Table summarizing key performance metrics and their applications.
+Search Keywords: "swarm performance metrics," "efficiency and robustness in swarm systems."
+
+Suggestion: Diagram highlighting system limitations and potential mitigation strategies.
+Search Keywords: "limitations of swarm intelligence," "challenges in swarm-based systems."
+
+9
+
+Suggestion: Photo of swarm robots in an industrial warehouse.
+Search Keywords: "swarm robotics in industry," "industrial swarm applications."
+
+Suggestion: Snapshot of the Kilobot swarm in action.
+Search Keywords: "Kilobot project swarm," "academic research in swarm intelligence."
+
+Suggestion: Diagram of a smart traffic system using swarm algorithms.
+Search Keywords: "swarm traffic management," "swarm intelligence success stories."
+
+Suggestion: Chart summarizing lessons learned from real-world swarm implementations.
+Search Keywords: "lessons from swarm systems," "real-world swarm intelligence insights."
+
+10
+
+Suggestion: Conceptual image of swarm systems managing IoT devices or blockchain networks.
+Search Keywords: "swarm intelligence in IoT," "swarm systems for blockchain."
+
+Suggestion: Diagram showing research trends in swarm intelligence.
+Search Keywords: "swarm intelligence research trends," "hybrid swarm AI."
+
+Suggestion: Visualization of a hybrid system blending neural networks and swarm intelligence.
+Search Keywords: "hybrid swarm systems," "swarm and neural networks."
+
+Suggestion: Chart outlining ethical considerations for swarm systems.
+Search Keywords: "ethics in swarm intelligence," "regulations for swarm systems."
+

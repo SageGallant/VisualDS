@@ -101,12 +101,6 @@
                                     <p class="bio">Proficient in HTML, CSS, JavaScript, Node.js, and UI/UX; builds
                                         dynamic, user-centric web applications.</p>
                                 </div>
-
-                                <!-- <div class="profile-links">
-                                    <a href="#" class="profile-btn github">GitHub</a>
-                                    <a href="#" class="profile-btn linkedin">LinkedIn</a>
-                                    <a href="#" class="profile-btn portfolio">Portfolio</a>
-                                </div> -->
                             </div>
                         </div>
                         <div class="slide">
@@ -143,6 +137,11 @@
                                     <p class="bio">BCA student with basic C knowledge; exploring web
                                         development fundamentals with team support.</p>
                                 </div>
+                                <!-- <div class="profile-links">
+                                    <a href="#" class="profile-btn github">GitHub</a>
+                                    <a href="#" class="profile-btn linkedin">LinkedIn</a>
+                                    <a href="#" class="profile-btn portfolio">Portfolio</a>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -167,12 +166,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             const themeSelect = document.getElementById('theme-select');
 
-            // Load saved theme
             const savedTheme = localStorage.getItem('theme') || 'theme-light';
             document.body.className = savedTheme;
             themeSelect.value = savedTheme;
 
-            // Theme change handler
             themeSelect.addEventListener('change', function () {
                 const selectedTheme = this.value;
                 document.body.className = selectedTheme;
