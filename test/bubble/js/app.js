@@ -1,97 +1,53 @@
-// import { isRunning } from "../script.js";
+// Theme functionality
+function toggleTheme() {
+  const body = document.body;
+  const themeToggleIcon = document.querySelector("#theme-toggle");
+  body.classList.toggle("dark");
+  themeToggleIcon.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
+}
+
+// Sound management
+const sounds = {
+  noSwap: new Audio("/assets/audio/sorting/slap.mp3"),
+  swap: new Audio("/assets/audio/sorting/jump.mp3"),
+  loop: new Audio("/assets/audio/sorting/nextLevel.mp3"),
+  complete: new Audio("/assets/audio/sorting/finish.mp3"),
+};
+
+function playSound(type) {
+  if (sounds[type]) {
+    sounds[type].currentTime = 0; // Reset to start for quick consecutive plays
+    sounds[type].load();
+    sounds[type].play();
+  } else {
+    console.error(`Sound type "${type}" not found.`);
+  }
+}
+
+// Utility functions
+const visualization = document.querySelector("#visualization");
+const barCountInput = document.querySelector("#bar-count");
+const barValuesInput = document.querySelector("#bar-values");
+const speedInput = document.querySelector("#speed");
+const infoPanel = document.querySelector("#info-panel");
+const currentOperationElem = document.querySelector("#current-operation");
+const loopValuesElem = document.querySelector("#loop-values");
+
 const COLORS = {
   default: "white",
   compare: "orange",
   swap: "green",
   incorrect: "red",
+  sorted: "rebeccapurple",
 };
 
-async function bubbleSort() {
-  const selection = Array.from(visualization.children);
+let bars = [];
+let speed = parseInt(speedInput.value, 10);
+let isRunning = false;
+let selectedAlgorithm = "bubble";
 
-  if (isArraySorted(bars)) {
-    currentOperation.textContent = "Already Sorted!";
-    stopAnimation();
-    return;
-  }
-
-  for (let i = 0; i < bars.length - 1 && isRunning; i++) {
-    bars.forEach((_barValue, idx) => {
-      const adjustedIdx = idx - i;
-      if (adjustedIdx >= 0)
-        selection[adjustedIdx].style.background = COLORS.default;
-    });
-
-    for (let j = 0; j < bars.length - i - 1 && isRunning; j++) {
-      loopValues.textContent = `Phase: ${i}, Compare: ${j}`;
-      currentOperation.textContent = `Comparing bars ${j} and ${j + 1}`;
-
-      selection[j].style.background = selection[j + 1].style.background =
-        COLORS.compare;
-      await pause();
-
-      if (bars[j] > bars[j + 1]) {
-        [bars[j], bars[j + 1]] = [bars[j + 1], bars[j]];
-        [selection[j].style.height, selection[j + 1].style.height] = [
-          selection[j + 1].style.height,
-          selection[j].style.height,
-        ];
-        [selection[j].textContent, selection[j + 1].textContent] = [
-          bars[j],
-          bars[j + 1],
-        ];
-        updateBarsWithSound(
-          [selection[j], selection[j + 1]],
-          COLORS.swap,
-          "jump",
-          sounds.jump
-        );
-
-        currentOperation.textContent = `Swapped bars ${j} and ${j + 1}`;
-        await pause();
-      } else {
-        updateBarsWithSound(
-          [selection[j], selection[j + 1]],
-          COLORS.incorrect,
-          "shake",
-          sounds.slap
-        );
-
-        await pause();
-      }
-      updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "blue");
-    }
-    if (i < bars.length - 2) sounds.compare.play();
-    await pause();
-  }
-  currentOperation.textContent = "Bubble Sort Complete";
-  sounds.phase.play();
-  stopAnimation();
-}
-
-// import { bubbleSort } from "./js/bubble.js";
-
-const loopValues = document.querySelector("#loop-values");
-const currentOperation = document.querySelector("#current-operation");
-const barCountInput = document.querySelector("#bar-count");
-const barValuesInput = document.getElementById("bar-values");
-const speedInput = document.querySelector("#speed");
-const startButton = document.querySelector("#start");
-const visualization = document.querySelector("#visualization");
-
-const sounds = {
-  slap: new Audio("./assets/audio/slap.mp3"),
-  jump: new Audio("./assets/audio/jump.mp3"),
-  compare: new Audio("./assets/audio/nextLevel.mp3"),
-  phase: new Audio("./assets/audio/finish.mp3"),
-};
-isRunning = false;
-
-let bars = [],
-  speed = parseInt(speedInput.value, 10),
-  animation = null;
 speedInput.addEventListener("input", () => {
-  speed = parseInt(speedInput.value, 10); // Parse to integer here as well!
+  speed = parseInt(speedInput.value, 10);
 });
 
 function createBars() {
@@ -102,52 +58,68 @@ function createBars() {
       bars = barValues.split(",").map((v) => +v.trim());
     } else {
       alert("Please enter valid numeric values for bars.");
-      return; // Return early if invalid input
+      return;
     }
   } else {
     bars = Array.from({ length: barCount }, () =>
       Math.floor(Math.random() * 100)
     );
   }
-
   visualization.innerHTML = "";
   bars.forEach((value) => {
     const bar = document.createElement("div");
     bar.className = "bar";
     bar.style.height = `${value}%`;
     bar.style.width = `${100 / bars.length - 1}%`;
-    bar.textContent = Math.floor(value); // Inverts div positioning;
+    bar.textContent = Math.floor(value);
     visualization.appendChild(bar);
   });
+  return bars;
 }
 
 function pause() {
   return new Promise((resolve) => setTimeout(resolve, speed));
 }
 
-function startAnimation() {
-  isRunning = true;
-  startButton.textContent = "Stop";
-  bubbleSort();
+function handleReset() {
+  createBars();
+  currentOperationElem.textContent = "Reset complete";
 }
 
-function stopAnimation() {
-  isRunning = false;
-  startButton.textContent = "Start";
-}
-function updateBars(bars, classesToRemove, newBackground) {
+function updateBars(
+  bars,
+  backgroundColor = null,
+  classToAdd = null,
+  classToRemove = [],
+  soundToPlay = null,
+  pauseFunction = null,
+  animationDuration = 0
+) {
   bars.forEach((bar) => {
-    classesToRemove.forEach((cls) => bar.classList.remove(cls));
-    bar.style.background = newBackground;
+    classToRemove.forEach((cls) => bar.classList.remove(cls));
+
+    if (backgroundColor) {
+      bar.style.background = backgroundColor;
+    }
+
+    if (classToAdd) {
+      bar.classList.add(classToAdd);
+      // Remove class after animation duration if animation is enabled
+      if (animationDuration > 0) {
+        setTimeout(() => bar.classList.remove(classToAdd), animationDuration);
+      }
+    }
   });
-}
-function updateBarsWithSound(bars, backgroundColor, classToAdd, soundToPlay) {
-  bars.forEach((bar) => {
-    bar.style.background = backgroundColor;
-    bar.classList.add(classToAdd);
-    setTimeout(() => bar.classList.remove(classToAdd), 500); // Remove class after animation duration
-  });
-  soundToPlay.play();
+
+  // Play sound if provided
+  if (soundToPlay) {
+    playSound(soundToPlay);
+  }
+
+  // Pause if provided
+  if (pauseFunction) {
+    pauseFunction();
+  }
 }
 
 function isArraySorted(array) {
@@ -157,14 +129,209 @@ function isArraySorted(array) {
   return true;
 }
 
-startButton.addEventListener("click", () => {
-  isRunning ? stopAnimation() : startAnimation();
-});
+// Sorting algorithms
+async function bubbleSort() {
+  if (!isRunning) return;
 
-document.querySelector("#reset").addEventListener("click", () => {
-  stopAnimation();
+  const bars = document.querySelectorAll(".bar");
+  const n = bars.length;
+  const values = Array.from(bars).map((bar) => parseInt(bar.style.height));
+
+  for (let i = 0; i < n - 1; i++) {
+    if (!isRunning) return;
+    loopValuesElem.textContent = `Phase: ${i + 1}, Compare: 0`;
+
+    for (let j = 0; j < n - i - 1; j++) {
+      if (!isRunning) return;
+
+      // Update info panel
+      loopValuesElem.textContent = `Phase: ${i + 1}, Compare: ${j + 1}`;
+      currentOperationElem.textContent = `Comparing ${values[j]} and ${
+        values[j + 1]
+      }`;
+
+      // Highlight bars being compared
+      bars[j].style.background = COLORS.compare;
+      bars[j + 1].style.background = COLORS.compare;
+      await pause();
+
+      if (values[j] > values[j + 1]) {
+        // Swap values
+        [values[j], values[j + 1]] = [values[j + 1], values[j]];
+
+        // Update bar heights
+        bars[j].style.height = `${values[j]}%`;
+        bars[j + 1].style.height = `${values[j + 1]}%`;
+
+        // Update bar text content
+        bars[j].textContent = Math.floor(values[j]);
+        bars[j + 1].textContent = Math.floor(values[j + 1]);
+
+        // Visual swap effect
+        updateBars(
+          [bars[j], bars[j + 1]],
+          COLORS.swap,
+          "jump",
+          ["shake"],
+          "swap"
+        );
+        await pause();
+      } else {
+        // No swap needed
+        updateBars(
+          [bars[j], bars[j + 1]],
+          COLORS.incorrect,
+          "shake",
+          ["jump"],
+          "noSwap"
+        );
+        await pause();
+      }
+
+      // Reset bar color
+      bars[j].style.background = "";
+      bars[j + 1].style.background = "";
+    }
+
+    // Mark the last bar as sorted
+    bars[n - i - 1].style.background = COLORS.sorted;
+    playSound("loop");
+    await pause();
+  }
+
+  // Mark the first bar as sorted (it's already in place)
+  bars[0].style.background = COLORS.sorted;
+
+  // Check if array is fully sorted
+  if (isArraySorted(values)) {
+    currentOperationElem.textContent = "Sorting Complete!";
+    document.querySelectorAll(".bar").forEach((bar) => {
+      updateBars([bar], null, "finish", [], "complete");
+    });
+  }
+
+  isRunning = false;
+  document.querySelector("#start").textContent = "Start";
+}
+
+async function insertionSort() {
+  if (!isRunning) return;
+
+  const bars = document.querySelectorAll(".bar");
+  const n = bars.length;
+  const values = Array.from(bars).map((bar) => parseInt(bar.style.height));
+
+  // Mark first element as sorted
+  bars[0].style.background = COLORS.sorted;
+
+  for (let i = 1; i < n; i++) {
+    if (!isRunning) return;
+
+    let current = values[i];
+    let j = i - 1;
+
+    // Highlight current element
+    loopValuesElem.textContent = `Phase: ${i}, Current: ${current}`;
+    currentOperationElem.textContent = `Inserting ${current} into sorted array`;
+    bars[i].style.background = COLORS.compare;
+    await pause();
+
+    while (j >= 0 && values[j] > current) {
+      if (!isRunning) return;
+
+      // Shift element right
+      values[j + 1] = values[j];
+      bars[j + 1].style.height = `${values[j + 1]}%`;
+      bars[j + 1].textContent = Math.floor(values[j + 1]);
+
+      // Visual effect for shift
+      updateBars(
+        [bars[j], bars[j + 1]],
+        COLORS.swap,
+        "jump",
+        ["shake"],
+        "swap"
+      );
+      await pause();
+
+      // Move to the next element
+      j--;
+    }
+
+    // Place current element at correct position
+    values[j + 1] = current;
+    bars[j + 1].style.height = `${values[j + 1]}%`;
+    bars[j + 1].textContent = Math.floor(values[j + 1]);
+
+    // Mark all processed elements as sorted
+    for (let k = 0; k <= i; k++) {
+      bars[k].style.background = COLORS.sorted;
+    }
+
+    playSound("loop");
+    await pause();
+  }
+
+  // Check if array is fully sorted
+  if (isArraySorted(values)) {
+    currentOperationElem.textContent = "Sorting Complete!";
+    document.querySelectorAll(".bar").forEach((bar) => {
+      updateBars([bar], null, "finish", [], "complete");
+    });
+  }
+
+  isRunning = false;
+  document.querySelector("#start").textContent = "Start";
+}
+
+// Main app control functions
+function startSort() {
+  if (isRunning) return;
+  isRunning = true;
+  document.querySelector("#start").textContent = "Stop";
+
+  switch (selectedAlgorithm) {
+    case "bubble":
+      bubbleSort();
+      break;
+    case "insertion":
+      insertionSort();
+      break;
+    default:
+      console.error("Unknown algorithm selected");
+      isRunning = false;
+      document.querySelector("#start").textContent = "Start";
+  }
+}
+
+function stopSort() {
+  if (!isRunning) return;
+  isRunning = false;
+  document.querySelector("#start").textContent = "Start";
+}
+
+// Event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.querySelector("#start");
+  const resetButton = document.querySelector("#reset");
+  const algorithmSelector = document.querySelector("#algorithm");
+  const themeToggleButton = document.querySelector("#theme-toggle");
+
+  startButton.addEventListener("click", () => {
+    isRunning ? stopSort() : startSort();
+  });
+
+  resetButton.addEventListener("click", () => {
+    stopSort();
+    handleReset();
+  });
+
+  algorithmSelector.addEventListener("change", (e) => {
+    selectedAlgorithm = e.target.value;
+  });
+
+  themeToggleButton.addEventListener("click", toggleTheme);
+
+  // Initialize bars on page load
   createBars();
-  currentOperation.textContent = "Reset complete";
 });
-
-createBars();

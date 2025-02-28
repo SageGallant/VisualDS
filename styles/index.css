@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
+  /* border: 1px solid; */
 }
 
 body {
@@ -17,12 +18,26 @@ body {
   align-items: center;
 }
 
-/* Update main container styles */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-bg);
+  padding: 0 2rem;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+}
+
 .main-container {
   width: 95%;
   max-width: 1200px;
-  margin: .5rem auto 2rem; 
-  padding: 2rem;
+  /* margin: 0.5rem auto 2rem; */
+  margin-top: 5rem;
+  padding: 0.9rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -38,7 +53,6 @@ body {
   gap: 0.5rem;
 }
 
-/* Update right section layout */
 .right-section {
   position: relative;
   min-height: 100%;
@@ -46,7 +60,6 @@ body {
   flex-direction: column;
 }
 
-/* left section styling. */
 .navbar {
   background: var(--header-bg);
   color: var(--text-color);
@@ -102,11 +115,7 @@ header p {
   padding: 2rem;
   border-radius: 8px;
   margin-top: auto;
-}
-
-/* Remove unused footer grid */
-.footer-content {
-  display: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .footer-section h4 {
@@ -115,7 +124,7 @@ header p {
   font-size: 1.1rem;
 }
 
-.footer-section ul {
+/* .footer-section ul {
   list-style: none;
   padding: 0;
 }
@@ -131,9 +140,8 @@ header p {
 
 .footer-section a:hover {
   color: var(--primary-color);
-}
+} */
 
-/* Add social icons styles */
 .social-links {
   display: flex;
   gap: 1rem;
@@ -171,12 +179,12 @@ header p {
 
 /* right section styling. */
 .feature {
-  background: var(--primary-color);
+  background: var(--header-bg);
   color: var(--text-color);
   text-align: center;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s;
 }
 
@@ -202,6 +210,7 @@ header p {
 
 .feature button:hover {
   background: var(--tertiary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .about-section {
@@ -217,9 +226,10 @@ header p {
   min-height: 300px; /* Change from fixed height to min-height */
   height: auto;
   position: relative;
-  background: var(--card-bg-color);
+  background: var(--header-bg);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .slides {
@@ -354,10 +364,10 @@ header p {
 }
 
 .contact {
-  background: var(--primary-color);
+  background: var(--header-bg);
   color: var(--text-color);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   padding: 1.5rem;
 }
 
@@ -431,21 +441,6 @@ header p {
 /* Remove old theme selector styles */
 .theme-selector {
   display: none;
-}
-
-/* Update header styles */
-.main-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--header-bg);
-  padding: 0.5rem 2rem;
-  box-shadow: var(--shadow-md);
-  z-index: 1000;
 }
 
 .page-title {

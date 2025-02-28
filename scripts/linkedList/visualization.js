@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async deleteLastNode() {
       if (this.size > 0) {
-        const lastNode = this.trainContainer.children[this.size];
+        const lastNode = this.trainContainer.children[this.size + 2];
         if (!lastNode) return;
         this.trainContainer.classList.add("train-move-right");
         await new Promise((resolve) => setTimeout(resolve, 800));
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.ticketCollector.classList.add("active");
 
       const moveCollector = () => {
-        if (current <= this.size) {
+        if (current <= this.size + 2) {
           const compartment = this.trainContainer.children[current];
           const rect = compartment.getBoundingClientRect();
           const containerRect = this.trainContainer.getBoundingClientRect();
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   const train = new LinkedListTrain();
-window.addNode = async function () {
+  window.addNode = async function () {
     const input = document.getElementById("nodeValue");
     const value = input.value.trim();
     if (value) {
@@ -238,5 +238,4 @@ window.addNode = async function () {
     document.getElementById("listLength").textContent = train.size;
   }
   updateStateInfo();
-
 });
