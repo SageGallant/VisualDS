@@ -15,7 +15,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  padding-top: 60px; /* Match header height */
+  /* padding-top: 60px; Match header height */
 }
 
 /* Common Layout Components */

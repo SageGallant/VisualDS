@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((html) => {
         const container = document.getElementById(containerId);
         container.innerHTML = html;
-
-        const scriptUrl = `../../scripts/sorting/bubble/${url.replace(
+        const scriptUrl = `../../scripts/linkedList/${url.replace(
           ".html",
           ".js"
         )}`;
@@ -149,8 +148,35 @@ document.addEventListener("DOMContentLoaded", function () {
               }
               break;
             case 2:
-              if (window.BubbleSortVisualizer) {
-                new window.BubbleSortVisualizer();
+              // Make sure functions are accessible in global scope when visualization is loaded
+              if (document.getElementById("visualization-content")) {
+                // Update the onclick handlers to use the functions from the window object
+                const addNodeBtn = document.querySelector(
+                  '.btn[onclick="addNode()"]'
+                );
+                if (addNodeBtn) {
+                  addNodeBtn.onclick = function () {
+                    if (window.addNode) window.addNode();
+                  };
+                }
+
+                const deleteLastNodeBtn = document.querySelector(
+                  '.btn[onclick="deleteLastNode()"]'
+                );
+                if (deleteLastNodeBtn) {
+                  deleteLastNodeBtn.onclick = function () {
+                    if (window.deleteLastNode) window.deleteLastNode();
+                  };
+                }
+
+                const traverseBtn = document.querySelector(
+                  '.btn[onclick="traverse()"]'
+                );
+                if (traverseBtn) {
+                  traverseBtn.onclick = function () {
+                    if (window.traverse) window.traverse();
+                  };
+                }
               }
               break;
           }
@@ -191,24 +217,6 @@ document.addEventListener("DOMContentLoaded", function () {
         showSection(index);
       }
     });
-  });
-
-  // Theme toggle using class on the body tag
-  themeSelect.addEventListener("change", function () {
-    // Remove all theme classes from the body
-    document.body.classList.remove(
-      "theme-dark",
-      "theme-modern",
-      "theme-royal",
-      "theme-elegant",
-      "theme-default"
-    );
-    // If the selected theme is not default, add the new theme class to the body
-    if (this.value !== "default") {
-      document.body.classList.add(`theme-${this.value}`);
-    }
-    // Save the selected theme in localStorage
-    localStorage.setItem("theme", this.value);
   });
 
   menuToggle.addEventListener("click", () => {

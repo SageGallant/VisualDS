@@ -18,13 +18,6 @@
     <h1 class="page-title"><a href="../index.html">VisualDSA</a></h1>
     <div class="header-controls">
       <label for="theme-select">Theme:</label>
-      <select id="theme-select" class="theme-select">
-        <option value="theme-light">Light Theme</option>
-        <option value="theme-dark">Dark Theme</option>
-        <option value="theme-modern">Modern Theme</option>
-        <option value="theme-royal">Royal Theme</option>
-        <option value="theme-elegant">Elegant Theme</option>
-      </select>
     </div>
   </header>
   <section class="container">
@@ -75,6 +68,7 @@
 
     <main class="main-content">
       <div class="card-grid">
+        <!-- Card 1: Bubble -->
         <div class="card">
           <img src="../assets/images/sorting.gif" alt="Bubble Sort">
           <h3>Bubble Sort</h3>
@@ -102,8 +96,8 @@
             </div>
           </div>
         </div>
-        <!-- Card 4: Tree -->
-        <div class="card">
+
+        <!-- <div class="card">
           <img src="../assets/images/tree.gif" alt="Tree">
           <h3>Tree</h3>
           <div class="button-group">
@@ -116,7 +110,6 @@
             </div>
           </div>
         </div>
-        <!-- Card 5: Recursion -->
         <div class="card">
           <img src="../assets/images/recursion.gif" alt="Recursion">
           <h3>Recursion</h3>
@@ -130,7 +123,6 @@
             </div>
           </div>
         </div>
-        <!-- Card 6: Graph -->
         <div class="card">
           <img src="../assets/images/graph.gif" alt="Graph">
           <h3>Graph</h3>
@@ -144,7 +136,6 @@
             </div>
           </div>
         </div>
-        <!-- Card 7: Hash Table -->
         <div class="card">
           <img src="../assets/images/hashtable.gif" alt="Hash Table">
           <h3>Hash Table</h3>
@@ -157,100 +148,10 @@
               <button class="nav-button" data-page="hash" data-section="visualization">Visualization</button>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            const themeSelect = document.getElementById('theme-select');
-
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme') || 'theme-light';
-            document.body.className = savedTheme;
-            themeSelect.value = savedTheme;
-
-            // Theme change handler
-            themeSelect.addEventListener('change', function () {
-              const selectedTheme = this.value;
-              document.body.className = selectedTheme;
-              localStorage.setItem('theme', selectedTheme);
-            });
-          });
-
-          // Sidebar Toggle
-          function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            const toggleBtn = document.getElementById("sidebar-toggle");
-            sidebar.classList.toggle("collapsed");
-            if (sidebar.classList.contains("collapsed")) {
-              toggleBtn.style.left = "0px";
-              toggleBtn.innerHTML =
-                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            } else {
-              toggleBtn.style.left = "var(--sidebar-width)";
-              toggleBtn.innerHTML =
-                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            }
-          }
-
-          // Dropdown Toggle
-          function toggleDropdown(element) {
-            const dropdownContent = element.nextElementSibling;
-            const icon = element.querySelector('.icon svg path');
-
-            // Toggle active class
-            element.classList.toggle('active');
-
-            // Toggle dropdown visibility
-            if (dropdownContent.style.maxHeight) {
-              dropdownContent.style.maxHeight = null;
-              icon.setAttribute('d', 'M8 9L12 13L16 9');
-            } else {
-              dropdownContent.style.maxHeight = dropdownContent.scrollHeight + "px";
-              icon.setAttribute('d', 'M16 15L12 11L8 15');
-            }
-          }
-
-          // On page load, ensure the toggle button is positioned correctly (sidebar open by default)
-          document.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.getElementById("sidebar-toggle");
-            toggleBtn.style.left = "var(--sidebar-width)";
-          });
-
-          document.addEventListener("DOMContentLoaded", function () {
-            const navButtons = document.querySelectorAll(".nav-button");
-            // Mapping for each card type to its corresponding target page
-            const urlMap = {
-              bubble: "sorting/base.html",
-              linkedList: "linkedList/base.html",
-              tree: "tree/wantedTree.html",
-              recursion: "recursion/wantedRecursion.html",
-              graph: "graph/wantedGraph.html",
-              hashTable: "hashTable/wantedHashTable.html",
-            };
-
-            navButtons.forEach(function (button) {
-              button.addEventListener("click", function () {
-                const page = this.getAttribute("data-page");
-                const section = this.getAttribute("data-section");
-                console.log("Button clicked for", page, section);
-                // Determine the target URL based on the page mapping
-                let targetUrl = urlMap[page];
-                if (targetUrl) {
-                  window.location.href = targetUrl + "?section=" + section;
-                } else {
-                  console.error("No target URL found for page:", page);
-                }
-              });
-            });
-          });
-
-        </script>
-
-        <script>
-
-        </script>
-
-        <script src="../scripts/main.js"></script>
+        <script src="../scripts/themeManager.js"></script>
+        <script src="../scripts/home.js"></script>
 </body>
 
 </html>

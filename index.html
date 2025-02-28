@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="styles/common/base.css"> -->
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
@@ -18,15 +17,9 @@
         <h1 class="page-title"><a href="index.html">VisualDSA</a></h1>
         <div class="header-controls">
             <label for="theme-select">Theme:</label>
-            <select id="theme-select" class="theme-select">
-                <option value="theme-light">Light Theme</option>
-                <option value="theme-dark">Dark Theme</option>
-                <option value="theme-modern">Modern Theme</option>
-                <option value="theme-royal">Royal Theme</option>
-                <option value="theme-elegant">Elegant Theme</option>
-            </select>
         </div>
     </header>
+
     <main class="main-container">
         <section class="left-section">
             <nav class="navbar">
@@ -68,8 +61,7 @@
                 </div>
             </footer>
             <div class="copyright">
-                <p>© 2025 VisualDSA. All rights reserved.</p>
-            </div>
+                <p>© 2025 VisualDSA. All rights reserved.</p </div>
         </section>
 
         <section class="right-section">
@@ -161,21 +153,7 @@
         </section>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const themeSelect = document.getElementById('theme-select');
-
-            const savedTheme = localStorage.getItem('theme') || 'theme-light';
-            document.body.className = savedTheme;
-            themeSelect.value = savedTheme;
-
-            themeSelect.addEventListener('change', function () {
-                const selectedTheme = this.value;
-                document.body.className = selectedTheme;
-                localStorage.setItem('theme', selectedTheme);
-            });
-        });
-    </script>
+    <script src="scripts/themeManager.js"></script>
     <script src="scripts/index.js"></script>
 </body>
 

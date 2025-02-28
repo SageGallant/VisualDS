@@ -51,10 +51,9 @@
         <div class="content-grid">
             <div class="card theory-card">
                 <div class="card-header">
-                    <h1 class="card-title">Understanding Linked Lists</h1>
+                    <h2 class="card-title">Linked Lists</h2>
                 </div>
                 <div class="theory-content">
-                    <h3>What is a Linked List?</h3>
                     <p>A Linked List is a linear data structure where elements are stored in nodes, and each node points
                         to the next node in the sequence. Unlike arrays, linked lists don't store elements in contiguous
                         memory locations.</p>
@@ -98,9 +97,26 @@
                     </div>
                 </div>
             </div>
-
             <div class="card visual-card">
-                <!-- ...existing visual content... -->
+                <div class="key-points">
+                    <h2>Key Characteristics</h2>
+                    <ul>
+                        <li>Simple implementation</li>
+                        <li>O(n²) time complexity</li>
+                        <li>Stable sorting algorithm</li>
+                        <li>In-place algorithm</li>
+                    </ul>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Visual Representation</h2>
+                </div>
+                <div class="visual-content">
+                    <div class="array-visual" id="arrayVisual"></div>
+                    <div class="visual-controls">
+                        <button class="button button-secondary" id="resetVisual">Reset</button>
+                        <button class="button button-primary" id="nextStep">Next Step</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,3 +1,36 @@
+document.addEventListener("DOMContentLoaded", () => {
+  setupButtonListeners();
+});
+
+function setupButtonListeners() {
+  const addNodeBtn = document.querySelector(".add-node-btn");
+  if (addNodeBtn) {
+    addNodeBtn.addEventListener("click", function () {
+      if (window.addNode) window.addNode();
+    });
+  } else {
+    console.error("Add Node button not found!");
+  }
+
+  const deleteLastBtn = document.querySelector(".delete-last-btn");
+  if (deleteLastBtn) {
+    deleteLastBtn.addEventListener("click", function () {
+      if (window.deleteLastNode) window.deleteLastNode();
+    });
+  } else {
+    console.error("Delete Last button not found!");
+  }
+
+  const traverseBtn = document.querySelector(".traverse-btn");
+  if (traverseBtn) {
+    traverseBtn.addEventListener("click", function () {
+      if (window.traverse) window.traverse();
+    });
+  } else {
+    console.error("Traverse button not found!");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   class Node {
     constructor(value) {
@@ -204,7 +237,10 @@ document.addEventListener("DOMContentLoaded", function () {
       moveCollector();
     }
   }
+
   const train = new LinkedListTrain();
+
+  // Make functions available globally
   window.addNode = async function () {
     const input = document.getElementById("nodeValue");
     const value = input.value.trim();
@@ -227,15 +263,20 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("currentOperation").textContent = "None";
     }, train.size * 1000 + 1000);
   };
-  document
-    .getElementById("nodeValue")
-    .addEventListener("keypress", function (e) {
+
+  const nodeValueInput = document.getElementById("nodeValue");
+  if (nodeValueInput) {
+    nodeValueInput.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
         window.addNode();
       }
     });
+  }
+
   function updateStateInfo() {
     document.getElementById("listLength").textContent = train.size;
   }
+
   updateStateInfo();
+  setupButtonListeners(); // Setup button listeners again to ensure they work
 });

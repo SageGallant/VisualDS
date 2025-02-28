@@ -21,6 +21,22 @@
   --shadow-md: 0 4px 6px var(--shadow-color);
 }
 
+/* Modern theme */
+body.theme-modern {
+  --bg-color: #f5f6fa;
+  --card-bg-color: #ffffff;
+  --text-color: #2c3e50;
+  --text-muted: #7f8c8d;
+  --border-color: #dcdde1;
+  --header-bg: #f1f2f6;
+  --header-text: #2980b9;
+  --button-bg: #ecf0f1;
+  --button-hover: #bdc3c7;
+  --primary-color: #3498db;
+  --secondary-color: #e74c3c;
+  --tertiary-color: #2ecc71;
+}
+
 /* Dark theme */
 body.theme-dark {
   --bg-color: #111827;
@@ -36,22 +52,6 @@ body.theme-dark {
   --primary-color: #60a5fa;
   --secondary-color: #f87171;
   --tertiary-color: #4ade80;
-}
-
-/* Modern theme */
-body.theme-modern {
-  --bg-color: #f5f6fa;
-  --card-bg-color: #ffffff;
-  --text-color: #2c3e50;
-  --text-muted: #7f8c8d;
-  --border-color: #dcdde1;
-  --header-bg: #f1f2f6;
-  --header-text: #2980b9;
-  --button-bg: #ecf0f1;
-  --button-hover: #bdc3c7;
-  --primary-color: #3498db;
-  --secondary-color: #e74c3c;
-  --tertiary-color: #2ecc71;
 }
 
 /* Royal theme */
