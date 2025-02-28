@@ -234,11 +234,6 @@ header p {
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-}
-
-/* Add these styles to your existing CSS file */
-
-.slide {
   padding: 1rem;
   display: flex;
   align-items: center;

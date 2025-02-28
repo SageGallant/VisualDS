@@ -1,4 +1,3 @@
-// Theme Toggle
 const themeToggle = document.querySelector('.theme-toggle');
 const root = document.documentElement;
 
@@ -9,26 +8,21 @@ themeToggle.addEventListener('click', () => {
     themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
 });
 
-// Tab Navigation
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove active class from all buttons and contents
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => content.classList.remove('active'));
         
-        // Add active class to clicked button
         button.classList.add('active');
         
-        // Show corresponding content
         const tabId = button.getAttribute('data-tab');
         document.getElementById(tabId).classList.add('active');
     });
 });
 
-// Interactive Linked List Visualization
 class Node {
     constructor(value) {
         this.value = value;
@@ -63,7 +57,6 @@ class Node {
     }
 }
 
-// Create initial linked list visualization
 const nodeContainer = document.querySelector('.node-container');
 const initialValues = [1, 2, 3, 4, 5];
 
@@ -72,7 +65,6 @@ initialValues.forEach(value => {
     nodeContainer.appendChild(node.element);
 });
 
-// Add CSS animation
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -88,9 +80,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Navigation
 const nextButton = document.querySelector('.nav-button.next');
 nextButton.addEventListener('click', () => {
-    // Add navigation logic here
     console.log('Navigate to Algorithm page');
 });

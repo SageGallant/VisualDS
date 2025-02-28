@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Function to load HTML content and its associated script
   function loadContent(url, containerId) {
-    // Remove any previously loaded script for this section
     const oldScript = document.querySelector(
       `script[data-section="${containerId}"]`
     );
@@ -20,13 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById(containerId);
         container.innerHTML = html;
 
-        // Create and load the associated script
         const scriptUrl = `../../scripts/sorting/bubble/${url.replace(
           ".html",
           ".js"
         )}`;
 
-        // Verify if script exists before loading
         return fetch(scriptUrl).then((response) => {
           if (!response.ok) {
             console.log(`No script found for ${url}, skipping script load`);
@@ -57,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Cache DOM elements for navigation and theme toggling
   const steps = document.querySelectorAll(".step-item");
   const circles = document.querySelectorAll(".step-circle");
   const sections = document.querySelectorAll(".content-section");
@@ -71,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentStep = 0;
   let completedSteps = [false, false, false];
 
-  // Handle URL parameters first
   const urlParams = new URLSearchParams(window.location.search);
   const sectionParam = urlParams.get("section");
   if (sectionParam) {
@@ -88,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Load saved state if no URL parameters
   if (!sectionParam) {
     if (localStorage.getItem("currentStep")) {
       currentStep = parseInt(localStorage.getItem("currentStep"), 10);
@@ -98,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Load saved theme
   const savedTheme = localStorage.getItem("theme") || "default";
   themeSelect.value = savedTheme;
   if (savedTheme !== "default") {
@@ -106,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateNav() {
-    // Step updates
     steps.forEach((step, index) => {
       step.classList.remove("active", "completed");
       if (completedSteps[index]) {
@@ -118,12 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     steps[currentStep].classList.add("active");
 
-    // Update next button text
     const nextBtn = document.querySelector(".next-btn");
     nextBtn.textContent =
       currentStep === steps.length - 1 ? "Complete" : "Next";
 
-    // Calculate and update progress fill
     const totalSteps = steps.length - 1; // 3 steps: 0, 1, 2
     const fillPercentage = (currentStep / totalSteps) * 100;
     const progressFill = document.querySelector(".progress-fill");
@@ -139,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     sections[index].classList.add("active");
 
-    // Load content for the visible section
     const contentMap = {
       0: { url: "theory.html", containerId: "theory-content" },
       1: { url: "algorithm.html", containerId: "algorithm-content" },

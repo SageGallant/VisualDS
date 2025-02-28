@@ -24,14 +24,11 @@ function pauseSlideShow() {
   clearInterval(slideInterval);
 }
 
-// Start the slideshow
 startSlideShow();
 
-// Add event listeners for hover
 slider.addEventListener("mouseenter", pauseSlideShow);
 slider.addEventListener("mouseleave", startSlideShow);
 
-// Add event listeners for buttons
 prevButton.addEventListener("click", () => {
   pauseSlideShow();
   prevSlide();

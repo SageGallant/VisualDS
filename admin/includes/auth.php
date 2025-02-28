@@ -19,7 +19,7 @@ function login($username, $password) {
     $username = mysqli_real_escape_string($conn, $username);
     $password = md5($password); // Using MD5 as per requirement for simple authentication
     
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND status = 'active'";
+    $query = "SELECT * FROM users WHERE username_local = '$username' AND password = '$password' AND status = 'active'";
     $result = mysqli_query($conn, $query);
     
     if (mysqli_num_rows($result) == 1) {
@@ -42,7 +42,6 @@ function login($username, $password) {
 }
 
 function logout() {
-    session_start();
     session_destroy();
     header("Location: ../login.php");
     exit();
