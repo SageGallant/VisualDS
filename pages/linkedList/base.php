@@ -4,17 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bubble Sort</title>
+    <title>Linked List</title>
     <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
+    <style>
+        .bgm-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        .bgm-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
 <body class="theme-classic">
     <header class="main-header">
-        <a href="../../index.html" class="logo">
+        <a href="../../index.php" class="logo">
             <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
         </a>
-        <h1 class="page-title"><a href="../../index.html">VisualDSA</a></h1>
+        <h1 class="page-title"><a href="../../index.php">VisualDSA</a></h1>
         <div class="header-controls">
+            <button id="bgm-toggle" class="bgm-toggle" title="Toggle Background Music">
+                <span class="icon">🔊</span>
+            </button>
             <button id="menu-toggle">☰</button>
             <nav class="nav-menu" id="menu">
                 <ul>
@@ -27,6 +46,10 @@
             <label for="theme-select">Theme:</label>
         </div>
     </header>
+
+    <audio id="bgm" loop>
+        <source src="../../assets/audio/background-music.mp3" type="audio/mp3">
+    </audio>
 
     <nav class="progress-bar">
         <button class="prev-btn">Previous</button>
@@ -66,8 +89,8 @@
             <div id="visualization-content"></div>
         </section>
     </div>
-    <script type="module" src="../../scripts/sorting/bubble/script.js"></script>
     <script src="../../scripts/themeManager.js"></script>
+    <script type="module" src="../../scripts/linkedList/base.js"></script>
 </body>
 
 </html>

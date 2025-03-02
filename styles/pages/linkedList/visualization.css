@@ -99,7 +99,7 @@ body {
   z-index: 1;
   bottom: 40px;
   left: 0;
-  width: 200%;
+  width: 400%;
   height: 30px;
   background-image: linear-gradient(
     90deg,
@@ -107,7 +107,7 @@ body {
     #4a4a4a 20%,
     transparent 20%
   );
-  background-size: 100px 100%;
+  background-size: 50px 10%; /* Changed from 100px to 50px to double the number of sleepers */
   animation: moveSleepers var(--train-speed) linear infinite;
 }
 
@@ -332,21 +332,21 @@ body {
 
 @keyframes moveBackground {
   from {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 
   to {
-    transform: translateX(50%);
+    transform: translateX(0%);
   }
 }
 
 @keyframes moveSleepers {
   from {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 
   to {
-    transform: translateX(50%);
+    transform: translateX(0%);
   }
 }
 

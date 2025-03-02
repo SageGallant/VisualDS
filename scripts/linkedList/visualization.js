@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   setupButtonListeners();
 });
-
 function setupButtonListeners() {
   const addNodeBtn = document.querySelector(".add-node-btn");
   if (addNodeBtn) {
