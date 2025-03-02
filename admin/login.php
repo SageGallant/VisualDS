@@ -1,6 +1,23 @@
+<!-- Place this code in: admin/login.php -->
+
 <?php
-// File Path: admin/login.php
-require_once('includes/config.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Adjust the path to correctly point to config.php
+require_once 'includes/config.php';
+
+// Verify database connection
+if (!isset($conn) || !$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+require_once('includes/auth.php');
+
+// Clear any existing sessions if not logged in
+if (!isset($_SESSION['admin_logged_in'])) {
+    session_unset();
+}
 
 // If already logged in, redirect to dashboard
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
@@ -8,18 +25,35 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+$error = ''; // Initialize error variable
+
+// Handle login
+if(isset($_POST['username']) && isset($_POST['password'])) {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = $_POST['password'];
     
-    if (login($username, $password)) {
-        header('Location: pages/dashboard.php');
-        exit();
+    $query = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($conn, $query);
+    
+    if(mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if($user['status'] == 'inactive') {
+            $error = "Account is inactive";
+        } else if($password == $user['password']) {
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['username'] = $user['name'];
+            $_SESSION['user_id'] = $user['id'];
+            header("Location: pages/dashboard.php");
+            exit();
+        } else {
+            $error = "Invalid password";
+        }
     } else {
-        $error = "Invalid username or password";
+        $error = "User not found";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,51 +90,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin-bottom: 1rem;
         }
 
         h1 {
+            margin-bottom: 1rem;
             color: var(--dark-bg);
-            margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-align: left;
         }
 
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: var(--dark-bg);
-            font-weight: bold;
         }
 
-        input {
+        .form-group input {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1rem;
         }
 
         button {
-            background-color: var(--primary-color);
-            color: white;
+            width: 100%;
             padding: 0.75rem;
             border: none;
             border-radius: 4px;
-            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
             font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #2196F3;
+            background-color: #1E8C7A;
         }
 
         .error {
@@ -123,11 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </svg>
         <h1>VisualDS Admin Login</h1>
         
-        <?php if (isset($error)): ?>
+        <?php if ($error): ?>
             <div class="error"><?php echo $error; ?></div>
         <?php endif; ?>
 
-        <form method="POST" action="">
+        <form method="POST" action="" onsubmit="return validateForm('loginForm')" id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -145,5 +175,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             © 2025 VisualDS Admin Panel
         </div>
     </div>
+    <script src="../assets/js/validation.js"></script>
 </body>
 </html>

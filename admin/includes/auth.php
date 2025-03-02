@@ -1,43 +1,50 @@
 <?php
-// File Path: admin/includes/auth.php
-
-function checkLogin() {
-    // session_start();
-    // if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
-    //     header("Location: ../login.php");
-    //     exit();
-    // }
+function is_logged_in() {
+    return isset($_SESSION['user_id']);
 }
 
-function isLoggedIn() {
-    return isset($_SESSION['admin_id']) && !empty($_SESSION['admin_id']);
-}
+function login($login_username, $login_password) {
+    include 'config.php';
+    
+    // Create connection with error handling
+    $conn = mysqli_connect($host, $username, $password, $database);
+    if (!$conn) {
+        error_log("Connection failed: " . mysqli_connect_error());
+        return false;
+    }
 
-function login($username, $password) {
-    global $conn;
+    // Sanitize inputs
+    $login_username = mysqli_real_escape_string($conn, $login_username);
+    $login_password = mysqli_real_escape_string($conn, $login_password);
     
-    $username = mysqli_real_escape_string($conn, $username);
-    $password = md5($password); // Using MD5 as per requirement for simple authentication
-    
-    $query = "SELECT * FROM users WHERE username_local = '$username' AND password = '$password' AND status = 'active'";
+    $query = "SELECT * FROM users WHERE username='$login_username' AND password='$login_password'";
     $result = mysqli_query($conn, $query);
     
-    if (mysqli_num_rows($result) == 1) {
+    if (!$result) {
+        error_log("Query failed: " . mysqli_error($conn));
+        mysqli_close($conn);
+        return false;
+    }
+
+    if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
+        
+        // Set all required session variables
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
         $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user_id'] = $user['id'];
-        $_SESSION['admin_username'] = $user['username'];
-        $_SESSION['admin_role'] = $user['role'];
         
-        // Update last login and IP
-        $ip = $_SERVER['REMOTE_ADDR'];
-        mysqli_query($conn, "UPDATE users SET last_login = NOW(), ip_address = '$ip' WHERE id = " . $user['id']);
+        // Update last login
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $update_query = "UPDATE users SET last_login=NOW(), ip_address='$ip_address' WHERE id=" . $user['id'];
+        mysqli_query($conn, $update_query);
         
-        // Log activity
-        logActivity($user['id'], 'Login', 'Successful login from ' . $ip);
-        
+        mysqli_close($conn);
         return true;
     }
+    
+    mysqli_close($conn);
     return false;
 }
 

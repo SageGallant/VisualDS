@@ -1,0 +1,60 @@
+/* Place this code in: admin/assets/css/responsive.css */
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .logo,
+  .logout-btn,
+  .theme-toggle {
+    margin: 5px 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    top: 0;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 60px 10px 20px; /* Reduced padding for mobile */
+  }
+
+  .card {
+    margin: 10px 0;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  button,
+  .btn,
+  input,
+  textarea,
+  select {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card h2 {
+    font-size: 18px;
+  }
+
+  .sidebar li a {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

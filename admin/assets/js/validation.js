@@ -1,34 +1,17 @@
-// File Path: admin/assets/js/validation.js
+// Place this code in: admin/assets/js/validation.js
 
-function validateLoginForm() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+function validateForm(formId) {
+  const form = document.getElementById(formId);
+  const inputs = form.getElementsByTagName("input");
+  let isValid = true;
 
-  if (!username || !password) {
-    alert("Please enter both username and password");
-    return false;
+  for (let input of inputs) {
+    if (!input.value.trim()) {
+      isValid = false;
+      alert("All fields are required!");
+      break;
+    }
   }
 
-  return true;
-}
-
-function validateUserForm() {
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document
-    .getElementById("confirm_password")
-    .value.trim();
-
-  if (!username || !email) {
-    alert("Please fill in all required fields");
-    return false;
-  }
-
-  if (password !== confirmPassword) {
-    alert("Passwords do not match");
-    return false;
-  }
-
-  return true;
+  return isValid;
 }

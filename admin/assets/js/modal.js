@@ -1,24 +1,9 @@
-// File Path: admin/assets/js/modal.js
+// Place this code in: admin/assets/js/modal.js
 
-function showModal(title, content) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-
-  modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>${title}</h2>
-                <button onclick="closeModal(this)" class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                ${content}
-            </div>
-        </div>
-    `;
-
-  document.body.appendChild(modal);
+function showModal(modalId) {
+  document.getElementById(modalId).style.display = "block";
 }
 
-function closeModal(btn) {
-  btn.closest(".modal").remove();
+function hideModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
 }

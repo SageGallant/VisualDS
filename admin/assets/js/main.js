@@ -1,23 +1,19 @@
-// File Path: admin/assets/js/main.js
+// Place this code in: admin/assets/js/main.js
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Theme toggler
-  const themeToggle = document.getElementById("themeToggle");
-  const html = document.documentElement;
+function toggleTheme() {
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+  // Save theme preference (simple localStorage for demo)
+  localStorage.setItem(
+    "theme",
+    body.classList.contains("dark-mode") ? "dark" : "light"
+  );
+}
 
-  themeToggle.addEventListener("click", function () {
-    const currentTheme = html.getAttribute("data-theme");
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-
-    html.setAttribute("data-theme", newTheme);
-
-    // Save theme preference
-    fetch("includes/settings.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: "action=update_theme&theme=" + newTheme,
-    });
-  });
-});
+// Load saved theme on page load
+window.onload = function () {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+};
