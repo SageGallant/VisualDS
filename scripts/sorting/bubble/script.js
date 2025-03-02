@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Create and load the associated script
         const scriptUrl = `../../scripts/sorting/bubble/${url.replace(
           ".html",
-          ".js"
+          ".php"
         )}`;
 
         // Verify if script exists before loading

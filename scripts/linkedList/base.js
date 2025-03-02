@@ -19,12 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML = html;
         const scriptUrl = `../../scripts/linkedList/${url.replace(
           ".html",
-          ".js"
+          ".php"
         )}`;
 
         return fetch(scriptUrl).then((response) => {
           if (!response.ok) {
-            console.log(`No script found for ${url}, skipping script load`);
+            console.log(
+              `No script found for ${(url, ".php")}, skipping script load`
+            );
             return Promise.resolve();
           }
 

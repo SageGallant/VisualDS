@@ -1,14 +1,12 @@
 <!-- Place this code in: admin/pages/dashboard.php -->
 
 <?php
-require_once '../includes/config.php';
-require_once '../includes/functions.php';
+require_once '../../includes/config.php';
+require_once '../../includes/Auth.php';
+require_once '../includes/functions.php';  // Add this line
 
-// Check login
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../login.php");
-    exit();
-}
+// Verify admin access
+Auth::checkAdminAccess();
 
 // Get user ID from session
 $user_id = $_SESSION['user_id'] ?? null;

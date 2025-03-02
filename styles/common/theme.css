@@ -85,3 +85,17 @@ body.theme-elegant {
   --secondary-color: #8e44ad;
   --tertiary-color: #16a085;
 }
+
+.auth-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+  background-color: var(--primary-color-dark);
+}

@@ -42,12 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const navButtons = document.querySelectorAll(".nav-button");
   // Mapping for each card type to its corresponding target page
   const urlMap = {
-    bubble: "sorting/base.html",
-    linkedList: "linkedList/base.html",
-    tree: "tree/wantedTree.html",
-    recursion: "recursion/wantedRecursion.html",
-    graph: "graph/wantedGraph.html",
-    hashTable: "hashTable/wantedHashTable.html",
+    bubble: "sorting/base.php",
+    linkedList: "linkedList/base.php",
+    tree: "tree/wantedTree.php",
+    recursion: "recursion/wantedRecursion.php",
+    graph: "graph/wantedGraph.php",
+    hashTable: "hashTable/wantedHashTable.php",
   };
 
   navButtons.forEach(function (button) {

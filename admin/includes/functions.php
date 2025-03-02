@@ -88,7 +88,16 @@ function handle_settings_update($post_data) {
 
 function get_user_activity($user_id) {
     global $conn;
-    $query = "SELECT * FROM activity_logs ORDER BY time DESC LIMIT 10";
+    $query = "SELECT * FROM activity_logs WHERE 1";
+    
+    // If specific user's activity is requested
+    if ($user_id) {
+        $user_id = mysqli_real_escape_string($conn, $user_id);
+        $query .= " AND user_id = '$user_id'";
+    }
+    
+    $query .= " ORDER BY time DESC LIMIT 10";
+    
     $result = mysqli_query($conn, $query);
     if (!$result) {
         die("Error fetching activity: " . mysqli_error($conn));
