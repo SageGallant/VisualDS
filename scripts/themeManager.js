@@ -57,3 +57,31 @@ class ThemeManager {
 document.addEventListener("DOMContentLoaded", () => {
   window.themeManager = new ThemeManager();
 });
+
+// Add BGM functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const bgmButton = document.getElementById("bgm-toggle");
+  const bgm = document.getElementById("bgm");
+  let isMuted = localStorage.getItem("bgmMuted") === "true";
+
+  function updateBgmState() {
+    if (isMuted) {
+      bgm.pause();
+      bgmButton.querySelector(".icon").textContent = "🔈";
+    } else {
+      bgm.play().catch((e) => console.log("Playback prevented:", e));
+      bgmButton.querySelector(".icon").textContent = "🔊";
+    }
+  }
+
+  if (bgmButton && bgm) {
+    bgmButton.addEventListener("click", () => {
+      isMuted = !isMuted;
+      localStorage.setItem("bgmMuted", isMuted);
+      updateBgmState();
+    });
+
+    // Initial state
+    updateBgmState();
+  }
+});
