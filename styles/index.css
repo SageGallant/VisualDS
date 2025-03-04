@@ -27,7 +27,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background: var(--header-bg);
-  padding: 0 2rem;
+  padding: 0.8rem 2rem;
   box-shadow: var(--shadow-md);
   z-index: 1000;
 }

@@ -1,18 +1,5 @@
 /* --- Theme Variables --- */
 :root {
-  --primary-color: #007aff;
-  --secondary-color: #ff3b30;
-  --tertiary-color: #34c759;
-  --bg-color: #f8f9fb;
-  --card-bg-color: #ffffff;
-  --text-color: #1a1d26;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --header-bg: #f0f2f5;
-  --header-text: #0056b3;
-  --button-bg: #e3e6eb;
-  --button-hover: #d6dae0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
   --sidebar-width: 250px;
 }
 
@@ -21,7 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
-  border: 1px solid;
+  /* border: 1px solid; */
 }
 
 body {
@@ -31,84 +18,9 @@ body {
   color: var(--text-color);
 }
 
-.main-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--header-bg);
-  padding: 0 2rem;
-  box-shadow: var(--shadow-md);
-  z-index: 1000;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem;
-}
-
-.theme-select {
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  background: var(--card-bg-color);
-  color: var(--text-color);
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.theme-select:hover {
-  border-color: var(--primary-color);
-}
-
-/* Header */
-.main-header {
-  background: var(--header-bg);
-  color: var(--text-color);
-  padding: 0 2rem;
-  text-align: center;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.page-title {
-  text-align: center;
-  margin: 0;
-  flex: 1;
-}
-
-.page-title a {
-  text-decoration: none;
-  color: var(--header-text);
-  font-size: 1.5rem;
-}
-
-.theme-toggle {
-  background-color: var(--secondary-color);
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  color: var(--text-color);
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.theme-toggle:hover {
-  background-color: var(--tertiary-color);
-}
-
-/* Layout Container */
 .container {
-  margin-top: 2rem;
   display: flex;
   position: relative;
-  padding-top: 40px; /* Increase this value if header is taller */
 }
 
 .sidebar {
@@ -124,7 +36,6 @@ body {
   padding: 0;
 }
 
-/* Sidebar Toggle Button (Outside the Sidebar) */
 .sidebar-toggle {
   position: absolute;
   width: 40px;

@@ -92,60 +92,6 @@ require_once '../includes/header.php';
             </div>
           </div>
         </div>
-
-        <!-- <div class="card">
-          <img src="../assets/images/tree.gif" alt="Tree">
-          <h3>Tree</h3>
-          <div class="button-group">
-            <div class="button-row">
-              <button class="nav-button" data-page="tree" data-section="concept">Concept</button>
-              <button class="nav-button" data-page="tree" data-section="algorithm">Algorithm</button>
-            </div>
-            <div class="button-row">
-              <button class="nav-button" data-page="tree" data-section="visualization">Visualization</button>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/images/recursion.gif" alt="Recursion">
-          <h3>Recursion</h3>
-          <div class="button-group">
-            <div class="button-row">
-              <button class="nav-button" data-page="recursion" data-section="concept">Concept</button>
-              <button class="nav-button" data-page="recursion" data-section="algorithm">Algorithm</button>
-            </div>
-            <div class="button-row">
-              <button class="nav-button" data-page="recursion" data-section="visualization">Visualization</button>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/images/graph.gif" alt="Graph">
-          <h3>Graph</h3>
-          <div class="button-group">
-            <div class="button-row">
-              <button class="nav-button" data-page="graph" data-section="concept">Concept</button>
-              <button class="nav-button" data-page="graph" data-section="algorithm">Algorithm</button>
-            </div>
-            <div class="button-row">
-              <button class="nav-button" data-page="graph" data-section="visualization">Visualization</button>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/images/hashtable.gif" alt="Hash Table">
-          <h3>Hash Table</h3>
-          <div class="button-group">
-            <div class="button-row">
-              <button class="nav-button" data-page="hash" data-section="concept">Concept</button>
-              <button class="nav-button" data-page="hash" data-section="algorithm">Algorithm</button>
-            </div>
-            <div class="button-row">
-              <button class="nav-button" data-page="hash" data-section="visualization">Visualization</button>
-            </div>
-          </div>
-        </div> -->
-
         <script src="../scripts/themeManager.js"></script>
         <script src="../scripts/home.js"></script>
 </body>

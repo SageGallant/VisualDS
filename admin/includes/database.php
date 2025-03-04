@@ -49,6 +49,21 @@ $activity_table = "CREATE TABLE IF NOT EXISTS activity_logs (
 
 mysqli_query($conn, $activity_table) or die("Error creating activity logs table: " . mysqli_error($conn));
 
+// Create user progress tracking table
+$progress_table = "CREATE TABLE IF NOT EXISTS user_progress (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    algorithm_type VARCHAR(50) NOT NULL,
+    algorithm_name VARCHAR(50) NOT NULL,
+    progress INT DEFAULT 0,
+    last_visited DATETIME DEFAULT CURRENT_TIMESTAMP,
+    completed BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    UNIQUE KEY unique_user_algo (user_id, algorithm_type, algorithm_name)
+)";
+
+mysqli_query($conn, $progress_table) or die("Error creating progress table: " . mysqli_error($conn));
+
 // Close connection
 mysqli_close($conn);
 ?>

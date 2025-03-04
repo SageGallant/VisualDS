@@ -14,6 +14,7 @@ require_once 'includes/header.php';
 </head>
 
 <body class="theme-light">
+
     <main class="main-container">
         <section class="left-section">
             <nav class="navbar">

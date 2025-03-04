@@ -7,33 +7,14 @@ class ThemeManager {
 
   init() {
     this.applyTheme(this.currentTheme);
-    this.createThemeSelector();
-  }
-
-  createThemeSelector() {
-    const header = document.querySelector(".main-header");
-    if (!header) return;
-
-    const themeSelector = document.createElement("select");
-    themeSelector.id = "theme-select";
-    themeSelector.className = "theme-select";
-
-    this.themes.forEach((theme) => {
-      const option = document.createElement("option");
-      option.value = theme;
-      option.text = theme.charAt(0).toUpperCase() + theme.slice(1);
-      option.selected = theme === this.currentTheme;
-      themeSelector.appendChild(option);
-    });
-
-    themeSelector.addEventListener("change", (e) => {
-      this.applyTheme(e.target.value);
-    });
-
-    const container = document.createElement("div");
-    container.className = "theme-selector-container";
-    container.appendChild(themeSelector);
-    header.appendChild(container);
+    // Listen for theme changes
+    const themeSelect = document.getElementById("theme-select");
+    if (themeSelect) {
+      themeSelect.value = this.currentTheme;
+      themeSelect.addEventListener("change", (e) =>
+        this.applyTheme(e.target.value)
+      );
+    }
   }
 
   applyTheme(theme) {
@@ -56,32 +37,4 @@ class ThemeManager {
 // Initialize theme manager when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   window.themeManager = new ThemeManager();
-});
-
-// Add BGM functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const bgmButton = document.getElementById("bgm-toggle");
-  const bgm = document.getElementById("bgm");
-  let isMuted = localStorage.getItem("bgmMuted") === "true";
-
-  function updateBgmState() {
-    if (isMuted) {
-      bgm.pause();
-      bgmButton.querySelector(".icon").textContent = "🔈";
-    } else {
-      bgm.play().catch((e) => console.log("Playback prevented:", e));
-      bgmButton.querySelector(".icon").textContent = "🔊";
-    }
-  }
-
-  if (bgmButton && bgm) {
-    bgmButton.addEventListener("click", () => {
-      isMuted = !isMuted;
-      localStorage.setItem("bgmMuted", isMuted);
-      updateBgmState();
-    });
-
-    // Initial state
-    updateBgmState();
-  }
 });
