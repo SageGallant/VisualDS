@@ -1,3 +1,8 @@
+<?php 
+require_once '../../includes/config.php';
+require_once '../../includes/header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,25 +14,6 @@
 </head>
 
 <body class="theme-classic">
-    <header class="main-header">
-        <a href="../../index.php" class="logo">
-            <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
-        </a>
-        <h1 class="page-title"><a href="../../index.php">VisualDSA</a></h1>
-        <div class="header-controls">
-            <button id="menu-toggle">☰</button>
-            <nav class="nav-menu" id="menu">
-                <ul>
-                    <li><a href="../home.html">Home</a></li>
-                    <li><a href="#">Sorting</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Help</a></li>
-                </ul>
-            </nav>
-            <label for="theme-select">Theme:</label>
-        </div>
-    </header>
-
     <nav class="progress-bar">
         <button class="prev-btn">Previous</button>
         <div class="progress-container">

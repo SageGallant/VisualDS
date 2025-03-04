@@ -9,37 +9,24 @@ function getAuthButton() {
 ?>
 
 <header class="main-header">
-    <div class="header-left">
-        <button id="mobile-menu-toggle" class="control-btn mobile-only">
-            <span>☰</span>
+    <a href="/VisualDS/index.php" class="logo">
+        <img src="/VisualDS/assets/images/Icon.gif" width="40" alt="Logo">
+    </a>
+    <h1 class="page-title"><a href="/VisualDS/index.php">VisualDSA</a></h1>
+    <div class="header-controls">
+        <button id="bgm-toggle" class="bgm-toggle" title="Toggle Background Music">
+            <span class="icon">🔊</span>
         </button>
-        <a href="/VisualDS/index.php" class="logo">
-            <img src="/VisualDS/assets/images/Icon.gif" width="40" alt="Logo">
-            <h1 class="brand-name">VisualDSA</h1>
-        </a>
-    </div>
-
-    <nav class="header-center" id="main-nav">
-        <ul class="nav-menu">
-            <li><a href="/VisualDS/pages/home.html">Home</a></li>
-            <li><a href="#">Sorting</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Help</a></li>
-        </ul>
-    </nav>
-
-    <div class="header-right">
-        <div class="controls-group">
-            <button id="bgm-toggle" class="control-btn" title="Toggle Background Music">
-                <span class="icon">🔊</span>
-            </button>
-            <select id="theme-select" class="theme-select">
-                <option value="modern">Modern</option>
-                <option value="dark">Dark</option>
-                <option value="royal">Royal</option>
-                <option value="elegant">Elegant</option>
-            </select>
-        </div>
+        <button id="menu-toggle">☰</button>
+        <nav class="nav-menu" id="menu">
+            <ul>
+                <li><a href="/VisualDS/pages/home.html">Home</a></li>
+                <li><a href="#">Sorting</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+        <label for="theme-select">Theme:</label>
         <?php echo getAuthButton(); ?>
     </div>
 </header>
@@ -49,223 +36,139 @@ function getAuthButton() {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 2rem;
-    background: var(--header-bg);
-    box-shadow: var(--shadow-sm);
-    height: 64px;
-}
-
-.header-left {
-    flex: 0 0 auto;
+    padding: 1rem 2rem;
+    background: var(--header-bg, #ffffff);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
     text-decoration: none;
 }
 
-.brand-name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--header-text);
-    margin: 0;
+.page-title {
+    margin: 0 1rem;
 }
 
-.header-center {
-    flex: 1;
+.page-title a {
+    text-decoration: none;
+    color: var(--text-primary, #333);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.header-controls {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bgm-toggle {
+    background: none;
+    border: 1px solid var(--border-color, #ddd);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.bgm-toggle:hover {
+    transform: scale(1.1);
+    background: var(--button-hover-bg, #f0f0f0);
 }
 
 .nav-menu {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-menu a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 0;
     position: relative;
-    transition: color 0.2s;
+    display: inline-block;
 }
 
-.nav-menu a:hover {
-    color: var(--primary-color);
-}
-
-.nav-menu a::after {
-    content: '';
+.nav-menu ul {
+    display: none;
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: width 0.2s;
+    top: 100%;
+    right: 0;
+    background: var(--menu-bg, #ffffff);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none;
+    min-width: 150px;
 }
 
-.nav-menu a:hover::after {
-    width: 100%;
+.nav-menu.active ul {
+    display: block;
 }
 
-.header-right {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.nav-menu ul li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--text-primary, #333);
+    text-decoration: none;
+    transition: background-color 0.2s;
 }
 
-.control-btn {
-    background: var(--button-bg);
-    border: none;
+.nav-menu ul li a:hover {
+    background-color: var(--menu-hover-bg, #f5f5f5);
+}
+
+#menu-toggle {
+    background: none;
+    border: 1px solid var(--border-color, #ddd);
     padding: 0.5rem;
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     cursor: pointer;
-    transition: background 0.2s;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
 }
 
-.control-btn:hover {
-    background: var(--button-hover);
-}
-
-.theme-select {
-    padding: 0.5rem;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-    background: var(--button-bg);
-    color: var(--text-color);
-    cursor: pointer;
+#menu-toggle:hover {
+    background: var(--button-hover-bg, #f0f0f0);
 }
 
 .auth-btn {
-    padding: 0.5rem 1.25rem;
-    border-radius: var(--border-radius);
-    background: var(--primary-color);
-    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s;
+    background: var(--primary-color, #007bff);
+    color: white;
+    transition: background-color 0.2s;
 }
 
 .auth-btn:hover {
-    background: var(--button-hover);
-}
-
-.mobile-only {
-    display: none;
-}
-
-.controls-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    background: var(--primary-color-dark, #0056b3);
 }
 
 @media (max-width: 768px) {
     .main-header {
         padding: 0.5rem 1rem;
-        position: relative;
     }
 
-    .mobile-only {
-        display: block;
+    .page-title {
+        font-size: 1.2rem;
     }
 
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .header-center {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--header-bg);
-        padding: 1rem;
-        box-shadow: var(--shadow-sm);
-        display: none;
-        z-index: 100;
-    }
-
-    .header-center.active {
-        display: block;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .nav-menu a {
-        display: block;
-        padding: 0.5rem 0;
-    }
-
-    .header-right {
+    .header-controls {
         gap: 0.5rem;
-    }
-
-    .controls-group {
-        order: 1;
-    }
-
-    .theme-select {
-        width: auto;
-        padding: 0.5rem;
-        display: block;
     }
 }
 </style>
 
 <script>
-// Initialize audio autoplay with user interaction
-const bgm = document.getElementById('bgm');
-const bgmToggle = document.getElementById('bgm-toggle');
-let isMuted = true;
-
-bgmToggle.addEventListener('click', function() {
-    if (isMuted) {
-        bgm.play();
-        bgmToggle.querySelector('.icon').textContent = '🔊';
-    } else {
-        bgm.pause();
-        bgmToggle.querySelector('.icon').textContent = '🔈';
-    }
-    isMuted = !isMuted;
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('active');
 });
 
-// Mobile menu toggle
-const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-const mainNav = document.getElementById('main-nav');
-
-mobileMenuToggle.addEventListener('click', function() {
-    mainNav.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
+// Close menu when clicking outside
 document.addEventListener('click', function(event) {
-    if (!mainNav.contains(event.target) && 
-        !mobileMenuToggle.contains(event.target) && 
-        mainNav.classList.contains('active')) {
-        mainNav.classList.remove('active');
+    const menu = document.getElementById('menu');
+    const menuToggle = document.getElementById('menu-toggle');
+    if (!menu.contains(event.target) && event.target !== menuToggle) {
+        menu.classList.remove('active');
     }
-});
-
-// Try to autoplay audio on page load (may be blocked by browser)
-document.addEventListener('DOMContentLoaded', function() {
-    bgm.volume = 0.3; // Set a comfortable default volume
-    bgm.play().catch(function(error) {
-        console.log("Audio autoplay was prevented:", error);
-    });
 });
 </script>
 

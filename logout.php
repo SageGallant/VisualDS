@@ -1,5 +1,6 @@
 <?php
-session_start();
-require_once 'includes/Auth.php';
-Auth::doLogout();
+// session_start();
+session_destroy();
+header("Location: /VisualDS/login.php");
+exit();
 ?>

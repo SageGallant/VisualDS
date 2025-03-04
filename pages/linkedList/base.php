@@ -25,7 +25,7 @@
 </head>
 
 <body class="theme-classic">
-    <header class="main-header">
+    <!-- <header class="main-header">
         <a href="../../index.php" class="logo">
             <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
         </a>
@@ -45,7 +45,8 @@
             </nav>
             <label for="theme-select">Theme:</label>
         </div>
-    </header>
+    </header> -->
+    <?php include "../../includes/header.php"?>
 
     <audio id="bgm" loop>
         <source src="../../assets/audio/background-music.mp3" type="audio/mp3">

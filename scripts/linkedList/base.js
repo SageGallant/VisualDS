@@ -223,7 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
     menu.classList.toggle("visible");
   });
 
-  // Background Music Controls
   const bgmButton = document.getElementById("bgm-toggle");
   const bgm = document.getElementById("bgm");
   let isMuted = localStorage.getItem("bgmMuted") === "true";

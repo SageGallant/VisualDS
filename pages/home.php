@@ -1,3 +1,8 @@
+<?php 
+require_once '../includes/config.php';
+require_once '../includes/header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,15 +16,6 @@
 </head>
 
 <body class="theme-light">
-  <header class="main-header">
-    <a href="../index.php" class="logo">
-      <img src="../assets/images/Icon.gif" width="40" alt="Logo">
-    </a>
-    <h1 class="page-title"><a href="../index.php">VisualDSA</a></h1>
-    <div class="header-controls">
-      <label for="theme-select">Theme:</label>
-    </div>
-  </header>
   <section class="container">
     <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

@@ -1,9 +1,7 @@
-<!-- Place this code in: admin/pages/dashboard.php -->
-
 <?php
 require_once '../../includes/config.php';
 require_once '../../includes/Auth.php';
-require_once '../includes/functions.php';  // Add this line
+require_once '../includes/functions.php';
 
 // Verify admin access
 Auth::checkAdminAccess();
@@ -11,12 +9,10 @@ Auth::checkAdminAccess();
 // Get user ID from session
 $user_id = $_SESSION['user_id'] ?? null;
 
-// Database queries
 $total_users = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as count FROM users"))['count'];
 $total_content = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as count FROM content"))['count'];
 $active_sessions = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(DISTINCT ip_address) as count FROM users WHERE last_login IS NOT NULL"))['count'];
 
-// Get recent activity
 $recent_activity = get_user_activity($user_id);
 ?>
 

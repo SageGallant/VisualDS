@@ -14,17 +14,6 @@ require_once 'includes/header.php';
 </head>
 
 <body class="theme-light">
-    <header class="main-header">
-        <a href="index.php" class="logo">
-            <img src="assets/images/Icon.gif" width="40" alt="Logo">
-        </a>
-        <h1 class="page-title"><a href="index.php">VisualDSA</a></h1>
-        <div class="header-controls">
-            <label for="theme-select">Theme:</label>
-            <?php echo getAuthButton(); ?>
-        </div>
-    </header>
-
     <main class="main-container">
         <section class="left-section">
             <nav class="navbar">
@@ -75,7 +64,7 @@ require_once 'includes/header.php';
                 <p>Our platform provides in-depth visualizations of complex data structures and algorithms to help
                     you succeed
                     in your Computer Science journey.</p>
-                <a href="pages/home.html"><button>Get Started</button></a>
+                <a href="pages/home.php"><button>Get Started</button></a>
             </section>
 
             <div id="about" class="about-section">

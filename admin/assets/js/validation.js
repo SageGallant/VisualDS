@@ -1,5 +1,3 @@
-// Place this code in: admin/assets/js/validation.js
-
 function validateForm(formId) {
   const form = document.getElementById(formId);
   const inputs = form.getElementsByTagName("input");
