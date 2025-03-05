@@ -28,13 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return Promise.resolve();
           }
 
-          const script = document.createElement("script");
-          script.src = scriptUrl;
-          script.setAttribute("data-section", containerId);
-
           return new Promise((resolve, reject) => {
+            // Dynamically create and load the script
+            const script = document.createElement("script");
+            script.src = scriptUrl;
+            script.type = "module"; // Important: use module type
+            script.setAttribute("data-section", containerId);
+
             script.onload = () => {
               console.log("Script loaded:", scriptUrl);
+
+              // Reinitialize event listeners and global functions after script load
+              initializeVisualizationControls();
+
               resolve();
             };
             script.onerror = (error) => {
@@ -51,7 +57,23 @@ document.addEventListener("DOMContentLoaded", function () {
           "<p>Content failed to load.</p>";
       });
   }
+  function initializeVisualizationControls() {
+    const addNodeBtn = document.querySelector(".add-node-btn");
+    const deleteLastBtn = document.querySelector(".delete-last-btn");
+    const traverseBtn = document.querySelector(".traverse-btn");
 
+    if (addNodeBtn && window.addNode) {
+      addNodeBtn.onclick = window.addNode;
+    }
+
+    if (deleteLastBtn && window.deleteLastNode) {
+      deleteLastBtn.onclick = window.deleteLastNode;
+    }
+
+    if (traverseBtn && window.traverse) {
+      traverseBtn.onclick = window.traverse;
+    }
+  }
   const steps = document.querySelectorAll(".step-item");
   const circles = document.querySelectorAll(".step-circle");
   const sections = document.querySelectorAll(".content-section");
@@ -217,10 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
         showSection(index);
       }
     });
-  });
-
-  menuToggle.addEventListener("click", () => {
-    menu.classList.toggle("visible");
   });
 
   const bgmButton = document.getElementById("bgm-toggle");

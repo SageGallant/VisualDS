@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/Auth.php';
 
@@ -62,24 +63,13 @@ if(isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     
-    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $query);
+    $login_result = Auth::doLogin($username, $password);
     
-    if(mysqli_num_rows($result) == 1) {
-        $user = mysqli_fetch_assoc($result);
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
-        
-        // Update last login
-        $update_query = "UPDATE users SET last_login = NOW() WHERE id = " . $user['id'];
-        mysqli_query($conn, $update_query);
-        
-        if($user['role'] === 'admin') {
-            header('Location: admin/pages/dashboard.php');
-        } else {
-            header('Location: index.php');
-        }
+    if($login_result === 'admin') {
+        header('Location: admin/pages/dashboard.php');
+        exit();
+    } elseif($login_result === 'user') {
+        header('Location: index.php');
         exit();
     } else {
         $error = "Invalid username or password";
@@ -238,6 +228,7 @@ if(isset($_POST['login'])) {
 
         <div class="forms-container">
             <div class="forms-wrapper">
+                <!-- Login Form -->
                 <div class="login-form">
                     <form method="POST" action="" onsubmit="return validateForm('loginForm')" id="loginForm">
                         <div class="form-group">
@@ -255,6 +246,7 @@ if(isset($_POST['login'])) {
                     <div class="toggle-form" onclick="toggleForm()">Need an account? Sign up</div>
                 </div>
 
+                <!-- Signup Form -->
                 <div class="signup-form">
                     <form method="POST" action="" onsubmit="return validateForm('signupForm')" id="signupForm">
                         <div class="form-group">

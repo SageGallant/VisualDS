@@ -1,8 +1,4 @@
 <?php
-// Only start session if it hasn't been started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 // Database configuration
 $host = "localhost";

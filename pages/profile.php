@@ -130,6 +130,21 @@ $average_progress = $progress_count > 0 ? round($total_progress / $progress_coun
             font-size: 0.8rem;
             color: #666;
         }
+
+        .admin-button {
+            background-color: #26A69A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .admin-button:hover {
+            background-color: #1E8C7A;
+        }
     </style>
 </head>
 <body>
@@ -141,6 +156,11 @@ $average_progress = $progress_count > 0 ? round($total_progress / $progress_coun
             <div class="profile-info">
                 <h1><?php echo htmlspecialchars($user['username']); ?></h1>
                 <p><?php echo htmlspecialchars($user['email']); ?></p>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true): ?>
+                    <a href="/VisualDS/admin/pages/dashboard.php" class="admin-button">
+                        Admin Panel
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
 

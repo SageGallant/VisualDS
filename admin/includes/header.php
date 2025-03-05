@@ -6,8 +6,32 @@
         </svg>
         VisualDS Admin Panel
     </div>
-    <div class="theme-toggle">
-        <button id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+    <div class="header-buttons">
+        <a href="/VisualDS/" class="home-btn">Website</a>
+        <div class="theme-toggle">
+            <button id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+        <a href="../logout.php" class="logout-btn">Logout</a>
     </div>
-    <a href="../logout.php" class="logout-btn">Logout</a>
 </header>
+
+<style>
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home-btn {
+    padding: 0.5rem 1rem;
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.home-btn:hover {
+    background-color: #16a085;
+}
+</style>

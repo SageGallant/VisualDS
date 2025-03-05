@@ -1,15 +1,20 @@
 <?php
-require_once '../includes/config.php';
+require_once '../../includes/config.php';
 require_once '../includes/functions.php';
 
-// Check login
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: ../../login.php");
+// Start the session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if user is logged in and is admin
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    header('Location: /VisualDS/login.php');
     exit();
 }
 
 // Get user ID from session
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user_id'];
 
 // Handle form submissions
 $error = '';

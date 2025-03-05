@@ -68,6 +68,27 @@ if (!mysqli_query($conn, $activity_table)) {
     die("Error creating activity logs table: " . mysqli_error($conn));
 }
 
+// Create settings table if it doesn't exist
+$settings_table = "CREATE TABLE IF NOT EXISTS settings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    setting_name VARCHAR(100) NOT NULL UNIQUE,
+    setting_value TEXT NOT NULL
+)";
+
+if (!mysqli_query($conn, $settings_table)) {
+    die("Error creating settings table: " . mysqli_error($conn));
+}
+
+// Insert default settings if not exists
+$check_settings = "SELECT * FROM settings WHERE setting_name='site_name'";
+$result = mysqli_query($conn, $check_settings);
+
+if (mysqli_num_rows($result) == 0) {
+    $default_settings = "INSERT INTO settings (setting_name, setting_value) 
+                         VALUES ('site_name', 'VisualDS'), ('admin_email', 'admin@visualds.com')";
+    mysqli_query($conn, $default_settings);
+}
+
 // Create default admin user if not exists
 $check_admin = "SELECT * FROM users WHERE username='admin'";
 $result = mysqli_query($conn, $check_admin);
@@ -80,4 +101,6 @@ if (mysqli_num_rows($result) == 0) {
 
 // Set charset
 mysqli_set_charset($conn, "utf8mb4");
+
+return $conn;
 ?>

@@ -1,13 +1,15 @@
 <?php
 function getAuthButton() {
     if (isset($_SESSION['user_id'])) {
+        // Get first letter of username
+        $initial = strtoupper(substr($_SESSION['username'], 0, 1));
         return '
         <div class="user-menu">
-            <button class="profile-btn">
-                <img src="/VisualDS/assets/images/default-avatar.png" alt="Profile" class="avatar">
+            <button class="profile-btn" onclick="toggleDropdown(event)">
+                <div class="avatar-initial">' . $initial . '</div>
                 <span>' . htmlspecialchars($_SESSION['username']) . '</span>
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu" id="userDropdown">
                 <a href="/VisualDS/pages/profile.php">My Profile</a>
                 <a href="/VisualDS/logout.php">Logout</a>
             </div>
@@ -283,6 +285,19 @@ function getAuthButton() {
     border-radius: 50%;
 }
 
+.avatar-initial {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-color, #007bff);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -296,6 +311,10 @@ function getAuthButton() {
     z-index: 1000;
 }
 
+.dropdown-menu.show {
+    display: block;
+}
+
 .dropdown-menu a {
     display: block;
     padding: 0.5rem 1rem;
@@ -307,9 +326,9 @@ function getAuthButton() {
     background: var(--light-bg);
 }
 
-.user-menu:hover .dropdown-menu {
+/*.user-menu:hover .dropdown-menu {
     display: block;
-}
+}*/
 </style>
 
 <audio id="bgm" loop></audio>
@@ -344,6 +363,31 @@ bgmToggle.addEventListener('click', function() {
     } else {
         bgm.pause();
         this.querySelector('.icon').textContent = '🔈';
+    }
+});
+
+// Update the toggleDropdown function to be more explicit
+function toggleDropdown(event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById('userDropdown');
+    const dropdowns = document.getElementsByClassName('dropdown-menu');
+    
+    // Close all other dropdowns first
+    Array.from(dropdowns).forEach(d => {
+        if (d !== dropdown && d.classList.contains('show')) {
+            d.classList.remove('show');
+        }
+    });
+    
+    // Toggle current dropdown
+    dropdown.classList.toggle('show');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown && !event.target.closest('.user-menu')) {
+        dropdown.classList.remove('show');
     }
 });
 </script>

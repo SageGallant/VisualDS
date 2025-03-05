@@ -1,13 +1,16 @@
 <?php
 require_once '../../includes/config.php';
-require_once '../../includes/Auth.php';
+require_once '../../includes/auth.php';
 require_once '../includes/functions.php';
 
-// Verify admin access
-Auth::checkAdminAccess();
+// Simple admin check
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    header('Location: /VisualDS/login.php');
+    exit();
+}
 
 // Get user ID from session
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user_id'];
 
 $total_users = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as count FROM users"))['count'];
 $total_content = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as count FROM content"))['count'];

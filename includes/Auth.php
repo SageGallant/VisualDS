@@ -1,6 +1,9 @@
 <?php
 class Auth {
     public static function checkLogin() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION['user_id'])) {
             header("Location: /VisualDS/login.php");
             exit();
@@ -19,7 +22,6 @@ class Auth {
         if (mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
             
-            // Check if user is active
             if($user['status'] == 'inactive') {
                 $_SESSION['error'] = "Account is inactive. Please contact administrator.";
                 return false;
@@ -30,13 +32,12 @@ class Auth {
             $_SESSION['role'] = $user['role'];
             $_SESSION['status'] = $user['status'];
             
+            // Set admin flag if user is admin
             if ($user['role'] === 'admin') {
-                $_SESSION['admin_logged_in'] = true;
-                header("Location: /VisualDS/admin/pages/dashboard.php");
-            } else {
-                header("Location: /VisualDS/index.php");
+                $_SESSION['is_admin'] = true;
+                return 'admin';
             }
-            return true;
+            return 'user';
         }
         return false;
     }
@@ -48,7 +49,12 @@ class Auth {
     }
     
     public static function checkAdminAccess() {
-        if (!isset($_SESSION['admin_logged_in']) || $_SESSION['role'] !== 'admin') {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Check both user login and admin status
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             header("Location: /VisualDS/login.php");
             exit();
         }
