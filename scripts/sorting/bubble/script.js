@@ -223,10 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("theme", this.value);
   });
 
-  menuToggle.addEventListener("click", () => {
-    menu.classList.toggle("visible");
-  });
-
   showSection(currentStep);
   updateNav();
 });

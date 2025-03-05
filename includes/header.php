@@ -41,7 +41,7 @@ function getAuthButton() {
     </nav>
 
     <div class="header-right">
-        <button id="bgm-toggle" class="control-btn" title="Toggle Background Music">
+        <button id="bgm-toggle" class="control-btn sound-btn" title="Toggle Background Music">
             <span class="icon">🔊</span>
         </button>
         <select id="theme-select" class="theme-select">
@@ -329,9 +329,29 @@ function getAuthButton() {
 /*.user-menu:hover .dropdown-menu {
     display: block;
 }*/
+
+.sound-btn {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.sound-btn:hover {
+    background: var(--hover-bg, #f0f0f0);
+    transform: scale(1.1);
+}
+
+.sound-btn .icon {
+    line-height: 1;
+}
 </style>
 
-<audio id="bgm" loop></audio>
+<audio id="bgm" loop>
     <source src="/VisualDS/assets/audio/background-music.mp3" type="audio/mp3">
 </audio>
 
@@ -352,17 +372,43 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Simple audio toggle functionality
+// Enhanced audio functionality
 const bgm = document.getElementById('bgm');
 const bgmToggle = document.getElementById('bgm-toggle');
 
+// Set initial volume
+bgm.volume = 0.5;
+
+// Load user preference from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+    const isMuted = localStorage.getItem('bgmMuted') === 'true';
+    bgm.muted = isMuted;
+    bgmToggle.querySelector('.icon').textContent = isMuted ? '🔈' : '🔊';
+    
+    // Try to play audio (will be blocked by browser if no user interaction)
+    try {
+        if (!isMuted) {
+            const playPromise = bgm.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay prevented:", error);
+                });
+            }
+        }
+    } catch (e) {
+        console.log("Audio play error:", e);
+    }
+});
+
 bgmToggle.addEventListener('click', function() {
-    if (bgm.paused) {
-        bgm.play();
-        this.querySelector('.icon').textContent = '🔊';
-    } else {
-        bgm.pause();
-        this.querySelector('.icon').textContent = '🔈';
+    bgm.muted = !bgm.muted;
+    localStorage.setItem('bgmMuted', bgm.muted);
+    this.querySelector('.icon').textContent = bgm.muted ? '🔈' : '🔊';
+    
+    if (!bgm.muted && bgm.paused) {
+        bgm.play().catch(error => {
+            console.log("Play failed:", error);
+        });
     }
 });
 
