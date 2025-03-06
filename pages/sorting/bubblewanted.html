@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Visualization</title>
+    <style>
+        :root {
+            --primary: #2c2e31;
+            --secondary: #da3333;
+            --accent: #e2b714;
+            --background: #f8f9fa;
+            --success: #28a745;
+            --comparing: #e2b714;
+            --swapping: #28a745;
+            --not-swapping: #dc3545;
+            --current-phase: #17a2b8;
+            --sorted: #6f42c1;
+            --sidebar-bg: #2c2e31;
+            --sidebar-text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            display: flex;
+            height: 90vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .visualization-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .array-container {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: 10px;
+        }
+
+        .array-bar {
+            width: 40px;
+            background: var(--primary);
+            transition: height 0.3s, background-color 0.3s;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+
+        .array-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .status {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .algorithm-steps {
+            flex: 2;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            text-align: right;
+        }
+
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex: 1;
+        }
+
+        .input-group input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #eee;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+
+        /* Array Bar States */
+        .array-bar.comparing {
+            background: var(--comparing);
+        }
+
+        .array-bar.swapping {
+            background: var(--swapping);
+            animation: swap 0.5s ease;
+        }
+
+        .array-bar.not-swapping {
+            background: var(--not-swapping);
+            animation: shake 0.5s ease;
+        }
+
+        .array-bar.current-phase {
+            background: var(--current-phase);
+        }
+
+        .array-bar.sorted {
+            background: var(--sorted);
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        @keyframes swap {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .array-bar {
+                width: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Current State</h3>
+            <div class="stats-item">
+                <span>Comparisons:</span>
+                <span id="comparisonsCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span>Swaps:</span>
+                <span id="swapsCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span>Current Pass:</span>
+                <span id="currentPass">0</span>
+            </div>
+            <div class="stats-item">
+                <span>Total Passes:</span>
+                <span id="totalPasses">0</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Legend</h3>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--primary);"></div>
+                <span>Unsorted</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--comparing);"></div>
+                <span>Comparing</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--swapping);"></div>
+                <span>Swapping</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--not-swapping);"></div>
+                <span>Not Swapping</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--current-phase);"></div>
+                <span>Current Phase</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: var(--sorted);"></div>
+                <span>Sorted</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <main class="main-container">
+            <div class="visualization-container">
+                <div class="array-container" id="arrayContainer"></div>
+                <div class="status-container">
+                    <div class="status" id="status">Ready to sort!</div>
+                    <div class="algorithm-steps" id="algorithmSteps"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="control-row">
+                    <button class="btn btn-primary" id="generateBtn">Generate New Array</button>
+                    <button class="btn btn-secondary" id="sortBtn">Start Sorting</button>
+                    <button class="btn btn-outline" id="pauseBtn">Pause</button>
+                    <button class="btn btn-outline" id="resetBtn">Reset</button>
+                </div>
+                <div class="control-row">
+                    <div class="input-group">
+                        <label for="customArray">Custom Values:</label>
+                        <input type="text" id="customArray" placeholder="e.g., 45,23,67,12,89">
+                        <button class="btn btn-outline" id="applyCustomBtn">Apply</button>
+                    </div>
+                    <div class="control-group">
+                        <label for="barCount">Bars:</label>
+                        <input type="number" id="barCount" min="2" max="20" value="12" style="width: 60px;">
+                    </div>
+                </div>
+                <div class="speed-control">
+                    <span>Speed:</span>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const arrayContainer = document.getElementById('arrayContainer');
+        const status = document.getElementById('status');
+        const algorithmSteps = document.getElementById('algorithmSteps');
+        const speedSlider = document.getElementById('speedSlider');
+        const comparisonsCount = document.getElementById('comparisonsCount');
+        const swapsCount = document.getElementById('swapsCount');
+        const currentPass = document.getElementById('currentPass');
+        const totalPasses = document.getElementById('totalPasses');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const customArrayInput = document.getElementById('customArray');
+        const barCountInput = document.getElementById('barCount');
+
+        // State variables
+        let array = [];
+        let originalArray = []; // Store the original array for reset
+        let sortingInProgress = false;
+        let isPaused = false;
+        let comparisons = 0;
+        let swaps = 0;
+        let currentPassCount = 0;
+        let sortingPromise = null; // Store the sorting promise for cancellation
+        let abortController = new AbortController(); // For canceling the sorting process
+
+        // Generate random array based on bar count
+        function generateArray() {
+            const count = parseInt(barCountInput.value) || 12;
+            array = [];
+            for (let i = 0; i < count; i++) {
+                array.push(Math.floor(Math.random() * 80) + 20);
+            }
+            originalArray = [...array]; // Store a copy for reset
+            renderArray();
+            resetStats();
+            totalPasses.textContent = array.length - 1;
+            status.textContent = 'Ready to sort!';
+            algorithmSteps.textContent = '';
+        }
+
+        // Apply custom array from input
+        function applyCustomArray() {
+            const input = customArrayInput.value.trim();
+            if (!input) return;
+
+            const values = input.split(',')
+                .map(val => parseInt(val.trim()))
+                .filter(val => !isNaN(val) && val > 0 && val <= 99);
+
+            if (values.length < 2) {
+                alert('Please enter at least 2 valid numbers between 1-99');
+                return;
+            }
+
+            if (values.length > 20) {
+                alert('Maximum 20 numbers are allowed');
+                values.splice(20);
+            }
+
+            array = values;
+            originalArray = [...array]; // Store a copy for reset
+            barCountInput.value = array.length;
+            renderArray();
+            resetStats();
+            totalPasses.textContent = array.length - 1;
+            status.textContent = 'Ready to sort!';
+            algorithmSteps.textContent = '';
+        }
+
+        // Reset the array to its original state
+        function resetArray() {
+            array = [...originalArray]; // Reset to original values
+            renderArray();
+            resetStats();
+            status.textContent = 'Reset complete!';
+            algorithmSteps.textContent = '';
+        }
+
+        function resetStats() {
+            comparisons = 0;
+            swaps = 0;
+            currentPassCount = 0;
+            comparisonsCount.textContent = comparisons;
+            swapsCount.textContent = swaps;
+            currentPass.textContent = currentPassCount;
+        }
+
+        function renderArray() {
+            arrayContainer.innerHTML = '';
+            const maxWidth = Math.min(40, Math.floor(arrayContainer.clientWidth / array.length) - 4);
+            
+            array.forEach((value, idx) => {
+                const bar = document.createElement('div');
+                bar.className = 'array-bar';
+                bar.style.height = `${value * 2}px`;
+                bar.style.width = `${maxWidth}px`;
+                bar.setAttribute('data-value', value);
+                arrayContainer.appendChild(bar);
+            });
+        }
+
+        // Update algorithm steps
+        function updateAlgorithmSteps(step) {
+            algorithmSteps.textContent = step;
+        }
+
+        // Stop the sorting
+        function stopSorting() {
+            abortController.abort();
+            abortController = new AbortController();
+            sortingInProgress = false;
+            isPaused = false;
+            pauseBtn.textContent = 'Pause';
+            status.textContent = 'Sorting stopped';
+            algorithmSteps.textContent = '';
+        }
+
+        // Bubble Sort algorithm with animations
+        async function bubbleSort() {
+            try {
+                const signal = abortController.signal;
+                const bars = document.querySelectorAll('.array-bar');
+                let n = array.length;
+                totalPasses.textContent = n - 1;
+
+                for (let i = 0; i < n; i++) {
+                    if (signal.aborted) return;
+                    
+                    currentPassCount = i + 1;
+                    currentPass.textContent = currentPassCount;
+                    updateAlgorithmSteps(`Starting pass ${i+1} of ${n-1}`);
+
+                    let hasSwapped = false;
+
+                    for (let j = 0; j < n - i - 1; j++) {
+                        if (signal.aborted) return;
+                        
+                        if (isPaused) {
+                            status.textContent = 'Paused';
+                            await new Promise(resolve => {
+                                const checkPause = setInterval(() => {
+                                    if (!isPaused || signal.aborted) {
+                                        clearInterval(checkPause);
+                                        if (!isPaused) status.textContent = 'Resuming...';
+                                        resolve();
+                                    }
+                                }, 100);
+                            });
+                        }
+
+                        // Mark the comparing bars
+                        bars[j].classList.add('comparing');
+                        bars[j + 1].classList.add('comparing');
+                        comparisons++;
+                        comparisonsCount.textContent = comparisons;
+                        updateAlgorithmSteps(`Comparing ${array[j]} and ${array[j+1]}`);
+
+                        await new Promise(resolve => {
+                            const timeout = setTimeout(resolve, 1000 - speedSlider.value * 9);
+                            if (signal.aborted) clearTimeout(timeout);
+                        });
+
+                        if (signal.aborted) return;
+
+                        if (array[j] > array[j + 1]) {
+                            // Swap needed
+                            bars[j].classList.remove('comparing');
+                            bars[j + 1].classList.remove('comparing');
+
+                            bars[j].classList.add('swapping');
+                            bars[j + 1].classList.add('swapping');
+
+                            swaps++;
+                            swapsCount.textContent = swaps;
+                            hasSwapped = true;
+                            updateAlgorithmSteps(`Swapping ${array[j]} and ${array[j+1]} (${array[j]} > ${array[j+1]})`);
+
+                            // Swap animation
+                            const tempHeight = bars[j].style.height;
+                            const tempValue = bars[j].getAttribute('data-value');
+
+                            bars[j].style.height = bars[j + 1].style.height;
+                            bars[j].setAttribute('data-value', bars[j + 1].getAttribute('data-value'));
+
+                            bars[j + 1].style.height = tempHeight;
+                            bars[j + 1].setAttribute('data-value', tempValue);
+
+                            // Swap array values
+                            [array[j], array[j + 1]] = [array[j + 1], array[j]];
+
+                            await new Promise(resolve => {
+                                const timeout = setTimeout(resolve, 1000 - speedSlider.value * 9);
+                                if (signal.aborted) clearTimeout(timeout);
+                            });
+                            
+                            if (signal.aborted) return;
+
+                            bars[j].classList.remove('swapping');
+                            bars[j + 1].classList.remove('swapping');
+                            bars[j].classList.add('current-phase');
+                            bars[j + 1].classList.add('current-phase');
+                        } else {
+                            // No swap needed
+                            bars[j].classList.remove('comparing');
+                            bars[j + 1].classList.remove('comparing');
+
+                            bars[j].classList.add('not-swapping');
+                            bars[j + 1].classList.add('not-swapping');
+
+                            updateAlgorithmSteps(`No swap needed (${array[j]} <= ${array[j+1]})`);
+
+                            await new Promise(resolve => {
+                                const timeout = setTimeout(resolve, 1000 - speedSlider.value * 9);
+                                if (signal.aborted) clearTimeout(timeout);
+                            });
+                            
+                            if (signal.aborted) return;
+
+                            bars[j].classList.remove('not-swapping');
+                            bars[j + 1].classList.remove('not-swapping');
+                            bars[j].classList.add('current-phase');
+                            bars[j + 1].classList.add('current-phase');
+                        }
+                    }
+
+                    // Mark last element of this pass as sorted
+                    bars.forEach(bar => bar.classList.remove('current-phase'));
+                    bars[n - i - 1].classList.add('sorted');
+                    updateAlgorithmSteps(`Pass ${i+1} completed. Element at position ${n-i-1} is sorted.`);
+
+                    // Animate all bars at the end of phase
+                    bars.forEach(bar => {
+                        bar.style.animation = 'wiggle 0.5s ease';
+                        bar.addEventListener('animationend', () => {
+                            bar.style.animation = '';
+                        }, { once: true });
+                    });
+
+                    await new Promise(resolve => {
+                        const timeout = setTimeout(resolve, 1000 - speedSlider.value * 8);
+                        if (signal.aborted) clearTimeout(timeout);
+                    });
+                    
+                    if (signal.aborted) return;
+
+                    // If no swaps in this pass, array is sorted
+                    if (!hasSwapped) {
+                        updateAlgorithmSteps(`No swaps in this pass - array is sorted!`);
+                        // Mark all remaining elements as sorted
+                        for (let k = 0; k < n - i - 1; k++) {
+                            bars[k].classList.add('sorted');
+                        }
+                        break;
+                    }
+                }
+
+                // Sorting completed
+                sortingInProgress = false;
+                status.textContent = 'Sorting completed!';
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Sorting error:', error);
+                }
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            if (sortingInProgress) {
+                stopSorting();
+            }
+            generateArray();
+        });
+
+        document.getElementById('sortBtn').addEventListener('click', async () => {
+            if (!sortingInProgress) {
+                sortingInProgress = true;
+                status.textContent = 'Sorting in progress...';
+                await bubbleSort();
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (sortingInProgress) {
+                isPaused = !isPaused;
+                pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+                status.textContent = isPaused ? 'Paused' : 'Resuming...';
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (sortingInProgress) {
+                stopSorting();
+            }
+            resetArray();
+        });
+
+        document.getElementById('applyCustomBtn').addEventListener('click', () => {
+            if (sortingInProgress) {
+                stopSorting();
+            }
+            applyCustomArray();
+        });
+
+        barCountInput.addEventListener('change', () => {
+            if (parseInt(barCountInput.value) < 2) barCountInput.value = 2;
+            if (parseInt(barCountInput.value) > 20) barCountInput.value = 20;
+            if (!sortingInProgress) {
+                generateArray();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (!sortingInProgress) {
+                renderArray();
+            }
+        });
+
+        // Initialize
+        generateArray();
+    </script>
+</body>
+
+</html>
