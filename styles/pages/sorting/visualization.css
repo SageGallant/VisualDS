@@ -182,8 +182,4 @@ input[type="range"] {
     flex-direction: column;
     gap: 1rem;
   }
-
-  .progress-bar {
-    display: none;
-  }
 }

@@ -38,20 +38,18 @@ require_once '../../includes/header.php';
 
     <div class="content-wrapper">
         <section id="section-0" class="content-section active">
-            <!-- <h1>Theory of Bubble Sort</h1> -->
             <div id="theory-content"></div>
         </section>
 
         <section id="section-1" class="content-section">
-            <!-- <h1>Bubble Sort Algorithm</h1> -->
             <div id="algorithm-content"></div>
         </section>
 
         <section id="section-2" class="content-section">
-            <!-- <h1>Visualization of Bubble Sort</h1> -->
             <div id="visualization-content"></div>
         </section>
     </div>
+    
     <script type="module" src="../../scripts/sorting/bubble/script.js"></script>
     <script src="../../scripts/themeManager.js"></script>
 </body>

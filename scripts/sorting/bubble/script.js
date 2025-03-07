@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Function to load HTML content and its associated script
+    // Function to load HTML content and its associated script
   function loadContent(url, containerId) {
     // Remove any previously loaded script for this section
     const oldScript = document.querySelector(
@@ -63,10 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const sections = document.querySelectorAll(".content-section");
   const nextBtns = document.querySelectorAll(".next-btn");
   const prevBtns = document.querySelectorAll(".prev-btn");
-  const themeSelect = document.getElementById("theme-select");
-  const menuToggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("menu");
-  const progressFill = document.querySelector(".progress-fill");
 
   let currentStep = 0;
   let completedSteps = [false, false, false];
@@ -96,13 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("completedSteps")) {
       completedSteps = JSON.parse(localStorage.getItem("completedSteps"));
     }
-  }
-
-  // Load saved theme
-  const savedTheme = localStorage.getItem("theme") || "default";
-  themeSelect.value = savedTheme;
-  if (savedTheme !== "default") {
-    document.body.classList.add(`theme-${savedTheme}`);
   }
 
   function updateNav() {
@@ -138,8 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
       section.classList.remove("active");
     });
     sections[index].classList.add("active");
-
-    // Load content for the visible section
     const contentMap = {
       0: { url: "theory.html", containerId: "theory-content" },
       1: { url: "algorithm.html", containerId: "algorithm-content" },
@@ -203,24 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
         showSection(index);
       }
     });
-  });
-
-  // Theme toggle using class on the body tag
-  themeSelect.addEventListener("change", function () {
-    // Remove all theme classes from the body
-    document.body.classList.remove(
-      "theme-dark",
-      "theme-modern",
-      "theme-royal",
-      "theme-elegant",
-      "theme-default"
-    );
-    // If the selected theme is not default, add the new theme class to the body
-    if (this.value !== "default") {
-      document.body.classList.add(`theme-${this.value}`);
-    }
-    // Save the selected theme in localStorage
-    localStorage.setItem("theme", this.value);
   });
 
   showSection(currentStep);
