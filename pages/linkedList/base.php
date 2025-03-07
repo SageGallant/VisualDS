@@ -1,3 +1,8 @@
+<?php 
+require_once '../../includes/config.php';
+require_once '../../includes/header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Linked List</title>
-    <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
+    <link rel="stylesheet" href="../../styles/pages/linkedList/styles.css">
     <style>
         .bgm-toggle {
             background: none;
@@ -25,29 +30,6 @@
 </head>
 
 <body class="theme-classic">
-    <!-- <header class="main-header">
-        <a href="../../index.php" class="logo">
-            <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
-        </a>
-        <h1 class="page-title"><a href="../../index.php">VisualDSA</a></h1>
-        <div class="header-controls">
-            <button id="bgm-toggle" class="bgm-toggle" title="Toggle Background Music">
-                <span class="icon">🔊</span>
-            </button>
-            <button id="menu-toggle">☰</button>
-            <nav class="nav-menu" id="menu">
-                <ul>
-                    <li><a href="../home.html">Home</a></li>
-                    <li><a href="#">Sorting</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Help</a></li>
-                </ul>
-            </nav>
-            <label for="theme-select">Theme:</label>
-        </div>
-    </header> -->
-    <?php include "../../includes/header.php"?>
-
     <audio id="bgm" loop>
         <source src="../../assets/audio/background-music.mp3" type="audio/mp3">
     </audio>
@@ -76,22 +58,19 @@
 
     <div class="content-wrapper">
         <section id="section-0" class="content-section active">
-            <!-- <h1>Theory of Bubble Sort</h1> -->
             <div id="theory-content"></div>
         </section>
 
         <section id="section-1" class="content-section">
-            <!-- <h1>Bubble Sort Algorithm</h1> -->
             <div id="algorithm-content"></div>
         </section>
 
         <section id="section-2" class="content-section">
-            <!-- <h1>Visualization of Bubble Sort</h1> -->
             <div id="visualization-content"></div>
         </section>
     </div>
     <script src="../../scripts/themeManager.js"></script>
-    <script type="module" src="../../scripts/linkedList/base.js"></script>
+    <script src="../../scripts/linkedList/base.js"></script>
 </body>
 
 </html>

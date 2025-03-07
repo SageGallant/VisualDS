@@ -5,7 +5,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linked List Visualization</title>
-    <link rel="stylesheet" href="../../styles/pages/sorting/visualization.css">
+    <style>
+        :root {
+            --primary: #2c2e31;
+            --secondary: #da3333;
+            --accent: #e2b714;
+            --background: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --success: #28a745;
+            --comparing: #e2b714;
+            --swapping: #28a745;
+            --not-swapping: #dc3545;
+            --current-phase: #17a2b8;
+            --sorted: #6f42c1;
+            --sidebar-bg: #2c2e31;
+            --sidebar-text: #ffffff;
+            --input-border: #ced4da;
+            --button-bg: #2c2e31;
+            --button-text: #ffffff;
+            --button-hover: #3a3c3f;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.theme-dark {
+            --background: #212529;
+            --text-color: #f8f9fa;
+            --card-bg: #343a40;
+            --input-border: #495057;
+            --button-bg: #495057;
+            --button-hover: #6c757d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body.theme-cyberpunk {
+            --primary: #ff00ff;
+            --secondary: #00ffff;
+            --accent: #ffff00;
+            --background: #000033;
+            --text-color: #00ffff;
+            --card-bg: #000055;
+            --button-bg: #ff00ff;
+            --button-hover: #cc00cc;
+            --shadow-color: rgba(255, 0, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            background-color: var(--background);
+            color: var(--text-color);
+            min-height: 80vh;
+        }
+
+        /* Visualization Section */
+        .visualization-section {
+            margin-bottom: 2rem;
+        }
+
+        .visualization-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-field {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            font-size: 1rem;
+            flex: 1;
+            min-width: 150px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .add-node-btn {
+            background-color: var(--success);
+        }
+
+        .delete-last-btn {
+            background-color: var(--not-swapping);
+        }
+
+        .traverse-btn {
+            background-color: var(--current-phase);
+        }
+
+        .visualization {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Info Section */
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .current-state,
+        .legend {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .current-state h3,
+        .legend h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-bottom: 1px solid var(--input-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .state-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .state-info p {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+    </style>
     <link rel="stylesheet" href="../../styles/pages/linkedList/visualization.css">
 </head>
 
@@ -49,7 +232,26 @@
                     <p>Operation: <span id="currentOperation">None</span></p>
                 </div>
             </div>
-            <!-- ...existing legend content... -->
+
+            <div class="legend">
+                <h3>Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4b5563;"></div>
+                    <span>Engine</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--secondary);"></div>
+                    <span>Node</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--accent);"></div>
+                    <span>Ticket Collector (Traversal)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--success);"></div>
+                    <span>Last Compartment</span>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -59,8 +261,7 @@
     <audio id="connectSound" src="../../assets/audio/list/coach.mp3"></audio>
     <audio id="explosionSound" src="../../assets/audio/list/explosion.mp3"></audio>
 
-    <script src="../../scripts/linkedList/visualization.js">
-    </script>
+    <!-- Script will be loaded dynamically by base.js -->
 </body>
 
 </html>

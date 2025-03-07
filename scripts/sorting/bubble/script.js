@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Function to load HTML content and its associated script
+  // Function to load HTML content and its associated script
   function loadContent(url, containerId) {
     // Remove any previously loaded script for this section
     const oldScript = document.querySelector(
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const contentMap = {
       0: { url: "theory.html", containerId: "theory-content" },
       1: { url: "algorithm.html", containerId: "algorithm-content" },
-      2: { url: "visualization.html", containerId: "visualization-content" },
+      2: { url: "bubblewanted.html", containerId: "visualization-content" },
     };
 
     if (contentMap[index]) {

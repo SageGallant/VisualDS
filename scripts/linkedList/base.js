@@ -1,12 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Utility function to load content into containers
   function loadContent(url, containerId) {
-    const oldScript = document.querySelector(
-      `script[data-section="${containerId}"]`
-    );
-    if (oldScript) {
-      oldScript.remove();
-    }
-
     return fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -16,64 +10,93 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((html) => {
         const container = document.getElementById(containerId);
+        if (!container) {
+          throw new Error(`Container #${containerId} not found`);
+        }
         container.innerHTML = html;
+
+        // Try to load corresponding JavaScript file
         const scriptUrl = `../../scripts/linkedList/${url.replace(
           ".html",
           ".js"
         )}`;
 
-        return fetch(scriptUrl).then((response) => {
-          if (!response.ok) {
-            console.log(`No script found for ${url}, skipping script load`);
+        // First check if the script exists to avoid 404 errors
+        return fetch(scriptUrl, { method: "HEAD" })
+          .then((response) => {
+            if (!response.ok) {
+              console.log(`No script found for ${url}, script was not loaded`);
+              // Initialize the specific section without a script
+              initializeSection(containerId);
+              return Promise.resolve();
+            }
+
+            return new Promise((resolve, reject) => {
+              // Remove any existing script for this section
+              const oldScript = document.querySelector(
+                `script[data-section="${containerId}"]`
+              );
+              if (oldScript) {
+                oldScript.remove();
+              }
+
+              // Dynamically create and load the script
+              const script = document.createElement("script");
+              script.src = scriptUrl;
+              script.setAttribute("data-section", containerId);
+
+              script.onload = () => {
+                console.log("Script loaded:", scriptUrl);
+                // Initialize section-specific functionality if available
+                initializeSection(containerId);
+                resolve();
+              };
+
+              script.onerror = (error) => {
+                console.error("Script failed to load:", scriptUrl, error);
+                reject(error);
+              };
+
+              document.body.appendChild(script);
+            });
+          })
+          .catch((error) => {
+            console.error("Error checking script:", error);
+            initializeSection(containerId);
             return Promise.resolve();
-          }
-
-          return new Promise((resolve, reject) => {
-            // Dynamically create and load the script
-            const script = document.createElement("script");
-            script.src = scriptUrl;
-            script.type = "module"; // Important: use module type
-            script.setAttribute("data-section", containerId);
-
-            script.onload = () => {
-              console.log("Script loaded:", scriptUrl);
-
-              // Reinitialize event listeners and global functions after script load
-              initializeVisualizationControls();
-
-              resolve();
-            };
-            script.onerror = (error) => {
-              console.error("Script failed to load:", scriptUrl, error);
-              reject(error);
-            };
-            document.body.appendChild(script);
           });
-        });
       })
       .catch((error) => {
         console.error("Content loading error:", error);
-        document.getElementById(containerId).innerHTML =
-          "<p>Content failed to load.</p>";
+        const container = document.getElementById(containerId);
+        if (container) {
+          container.innerHTML = "<p>Content failed to load.</p>";
+        }
       });
   }
-  function initializeVisualizationControls() {
-    const addNodeBtn = document.querySelector(".add-node-btn");
-    const deleteLastBtn = document.querySelector(".delete-last-btn");
-    const traverseBtn = document.querySelector(".traverse-btn");
 
-    if (addNodeBtn && window.addNode) {
-      addNodeBtn.onclick = window.addNode;
-    }
-
-    if (deleteLastBtn && window.deleteLastNode) {
-      deleteLastBtn.onclick = window.deleteLastNode;
-    }
-
-    if (traverseBtn && window.traverse) {
-      traverseBtn.onclick = window.traverse;
+  // Helper function to initialize sections based on containerId
+  function initializeSection(containerId) {
+    switch (containerId) {
+      case "visualization-content":
+        if (window.initializeVisualization) {
+          window.initializeVisualization();
+        }
+        break;
+      case "algorithm-content":
+        if (window.initializeAlgorithm) {
+          window.initializeAlgorithm();
+        }
+        break;
+      case "theory-content":
+        if (window.initializeTheory) {
+          window.initializeTheory();
+        }
+        break;
     }
   }
+
+  // UI Elements
   const steps = document.querySelectorAll(".step-item");
   const circles = document.querySelectorAll(".step-circle");
   const sections = document.querySelectorAll(".content-section");
@@ -84,14 +107,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const menu = document.getElementById("menu");
   const progressFill = document.querySelector(".progress-fill");
 
+  // State variables
   let currentStep = 0;
   let completedSteps = [false, false, false];
 
+  // Check for URL parameters to determine starting section
   const urlParams = new URLSearchParams(window.location.search);
   const sectionParam = urlParams.get("section");
   if (sectionParam) {
     switch (sectionParam) {
       case "concept":
+      case "theory":
         currentStep = 0;
         break;
       case "algorithm":
@@ -101,9 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
         currentStep = 2;
         break;
     }
-  }
-
-  if (!sectionParam) {
+  } else {
+    // Restore from localStorage if no URL parameter is present
     if (localStorage.getItem("currentStep")) {
       currentStep = parseInt(localStorage.getItem("currentStep"), 10);
     }
@@ -112,12 +137,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Apply saved theme
   const savedTheme = localStorage.getItem("theme") || "default";
-  themeSelect.value = savedTheme;
+  if (themeSelect) {
+    themeSelect.value = savedTheme;
+  }
   if (savedTheme !== "default") {
     document.body.classList.add(`theme-${savedTheme}`);
   }
 
+  // Update navigation UI based on current state
   function updateNav() {
     steps.forEach((step, index) => {
       step.classList.remove("active", "completed");
@@ -128,96 +157,59 @@ document.addEventListener("DOMContentLoaded", function () {
         circles[index].textContent = index + 1;
       }
     });
+
+    // Set active step
     steps[currentStep].classList.add("active");
 
+    // Update next button text
     const nextBtn = document.querySelector(".next-btn");
-    nextBtn.textContent =
-      currentStep === steps.length - 1 ? "Complete" : "Next";
+    if (nextBtn) {
+      nextBtn.textContent =
+        currentStep === steps.length - 1 ? "Complete" : "Next";
+    }
 
-    const totalSteps = steps.length - 1; // 3 steps: 0, 1, 2
-    const fillPercentage = (currentStep / totalSteps) * 100;
-    const progressFill = document.querySelector(".progress-fill");
+    // Update progress bar
     if (progressFill) {
+      const totalSteps = steps.length - 1;
+      const fillPercentage = (currentStep / totalSteps) * 100;
       progressFill.style.width = `${fillPercentage}%`;
-      console.log("Progress width:", `${fillPercentage}%`); // Debug line
     }
   }
 
+  // Show the specified section and load its content
   function showSection(index) {
-    sections.forEach((section, i) => {
-      section.classList.remove("active");
-    });
+    // Hide all sections and show the selected one
+    sections.forEach((section) => section.classList.remove("active"));
     sections[index].classList.add("active");
 
+    // Map of content to load for each section
     const contentMap = {
       0: { url: "theory.html", containerId: "theory-content" },
       1: { url: "algorithm.html", containerId: "algorithm-content" },
       2: { url: "visualization.html", containerId: "visualization-content" },
     };
 
+    // Load content if mapping exists
     if (contentMap[index]) {
-      loadContent(contentMap[index].url, contentMap[index].containerId).then(
-        () => {
-          switch (index) {
-            case 0:
-              if (window.initializeTheory) {
-                window.initializeTheory();
-              }
-              break;
-            case 1:
-              if (window.initializeAlgorithm) {
-                window.initializeAlgorithm();
-              }
-              break;
-            case 2:
-              // Make sure functions are accessible in global scope when visualization is loaded
-              if (document.getElementById("visualization-content")) {
-                // Update the onclick handlers to use the functions from the window object
-                const addNodeBtn = document.querySelector(
-                  '.btn[onclick="addNode()"]'
-                );
-                if (addNodeBtn) {
-                  addNodeBtn.onclick = function () {
-                    if (window.addNode) window.addNode();
-                  };
-                }
-
-                const deleteLastNodeBtn = document.querySelector(
-                  '.btn[onclick="deleteLastNode()"]'
-                );
-                if (deleteLastNodeBtn) {
-                  deleteLastNodeBtn.onclick = function () {
-                    if (window.deleteLastNode) window.deleteLastNode();
-                  };
-                }
-
-                const traverseBtn = document.querySelector(
-                  '.btn[onclick="traverse()"]'
-                );
-                if (traverseBtn) {
-                  traverseBtn.onclick = function () {
-                    if (window.traverse) window.traverse();
-                  };
-                }
-              }
-              break;
-          }
-        }
-      );
+      loadContent(contentMap[index].url, contentMap[index].containerId);
     }
 
+    // Update state
     currentStep = index;
     localStorage.setItem("currentStep", currentStep);
     updateNav();
   }
 
+  // Event Handlers
   nextBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (currentStep < sections.length - 1) {
+        // Mark current step as completed and move to next
         completedSteps[currentStep] = true;
         localStorage.setItem("completedSteps", JSON.stringify(completedSteps));
         showSection(currentStep + 1);
       } else if (currentStep === sections.length - 1) {
+        // At last step, return to index
         window.location.href = "index.php";
       }
     });
@@ -226,6 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
   prevBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (currentStep > 0) {
+        // Mark previous step as not completed and go back
         completedSteps[currentStep - 1] = false;
         localStorage.setItem("completedSteps", JSON.stringify(completedSteps));
         showSection(currentStep - 1);
@@ -233,37 +226,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Make steps clickable
   steps.forEach((step, index) => {
     step.addEventListener("click", () => {
+      // Only allow clicking on current or completed steps
       if (index <= currentStep || completedSteps[index - 1]) {
         showSection(index);
       }
     });
   });
 
+  // Background music controls
   const bgmButton = document.getElementById("bgm-toggle");
   const bgm = document.getElementById("bgm");
-  let isMuted = localStorage.getItem("bgmMuted") === "true";
 
-  function updateBgmState() {
-    if (isMuted) {
-      bgm.pause();
-      bgmButton.querySelector(".icon").textContent = "🔈";
-    } else {
-      bgm.play().catch((e) => console.log("Playback prevented:", e));
-      bgmButton.querySelector(".icon").textContent = "🔊";
+  if (bgmButton && bgm) {
+    let isMuted = localStorage.getItem("bgmMuted") === "true";
+
+    function updateBgmState() {
+      if (isMuted) {
+        bgm.pause();
+        bgmButton.querySelector(".icon").textContent = "🔈";
+      } else {
+        bgm.play().catch((e) => console.log("Playback prevented:", e));
+        bgmButton.querySelector(".icon").textContent = "🔊";
+      }
     }
+
+    bgmButton.addEventListener("click", () => {
+      isMuted = !isMuted;
+      localStorage.setItem("bgmMuted", isMuted);
+      updateBgmState();
+    });
+
+    // Initialize BGM state
+    updateBgmState();
   }
 
-  bgmButton.addEventListener("click", () => {
-    isMuted = !isMuted;
-    localStorage.setItem("bgmMuted", isMuted);
-    updateBgmState();
-  });
-
-  // Initial state
-  updateBgmState();
-
+  // Initialize the page
   showSection(currentStep);
   updateNav();
 });

@@ -13,22 +13,59 @@ $user_query = "SELECT * FROM users WHERE id = '$user_id'";
 $user_result = mysqli_query($conn, $user_query);
 $user = mysqli_fetch_assoc($user_result);
 
-// Get progress data
-$progress_query = "SELECT * FROM user_progress WHERE user_id = '$user_id'";
-$progress_result = mysqli_query($conn, $progress_query);
+// First check if tables exist
+$tables_exist = true;
+$required_tables = ['algorithm_types', 'algorithms', 'user_progress'];
 
-// Calculate overall progress
-$total_progress = 0;
-$progress_count = 0;
-$progress_data = [];
-
-while ($row = mysqli_fetch_assoc($progress_result)) {
-    $progress_data[$row['algorithm_type']][] = $row;
-    $total_progress += $row['progress'];
-    $progress_count++;
+foreach ($required_tables as $table) {
+    $check = mysqli_query($conn, "SHOW TABLES LIKE '$table'");
+    if (mysqli_num_rows($check) == 0) {
+        $tables_exist = false;
+        die("Table '$table' does not exist. Please run the database setup script first.");
+    }
 }
 
-$average_progress = $progress_count > 0 ? round($total_progress / $progress_count) : 0;
+// Debug database tables
+$table_structure = mysqli_query($conn, "DESCRIBE user_progress");
+if (!$table_structure) {
+    die("Could not check table structure: " . mysqli_error($conn));
+}
+
+// Simpler query to prevent column mismatch
+$progress_query = "SELECT 
+    at.name as type_name,
+    a.name as algorithm_name,
+    COALESCE(up.progress, 0) as progress,
+    up.last_visited
+FROM algorithm_types at
+INNER JOIN algorithms a ON at.id = a.type_id
+LEFT JOIN (
+    SELECT * FROM user_progress WHERE user_id = $user_id
+) up ON a.id = up.algorithm_id";
+
+$progress_result = mysqli_query($conn, $progress_query);
+
+if (!$progress_result) {
+    echo "Error in query: " . $progress_query . "<br>";
+    die("Database error: " . mysqli_error($conn));
+}
+
+// Organize progress data by algorithm type
+$progress_data = [];
+$total_progress = 0;
+$total_algorithms = 0;
+
+while ($row = mysqli_fetch_assoc($progress_result)) {
+    $type = $row['type_name'];
+    if (!isset($progress_data[$type])) {
+        $progress_data[$type] = [];
+    }
+    $progress_data[$type][] = $row;
+    $total_progress += $row['progress'] ?? 0;
+    $total_algorithms++;
+}
+
+$average_progress = $total_algorithms > 0 ? round($total_progress / $total_algorithms) : 0;
 ?>
 
 <!DOCTYPE html>
@@ -179,43 +216,40 @@ $average_progress = $progress_count > 0 ? round($total_progress / $progress_coun
         </div>
 
         <div class="progress-sections">
-            <?php
-            $algorithm_types = ['Sorting', 'Searching', 'Linked Lists', 'Trees'];
-            foreach ($algorithm_types as $type) {
-                $type_progress = isset($progress_data[$type]) ? $progress_data[$type] : [];
-                $avg_progress = 0;
-                if (count($type_progress) > 0) {
-                    $avg_progress = array_reduce($type_progress, function($carry, $item) {
-                        return $carry + $item['progress'];
-                    }, 0) / count($type_progress);
+            <?php foreach ($progress_data as $type => $algorithms): 
+                $type_progress = 0;
+                $algo_count = count($algorithms);
+                
+                foreach ($algorithms as $algo) {
+                    $type_progress += $algo['progress'] ?? 0;
                 }
+                
+                $avg_type_progress = $algo_count > 0 ? round($type_progress / $algo_count) : 0;
             ?>
             <div class="progress-card">
-                <h3><?php echo $type; ?></h3>
+                <h3><?php echo htmlspecialchars($type); ?></h3>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: <?php echo $avg_progress; ?>%"></div>
+                    <div class="progress-fill" style="width: <?php echo $avg_type_progress; ?>%"></div>
                 </div>
-                <p><?php echo round($avg_progress); ?>% Complete</p>
+                <p><?php echo $avg_type_progress; ?>% Complete</p>
                 
                 <div class="algorithm-list">
-                    <?php
-                    if (!empty($type_progress)) {
-                        foreach ($type_progress as $algo) {
-                            echo '<div class="algorithm-item">';
-                            echo '<div>';
-                            echo '<div>' . htmlspecialchars($algo['algorithm_name']) . '</div>';
-                            echo '<div class="last-visited">Last visited: ' . date('M j, Y', strtotime($algo['last_visited'])) . '</div>';
-                            echo '</div>';
-                            echo '<div>' . $algo['progress'] . '%</div>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo '<p>No progress yet</p>';
-                    }
-                    ?>
+                    <?php foreach ($algorithms as $algo): ?>
+                        <div class="algorithm-item">
+                            <div>
+                                <div><?php echo htmlspecialchars($algo['algorithm_name']); ?></div>
+                                <?php if ($algo['last_visited']): ?>
+                                    <div class="last-visited">
+                                        Last visited: <?php echo date('M j, Y', strtotime($algo['last_visited'])); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div><?php echo $algo['progress'] ?? 0; ?>%</div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <?php } ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </body>

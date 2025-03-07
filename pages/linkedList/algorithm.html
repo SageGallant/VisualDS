@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linked List Algorithm</title>
+    <title>Linked List Algorithms</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="../../styles/pages/sorting/algorithm.css" rel="stylesheet">
+    <link href="../../styles/pages/linkedList/algorithm.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <div class="content-grid">
             <!-- Code Section -->
-            <div class="card code-card">
+            <div class="card">
                 <div class="card-header">
-                    <h2>Implementation</h2>
+                    <h2>Linked List Implementation</h2>
                 </div>
-                <div class="code-content">
-                    <div class="slide" id="insertion">
+                <div class="card-content">
+                    <div class="algorithm-section" id="insertion">
                         <h2>Insertion Operations</h2>
                         <div class="code-section">
                             <h3>Insert at Beginning</h3>
@@ -29,7 +29,7 @@ function insertAtBeginning(value) {
     head = newNode;
 }</pre>
                         </div>
-                        <!-- <div class="code-section">
+                        <div class="code-section">
                             <h3>Insert at End</h3>
                             <pre class="code-block">
 function insertAtEnd(value) {
@@ -44,12 +44,11 @@ function insertAtEnd(value) {
     }
     current.next = newNode;
 }</pre>
-                        </div> -->
+                        </div>
                     </div>
 
-                    <!-- Deletion Section -->
-                    <div class="slide" id="deletion">
-                        <!-- <h2>Deletion Operations</h2>
+                    <div class="algorithm-section" id="deletion">
+                        <h2>Deletion Operations</h2>
                         <div class="code-section">
                             <h3>Delete from Beginning</h3>
                             <pre class="code-block">
@@ -57,7 +56,7 @@ function deleteFromBeginning() {
     if (!head) return null;
     head = head.next;
 }</pre>
-                        </div> -->
+                        </div>
                         <div class="code-section">
                             <h3>Delete from End</h3>
                             <pre class="code-block">
@@ -79,17 +78,19 @@ function deleteFromEnd() {
             </div>
 
             <!-- Complexity Section -->
-            <div class="card complexity-card">
-                <div class="slide" id="complexity">
+            <div class="card">
+                <div class="card-header">
                     <h2>Time Complexity Analysis</h2>
+                </div>
+                <div class="card-content">
                     <div class="complexity-grid">
-                        <div class="complexity-card">
+                        <div class="complexity-box">
                             <h3>Insertion</h3>
                             <p>Beginning: O(1)</p>
                             <p>End: O(n)</p>
                             <p>At Position: O(n)</p>
                         </div>
-                        <div class="complexity-card">
+                        <div class="complexity-box">
                             <h3>Deletion</h3>
                             <p>Beginning: O(1)</p>
                             <p>End: O(n)</p>
@@ -100,7 +101,6 @@ function deleteFromEnd() {
             </div>
         </div>
     </div>
-    <script src="../../scripts/linkedList/algorithm.js"></script>
 </body>
 
 </html>

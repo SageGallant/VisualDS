@@ -1,0 +1,197 @@
+@import "../../common/base.css";
+
+/* Theme selector styles */
+.theme-select {
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.theme-select:hover {
+  border-color: var(--primary-color);
+}
+
+.theme-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.progress-container {
+  position: relative;
+  margin: 0 20px;
+  flex: 1;
+}
+
+.progress-indicator {
+  position: absolute;
+  top: 40%;
+  left: 15%;
+  right: 15%;
+  height: 4px;
+  background: var(--border-color);
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  color: var(--text-color);
+  line-height: 40px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.step-item.active .step-circle {
+  background-color: var(--primary-color);
+  color: var(--card-bg-color);
+}
+
+.step-item.completed .step-circle {
+  background-color: var(--secondary-color);
+  color: var(--card-bg-color);
+}
+
+.step-label {
+  margin-top: -3px;
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+/* Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+#theme-toggle,
+#menu-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--card-bg-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  position: relative;
+}
+
+.prev-btn,
+.next-btn {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  background: var(--secondary-color);
+}
+
+/* Content Sections */
+.content-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 110px);
+  background: var(--card-bg-color);
+  margin: 0;
+  padding-top: 20px;
+  min-height: calc(100vh - 80px);
+}
+
+.content-section {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: fit-content;
+  margin: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.5s ease;
+  overflow-y: auto;
+}
+
+.content-section.active {
+  left: 0;
+  opacity: 1;
+}
+
+/* Menu Styles */
+#menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu ul li {
+  padding: 10px;
+}
+
+#menu ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* LinkedList specific styles */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .progress-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .content-wrapper {
+    height: auto;
+    min-height: calc(100vh - 180px);
+  }
+}
