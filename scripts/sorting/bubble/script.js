@@ -143,7 +143,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const contentMap = {
       0: { url: "theory.html", containerId: "theory-content" },
       1: { url: "algorithm.html", containerId: "algorithm-content" },
-      2: { url: "visualization.html", containerId: "visualization-content" },
+      2: {
+        url: "visualization.html",
+        containerId: "visualization-content",
+      }, // Updated path
     };
 
     if (contentMap[index]) {

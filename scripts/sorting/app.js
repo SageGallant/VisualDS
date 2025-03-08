@@ -59,7 +59,7 @@ async function bubbleSort() {
 
         await pause();
       }
-      updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "blue");
+      updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "green");
     }
     if (i < bars.length - 2) sounds.compare.play();
     await pause();

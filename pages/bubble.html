@@ -6,19 +6,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algorithm Visualizer</title>
     <link rel="stylesheet" href="../styles/pages/bubble.css">
+    <style>
+        .visualization-container {
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+            height: 100%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .info-panel {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            width: 250px;
+        }
+
+        .controls select,
+        .controls input,
+        .controls button {
+            width: 100%;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .controls button {
+            background: var(--primary-color);
+            color: var(--text-on-primary);
+            border: none;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background: var(--primary-color-dark);
+        }
+
+        .visualization {
+            flex-grow: 1;
+            background: var(--bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            min-height: 400px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .bar {
+            background: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            color: black;
+            font-size: 0.8rem;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        .bar.shake {
+            animation: shake 0.5s;
+        }
+
+        .bar.jump {
+            animation: jump 0.5s;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes jump {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Algorithm Visualizer</h1>
-    </header>
     <div class="info-panel" id="info-panel">
         <span>
             <strong id="loop-values">Phase: 0, Compare: 0</strong>
             Current Operation:<strong id="current-operation">Idle</strong>
         </span>
     </div>
-    <main>
+    <div class="visualization-container">
         <aside class="controls">
             <h2>Controls</h2>
             <label for="algorithm">Choose Algorithm:</label>
@@ -34,13 +137,11 @@
             <input type="number" id="speed" value="500" min="50" max="2000">
             <button id="start">Start</button>
             <button id="reset">Reset</button>
-
         </aside>
         <section class="visualization" id="visualization">
             <!-- Visualization goes here -->
         </section>
-    </main>
-
+    </div>
     <script src="../scripts/sorting/app.js"></script>
 </body>
 
