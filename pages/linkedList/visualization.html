@@ -12,8 +12,8 @@
 <body>
     <main class="main-container">
         <!-- Visualization Section -->
-        <section class="visualization-section">
-            <div class="visualization-container">
+        <section class="visualization-section" style="width: 100%;">
+            <div class="visualization-container" style="width: 100%;">
                 <div class="container">
                     <div class="controls">
                         <input type="text" id="nodeValue" class="input-field" placeholder="Enter value">
@@ -41,7 +41,7 @@
         </section>
 
         <!-- Info Section -->
-        <section class="info-section">
+        <section class="info-section" style="width: 100%; margin-top: 20px;">
             <div class="current-state">
                 <h3>Current State</h3>
                 <div class="state-info">
@@ -49,17 +49,14 @@
                     <p>Operation: <span id="currentOperation">None</span></p>
                 </div>
             </div>
-            <!-- ...existing legend content... -->
         </section>
     </main>
 
-    <!-- Audio elements -->
     <audio id="trainHorn" src="../../assets/audio/list/engine.mp3"></audio>
     <audio id="wheelSound" src="../../assets/audio/list/wheel.mp3" loop></audio>
     <audio id="connectSound" src="../../assets/audio/list/coach.mp3"></audio>
     <audio id="explosionSound" src="../../assets/audio/list/explosion.mp3"></audio>
 
-    <script src="../../scripts/linkedList/visualization.js">
     </script>
 </body>
 

@@ -16,9 +16,9 @@ body {
 
 /* Main Container */
 .main-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -27,7 +27,7 @@ body {
 /* Visualization Section */
 .visualization-section {
   background: var(--color-surface);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 12px;
   box-shadow: var(--shadow-md);
 }

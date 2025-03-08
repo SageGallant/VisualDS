@@ -58,21 +58,8 @@
                         to the next node in the sequence. Unlike arrays, linked lists don't store elements in contiguous
                         memory locations.</p>
 
-                    <div class="interactive-diagram">
-                        <div class="node-container">
-                            <!-- Nodes will be added dynamically via JavaScript -->
-                        </div>
-                    </div>
-
-                    <h3>Types of Insertion</h3>
-                    <div class="operation-tabs">
-                        <button class="tab-btn active" data-tab="insert-beginning">At Beginning</button>
-                        <button class="tab-btn" data-tab="insert-end">At End</button>
-                        <button class="tab-btn" data-tab="insert-position">At Position</button>
-                    </div>
+                    <h3>Insertion at Beginning</h3>
                     <div class="tab-content active" id="insert-beginning">
-                        <h4>Insertion at Beginning</h4>
-                        <p>Time Complexity: O(1)</p>
                         <ol class="steps-list">
                             <li>Create a new node with given data</li>
                             <li>Make new node's next point to current head</li>
@@ -80,15 +67,8 @@
                         </ol>
                     </div>
 
-                    <h3>Types of Deletion</h3>
-                    <div class="operation-tabs">
-                        <button class="tab-btn active" data-tab="delete-beginning">From Beginning</button>
-                        <button class="tab-btn" data-tab="delete-end">From End</button>
-                        <button class="tab-btn" data-tab="delete-position">From Position</button>
-                    </div>
+                    <h3>Deletion at Last</h3>
                     <div class="tab-content active" id="delete-beginning">
-                        <h4>Deletion from Beginning</h4>
-                        <p>Time Complexity: O(1)</p>
                         <ol class="steps-list">
                             <li>Store head node in temp</li>
                             <li>Move head to next node</li>
@@ -106,16 +86,6 @@
                         <li>Stable sorting algorithm</li>
                         <li>In-place algorithm</li>
                     </ul>
-                </div>
-                <div class="card-header">
-                    <h2 class="card-title">Visual Representation</h2>
-                </div>
-                <div class="visual-content">
-                    <div class="array-visual" id="arrayVisual"></div>
-                    <div class="visual-controls">
-                        <button class="button button-secondary" id="resetVisual">Reset</button>
-                        <button class="button button-primary" id="nextStep">Next Step</button>
-                    </div>
                 </div>
             </div>
         </div>
