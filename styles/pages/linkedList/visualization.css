@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   height: fit-content;
 }
@@ -22,14 +22,14 @@ body {
   gap: 10px;
   justify-content: center;
   padding: 15px;
-  background: white;
+  background: var(--tertiary-color);
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .input-field {
   padding: 10px 15px;
-  border: 2px solid #4a90e2;
+  border: 2px solid var(--secondary-color);
   border-radius: 5px;
   font-size: 16px;
   outline: none;
@@ -47,7 +47,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s;
-  background: #4a90e2;
+  background: var(--secondary-color);
   color: white;
   font-size: 16px;
 }
@@ -64,11 +64,12 @@ body {
 
 .visualization {
   height: 400px;
+  width: 100%;
   position: relative;
   scrollbar-width: none;
   overflow-x: unset;
   overflow-y: hidden;
-  background: linear-gradient(180deg, #87ceeb 0%, #e0f4ff 100%);
+  background: linear-gradient(180deg, var(--primary-color) 0%, #e0f4ff 100%);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -109,7 +110,7 @@ body {
     #4a4a4a 20%,
     transparent 20%
   );
-  background-size: 50px 10%; /* Changed from 100px to 50px to double the number of sleepers */
+  background-size: 50px 10%;
   animation: moveSleepers var(--train-speed) linear infinite;
 }
 

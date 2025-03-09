@@ -18,6 +18,8 @@ let bars = [],
   speed = parseInt(speedInput.value, 10),
   animation = null,
   isPaused = false; // Add this state variable
+let currentI = 0,
+  currentJ = 0; // Add these state variables at the top with other variables
 speedInput.addEventListener("input", () => {
   speed = parseInt(speedInput.value, 10); // Parse to integer here as well!
   document.getElementById("speed-value").textContent = speed;
@@ -130,6 +132,7 @@ startButton.addEventListener("click", startAnimation);
 document.querySelector("#reset").addEventListener("click", () => {
   isRunning = false;
   isPaused = false;
+  currentI = currentJ = 0;
   startButton.textContent = "Start";
   createBars();
   currentOperation.textContent = "Reset complete";
@@ -137,14 +140,15 @@ document.querySelector("#reset").addEventListener("click", () => {
 
 async function bubbleSort() {
   const selection = Array.from(visualization.children);
-  let i = 0,
-    j = 0;
+  let i = currentI,
+    j = currentJ;
 
   if (isArraySorted(bars)) {
     currentOperation.textContent = "Already Sorted!";
     isRunning = false;
     isPaused = false;
     startButton.textContent = "Start";
+    currentI = currentJ = 0;
     return;
   }
 
@@ -160,6 +164,8 @@ async function bubbleSort() {
     while (j < bars.length - i - 1 && isRunning) {
       if (isPaused) {
         // Store current progress
+        currentI = i;
+        currentJ = j;
         return;
       }
 
@@ -217,6 +223,7 @@ async function bubbleSort() {
   isRunning = false;
   isPaused = false;
   startButton.textContent = "Start";
+  currentI = currentJ = 0;
 }
 
 createBars();

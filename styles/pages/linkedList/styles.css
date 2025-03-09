@@ -104,18 +104,6 @@
   cursor: pointer;
 }
 
-/* Progress Bar */
-.progress-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  background: var(--card-bg-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  position: relative;
-}
-
 .prev-btn,
 .next-btn {
   padding: 0.5rem 1rem;

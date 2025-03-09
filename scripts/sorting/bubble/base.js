@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         init: "initializeAlgorithm",
       },
       2: {
-        url: "../bubble.html",
+        url: "visualization.html",
         containerId: "visualization-content",
         init: "BubbleSortVisualizer",
       },
@@ -159,10 +159,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+  const bgmButton = document.getElementById("bgm-toggle");
+  const bgm = document.getElementById("bgm");
 
-  elements.menuToggle.addEventListener("click", () =>
-    elements.menu.classList.toggle("visible")
-  );
+  if (bgmButton && bgm) {
+    let isMuted = localStorage.getItem("bgmMuted") === "true";
 
+    function updateBgmState() {
+      if (isMuted) {
+        bgm.pause();
+        bgmButton.querySelector(".icon").textContent = "🔈";
+      } else {
+        bgm.play().catch((e) => console.log("Playback prevented:", e));
+        bgmButton.querySelector(".icon").textContent = "🔊";
+      }
+    }
+
+    bgmButton.addEventListener("click", () => {
+      isMuted = !isMuted;
+      localStorage.setItem("bgmMuted", isMuted);
+      updateBgmState();
+    });
+
+    updateBgmState();
+  }
   showSection(currentStep);
 });

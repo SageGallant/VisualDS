@@ -4,57 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Sort Visualization</title>
-    <link rel="stylesheet" href="../../styles/pages/sorting/visualization.css">
+    <title>Algorithm Visualizer</title>
+    <link rel="stylesheet" href="../../styles/pages/bubble.css">
 </head>
 
 <body>
-    <main class="main-container">
-        <section class="visualization-section">
-            <div class="visualization-container">
-                <div class="array-container" id="arrayContainer"></div>
-                <div class="controls-panel">
-                    <div class="control-buttons">
-                        <button id="generateArray" class="btn">New Array</button>
-                        <button id="startSort" class="btn primary">Start Sorting</button>
-                        <button id="pauseSort" class="btn" disabled>Pause</button>
-                        <button id="resetSort" class="btn">Reset</button>
-                    </div>
-                    <div class="speed-control">
-                        <label for="sortingSpeed">Speed:</label>
-                        <input type="range" id="sortingSpeed" min="1" max="100" value="50">
-                    </div>
-                </div>
-            </div>
+    <div class="info-panel" id="info-panel">
+        <span>
+            <strong id="loop-values">Phase: 0, Compare: 0</strong>
+            Current Operation:<strong id="current-operation">Idle</strong>
+            <span style="float: right;">
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--primary-color);"></span> Default
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--comparing-color);"></span> Comparing
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--swapping-color);"></span> Swapping
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--secondary-color);"></span> Not Swapped
+                </span>
+            </span>
+        </span>
+    </div>
+    <div class="visualization-container">
+        <aside class="controls">
+            <h2>Controls</h2>
+            <!-- <label for="algorithm">Choose Algorithm:</label>
+            <select id="algorithm">
+                <option value="bubble">Bubble Sort</option>
+                <option value="insertion">Insertion</option>
+            </select> -->
+            <label for="bar-count">Number of Bars:</label>
+            <input type="number" id="bar-count" value="10" min="5" max="100">
+            <label for="bar-values">Enter Bar Values (comma separated):</label>
+            <input type="text" id="bar-values" placeholder="e.g., 10,20,30">
+            <label for="speed">Animation Speed: <span id="speed-value">500</span>ms</label>
+            <input type="range" id="speed" value="500" min="50" max="2000" step="50">
+            <button id="start">Start</button>
+            <button id="reset">Reset</button>
+        </aside>
+        <section class="visualization" id="visualization">
+            <!-- Visualization -->
         </section>
-
-        <section class="info-section">
-            <div class="current-state">
-                <h3>Current State</h3>
-                <div class="state-info">
-                    <p>Comparisons: <span id="comparisons">0</span></p>
-                    <p>Swaps: <span id="swaps">0</span></p>
-                    <p>Current Pass: <span id="currentPass">0</span></p>
-                </div>
-            </div>
-            <div class="legend">
-                <h3>Legend</h3>
-                <div class="legend-item">
-                    <div class="legend-color comparing"></div>
-                    <span>Comparing</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color swapping"></div>
-                    <span>Swapping</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color sorted"></div>
-                    <span>Sorted</span>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="../../scripts/sorting/bubble/visualization.js"></script>
+    </div>
 </body>
 
 </html>

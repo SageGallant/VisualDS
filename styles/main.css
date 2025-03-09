@@ -1,34 +1,9 @@
-/* --- Theme Variables --- */
-:root {
-  --primary-color: #007aff;
-  --secondary-color: #ff3b30;
-  --tertiary-color: #34c759;
-  --bg-color: #f8f9fb;
-  --card-bg-color: #ffffff;
-  --text-color: #1a1d26;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --header-bg: #f0f2f5;
-  --header-text: #0056b3;
-  --button-bg: #e3e6eb;
-  --button-hover: #d6dae0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --sidebar-width: 250px;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
   /* border: 1px solid; */
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: var(--text-color);
 }
 
 .main-header {
@@ -66,7 +41,19 @@ body {
   border-color: var(--primary-color);
 }
 
-/* Header */
+.bgm-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.bgm-toggle:hover {
+  transform: scale(1.1);
+}
+
 .main-header {
   background: var(--header-bg);
   color: var(--text-color);

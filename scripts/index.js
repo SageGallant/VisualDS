@@ -40,3 +40,28 @@ nextButton.addEventListener("click", () => {
   nextSlide();
   startSlideShow();
 });
+
+const bgmButton = document.getElementById("bgm-toggle");
+const bgm = document.getElementById("bgm");
+
+if (bgmButton && bgm) {
+  let isMuted = localStorage.getItem("bgmMuted") === "true";
+
+  function updateBgmState() {
+    if (isMuted) {
+      bgm.pause();
+      bgmButton.querySelector(".icon").textContent = "🔈";
+    } else {
+      bgm.play().catch((e) => console.log("Playback prevented:", e));
+      bgmButton.querySelector(".icon").textContent = "🔊";
+    }
+  }
+
+  bgmButton.addEventListener("click", () => {
+    isMuted = !isMuted;
+    localStorage.setItem("bgmMuted", isMuted);
+    updateBgmState();
+  });
+
+  updateBgmState();
+}
