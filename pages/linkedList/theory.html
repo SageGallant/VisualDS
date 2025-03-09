@@ -8,42 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
     <link rel="stylesheet" href="../../styles/pages/sorting/theory.css">
-    <style>
-        .operation-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background: #e0e0e0;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .tab-btn:hover {
-            background: #d0d0d0;
-        }
-
-        .tab-btn.active {
-            background: #4a90e2;
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 5px;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
@@ -59,7 +23,7 @@
                         memory locations.</p>
 
                     <h3>Insertion at Beginning</h3>
-                    <div class="tab-content active" id="insert-beginning">
+                    <div class="card" id="insert-beginning">
                         <ol class="steps-list">
                             <li>Create a new node with given data</li>
                             <li>Make new node's next point to current head</li>
@@ -68,7 +32,7 @@
                     </div>
 
                     <h3>Deletion at Last</h3>
-                    <div class="tab-content active" id="delete-beginning">
+                    <div class="card" id="delete-beginning">
                         <ol class="steps-list">
                             <li>Store head node in temp</li>
                             <li>Move head to next node</li>
@@ -90,23 +54,6 @@
             </div>
         </div>
     </div>
-    <script src="../../scripts/linkedList/theory.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = document.querySelectorAll('.tab-btn');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs and contents
-                    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                    // Add active class to clicked tab and its content
-                    tab.classList.add('active');
-                    document.getElementById(tab.dataset.tab).classList.add('active');
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

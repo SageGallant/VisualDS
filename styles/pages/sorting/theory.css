@@ -70,6 +70,13 @@
   color: var(--color-primary);
 }
 
+.step-text.active {
+  color: var(--color-accent);
+  font-weight: bold;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
 .visual-card {
   display: flex;
   flex-direction: column;
@@ -104,6 +111,10 @@
   background: var(--comparing-color);
   color: var(--card-bg-color);
   transform: translateY(-5px);
+}
+
+.array-element.sorted {
+  background: var(--color-success);
 }
 
 .visual-controls {

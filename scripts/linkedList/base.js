@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("completedSteps", JSON.stringify(completedSteps));
         showSection(currentStep + 1);
       } else if (currentStep === sections.length - 1) {
-        window.location.href = "index.php";
+        window.location.href = "../home.html";
       }
     });
   });

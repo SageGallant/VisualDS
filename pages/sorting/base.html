@@ -6,27 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bubble Sort</title>
     <link rel="stylesheet" href="../../styles/pages/sorting/styles.css">
+    <!-- <link rel="stylesheet" href="../../styles/components/header.css"> -->
 </head>
 
 <body class="theme-classic">
     <header class="main-header">
-        <a href="../../index.html" class="logo">
-            <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
-        </a>
-        <h1 class="page-title"><a href="../../index.html">VisualDSA</a></h1>
-        <div class="header-controls">
-            <button id="menu-toggle">☰</button>
+        <div class="header-container">
+            <div class="logo-title-group">
+                <a href="../../index.html" class="logo">
+                    <img src="../../assets/images/Icon.gif" width="40" alt="Logo">
+                </a>
+                <h1 class="page-title"><a href="../../index.html">VisualDSA</a></h1>
+            </div>
+
             <nav class="nav-menu" id="menu">
-                <ul>
-                    <li><a href="../home.html">Home</a></li>
-                    <li><a href="#">Sorting</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Help</a></li>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="../home.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active">Sorting</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Search</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Help</a></li>
                 </ul>
             </nav>
-            <label for="theme-select">Theme:</label>
+
+            <div class="header-controls">
+                <button id="bgm-toggle" class="control-btn bgm-toggle" title="Toggle Background Music">
+                    <span class="icon">🔊</span>
+                </button>
+                <button id="menu-toggle" class="control-btn menu-toggle" aria-label="Toggle Menu">☰</button>
+                <div class="theme-control">
+                    <label for="theme-select">Theme:</label>
+                </div>
+            </div>
         </div>
     </header>
+
+    <audio id="bgm" loop>
+        <source src="../../assets/audio/background-music.mp3" type="audio/mp3">
+    </audio>
 
     <nav class="progress-bar">
         <button class="prev-btn">Previous</button>
@@ -66,8 +82,8 @@
             <div id="visualization-content"></div>
         </section>
     </div>
-    <script type="module" src="../../scripts/sorting/bubble/script.js"></script>
     <script src="../../scripts/themeManager.js"></script>
+    <script type="module" src="../../scripts/sorting/bubble/base.js"></script>
 </body>
 
 </html>

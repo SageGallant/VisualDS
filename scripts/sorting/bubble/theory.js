@@ -3,7 +3,7 @@ function initializeTheory() {
   const nextStep = document.getElementById("nextStep");
   const arrayVisual = document.getElementById("arrayVisual");
 
-  let currentArray = [64, 34, 25, 12, 22, 11, 90];
+  let currentArray = [64, 6, 25, 12, 22, 11, 90];
   let currentStep = 0;
 
   function displayArray(array, highlightIndices = []) {
@@ -36,10 +36,10 @@ function initializeTheory() {
           displayArray(currentArray, [0, 1]);
           break;
         case 1:
-          displayArray([34, 64, 25, 12, 22, 11, 90], [1, 2]);
+          displayArray([6, 64, 25, 12, 22, 11, 90], [1, 2]);
           break;
         case 2:
-          displayArray([34, 25, 64, 12, 22, 11, 90], [2, 3]);
+          displayArray([6, 25, 64, 12, 22, 11, 90], [2, 3]);
           break;
         case 3:
           displayArray(currentArray);
