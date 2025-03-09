@@ -7,18 +7,20 @@ const startButton = document.querySelector("#start");
 const visualization = document.querySelector("#visualization");
 
 const sounds = {
-  slap: new Audio("../assets/audio/sorting/slap.mp3"),
-  jump: new Audio("../assets/audio/sorting/jump.mp3"),
-  compare: new Audio("../assets/audio/sorting/nextLevel.mp3"),
-  phase: new Audio("../assets/audio/sorting/finish.mp3"),
+  slap: new Audio("../../assets/audio/sorting/slap.mp3"),
+  jump: new Audio("../../assets/audio/sorting/jump.mp3"),
+  compare: new Audio("../../assets/audio/sorting/nextLevel.mp3"),
+  phase: new Audio("../../assets/audio/sorting/finish.mp3"),
 };
 isRunning = false;
 
 let bars = [],
   speed = parseInt(speedInput.value, 10),
-  animation = null;
+  animation = null,
+  isPaused = false; // Add this state variable
 speedInput.addEventListener("input", () => {
   speed = parseInt(speedInput.value, 10); // Parse to integer here as well!
+  document.getElementById("speed-value").textContent = speed;
 });
 
 const COLORS = {
@@ -76,15 +78,27 @@ function pause() {
 }
 
 function startAnimation() {
-  isRunning = true;
-  startButton.textContent = "Stop";
-  bubbleSort();
+  if (!isRunning) {
+    // Initial start
+    isRunning = true;
+    isPaused = false;
+    startButton.textContent = "Pause";
+    bubbleSort();
+  } else {
+    if (isPaused) {
+      // Resume
+      isPaused = false;
+      startButton.textContent = "Pause";
+      bubbleSort();
+    } else {
+      // Pause
+      isPaused = true;
+      startButton.textContent = "Resume";
+    }
+  }
 }
 
-function stopAnimation() {
-  isRunning = false;
-  startButton.textContent = "Start";
-}
+// Remove stopAnimation function as it's no longer needed
 
 function updateBars(bars, classesToRemove, newBackground) {
   bars.forEach((bar) => {
@@ -109,33 +123,46 @@ function isArraySorted(array) {
   return true;
 }
 
-startButton.addEventListener("click", () => {
-  isRunning ? stopAnimation() : startAnimation();
-});
+// Modify the start button event listener
+startButton.addEventListener("click", startAnimation);
 
+// Modify reset button event listener
 document.querySelector("#reset").addEventListener("click", () => {
-  stopAnimation();
+  isRunning = false;
+  isPaused = false;
+  startButton.textContent = "Start";
   createBars();
   currentOperation.textContent = "Reset complete";
 });
 
 async function bubbleSort() {
   const selection = Array.from(visualization.children);
+  let i = 0,
+    j = 0;
 
   if (isArraySorted(bars)) {
     currentOperation.textContent = "Already Sorted!";
-    stopAnimation();
+    isRunning = false;
+    isPaused = false;
+    startButton.textContent = "Start";
     return;
   }
 
-  for (let i = 0; i < bars.length - 1 && isRunning; i++) {
+  // Continue from where we left off if paused
+  while (i < bars.length - 1 && isRunning) {
     bars.forEach((_barValue, idx) => {
       const adjustedIdx = idx - i;
       if (adjustedIdx >= 0)
         selection[adjustedIdx].style.background = COLORS.default;
     });
 
-    for (let j = 0; j < bars.length - i - 1 && isRunning; j++) {
+    // inner loop
+    while (j < bars.length - i - 1 && isRunning) {
+      if (isPaused) {
+        // Store current progress
+        return;
+      }
+
       loopValues.textContent = `Phase: ${i}, Compare: ${j}`;
       currentOperation.textContent = `Comparing bars ${j} and ${j + 1}`;
 
@@ -173,13 +200,23 @@ async function bubbleSort() {
         await pause();
       }
       updateBars([selection[j], selection[j + 1]], ["shake", "jump"], "green");
+      j++;
     }
+    // Add jelly animation to all bars after inner loop
+    selection.forEach((bar) => {
+      bar.classList.add("jelly");
+      setTimeout(() => bar.classList.remove("jelly"), 600);
+    });
+    j = 0;
     if (i < bars.length - 2) sounds.compare.play();
     await pause();
+    i++;
   }
   currentOperation.textContent = "Bubble Sort Complete";
   sounds.phase.play();
-  stopAnimation();
+  isRunning = false;
+  isPaused = false;
+  startButton.textContent = "Start";
 }
 
 createBars();

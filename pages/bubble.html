@@ -5,172 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algorithm Visualizer</title>
-    <style>
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 1rem;
-            min-height: 100vh;
-        }
-
-        .info-panel {
-            background: var(--card-bg-color);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-        }
-
-        .visualization-container {
-            display: grid;
-            grid-template-columns: minmax(250px, 1fr) 3fr;
-            gap: 1.5rem;
-            height: calc(100vh - 150px);
-        }
-
-        @media (max-width: 768px) {
-            .visualization-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-        }
-
-        .controls {
-            background: var(--card-bg-color);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-        }
-
-        .controls h2 {
-            color: var(--header-text);
-            margin-top: 0;
-        }
-
-        .controls select,
-        .controls input {
-            width: 100%;
-            margin: 0.5rem 0 1rem;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: calc(var(--border-radius) / 2);
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        .controls select:focus,
-        .controls input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--primary-color-dark);
-        }
-
-        .controls button {
-            width: 100%;
-            margin: 0.5rem 0;
-            padding: 0.75rem;
-            border: none;
-            border-radius: calc(var(--border-radius) / 2);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .controls button#start {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .controls button#reset {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .controls button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .visualization {
-            background: var(--card-bg-color);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            min-height: 400px;
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow-x: auto;
-        }
-
-        .bar {
-            background: var(--primary-color);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            color: var(--card-bg-color);
-            font-size: 0.8rem;
-            font-weight: bold;
-            padding-top: 4px;
-            border-radius: calc(var(--border-radius) / 3);
-            min-width: 30px;
-        }
-
-        .bar.comparing {
-            background: var(--comparing-color);
-        }
-
-        .bar.swapping {
-            background: var(--swapping-color);
-        }
-
-        .bar.sorted {
-            background: var(--tertiary-color);
-        }
-
-        .bar.shake {
-            animation: shake 0.5s;
-        }
-
-        .bar.jump {
-            animation: jump 0.5s;
-        }
-
-        @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-5px);
-            }
-
-            75% {
-                transform: translateX(5px);
-            }
-        }
-
-        @keyframes jump {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../../styles/pages/bubble.css">
 </head>
 
 <body>
@@ -178,6 +13,20 @@
         <span>
             <strong id="loop-values">Phase: 0, Compare: 0</strong>
             Current Operation:<strong id="current-operation">Idle</strong>
+            <span style="float: right;">
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--primary-color);"></span> Default
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--comparing-color);"></span> Comparing
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--swapping-color);"></span> Swapping
+                </span>
+                <span class="legend-item">
+                    <span class="color-box" style="background: var(--secondary-color);"></span> Not Swapped
+                </span>
+            </span>
         </span>
     </div>
     <div class="visualization-container">
@@ -192,8 +41,8 @@
             <input type="number" id="bar-count" value="10" min="5" max="100">
             <label for="bar-values">Enter Bar Values (comma separated):</label>
             <input type="text" id="bar-values" placeholder="e.g., 10,20,30">
-            <label for="speed">Animation Speed (ms):</label>
-            <input type="number" id="speed" value="500" min="50" max="2000">
+            <label for="speed">Animation Speed: <span id="speed-value">500</span>ms</label>
+            <input type="range" id="speed" value="500" min="50" max="2000" step="50">
             <button id="start">Start</button>
             <button id="reset">Reset</button>
         </aside>
