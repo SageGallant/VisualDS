@@ -80,10 +80,10 @@ const startButton = document.querySelector("#start");
 const visualization = document.querySelector("#visualization");
 
 const sounds = {
-  slap: new Audio("../../../assets/audio/sorting/slap.mp3"),
-  jump: new Audio("../../../assets/audio/sorting/jump.mp3"),
-  compare: new Audio("../../../assets/audio/sorting/nextLevel.mp3"),
-  phase: new Audio("../../../assets/audio/sorting/finish.mp3"),
+  slap: new Audio("../assets/audio/sorting/slap.mp3"),
+  jump: new Audio("../assets/audio/sorting/jump.mp3"),
+  compare: new Audio("../assets/audio/sorting/nextLevel.mp3"),
+  phase: new Audio("../assets/audio/sorting/finish.mp3"),
 };
 isRunning = false;
 
