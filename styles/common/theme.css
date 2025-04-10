@@ -19,6 +19,9 @@
   --spacing-unit: 1rem;
   --shadow-sm: 0 2px 4px var(--shadow-color);
   --shadow-md: 0 4px 6px var(--shadow-color);
+  --sidebar-bg: rgba(0, 122, 255, 0.9);
+  --hover-color: rgba(255, 255, 255, 0.1);
+  --dropdown-bg: rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease-in-out;
 }
 
@@ -37,6 +40,9 @@ body.theme-modern {
   --secondary-color: #d8572a;
   --tertiary-color: #48a9a6;
   --shadow-color: rgba(64, 145, 108, 0.1);
+  --sidebar-bg: rgba(64, 145, 108, 0.9);
+  --hover-color: rgba(255, 255, 255, 0.15);
+  --dropdown-bg: rgba(255, 255, 255, 0.1);
 }
 
 /* Dark theme - Dark mode version of root theme */
@@ -57,6 +63,9 @@ body.theme-dark {
   --comparing-color: #e2b714;
   --swapping-color: #ff3b30;
   --sorted-color: #34c759;
+  --sidebar-bg: rgba(0, 122, 255, 0.8);
+  --hover-color: rgba(255, 255, 255, 0.15);
+  --dropdown-bg: rgba(255, 255, 255, 0.08);
 }
 
 /* Dark theme - Updated accent colors */
@@ -76,6 +85,9 @@ body.theme-royal {
   --comparing-color: #3498db;
   --swapping-color: #2ecc71;
   --sorted-color: #f1c40f;
+  --sidebar-bg: rgba(52, 152, 219, 0.8);
+  --hover-color: rgba(255, 255, 255, 0.15);
+  --dropdown-bg: rgba(255, 255, 255, 0.08);
 }
 
 /* Elegant theme */
@@ -92,6 +104,9 @@ body.theme-elegant {
   --primary-color: #c0392b;
   --secondary-color: #8e44ad;
   --tertiary-color: #16a085;
+  --sidebar-bg: rgba(192, 57, 43, 0.85);
+  --hover-color: rgba(255, 255, 255, 0.15);
+  --dropdown-bg: rgba(255, 255, 255, 0.1);
 }
 
 /* Optimize transitions */

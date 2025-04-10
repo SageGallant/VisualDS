@@ -24,12 +24,20 @@
     </audio>
     <div class="header-controls">
       <label for="theme-select">Theme:</label>
+      <select id="theme-select" class="theme-select">
+        <option value="theme-light">Light</option>
+        <option value="theme-dark">Dark</option>
+        <option value="theme-modern">Modern</option>
+        <option value="theme-royal">Royal</option>
+        <option value="theme-elegant">Elegant</option>
+      </select>
     </div>
   </header>
   <section class="container">
     <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
       </svg>
     </button>
 
@@ -38,7 +46,8 @@
       <div class="dropdown" onclick="toggleDropdown(this)">
         Sorting <span class="icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 9L12 13L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </span>
       </div>
@@ -51,7 +60,8 @@
       <div class="dropdown" onclick="toggleDropdown(this)">
         Searching <span class="icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 9L12 13L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </span>
       </div>
@@ -62,7 +72,8 @@
       <div class="dropdown" onclick="toggleDropdown(this)">
         Linked List <span class="icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M8 9L12 13L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 9L12 13L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </span>
       </div>
@@ -155,9 +166,11 @@
             </div>
           </div>
         </div> -->
-
-        <script src="../scripts/themeManager.js"></script>
-        <script src="../scripts/home.js"></script>
+      </div>
+    </main>
+  </section>
+  <script src="../scripts/themeManager.js"></script>
+  <script src="../scripts/home.js"></script>
 </body>
 
 </html>

@@ -1,59 +1,25 @@
-class ThemeManager {
-  constructor() {
-    this.themes = ["default", "dark", "modern", "royal", "elegant"];
-    this.currentTheme = localStorage.getItem("theme") || "default";
-    this.init();
-  }
+// Theme Manager - Handles theme switching
+document.addEventListener("DOMContentLoaded", function () {
+  const themeSelect = document.getElementById("theme-select");
 
-  init() {
-    this.applyTheme(this.currentTheme);
-    this.createThemeSelector();
-  }
+  // Get saved theme or default to light
+  const savedTheme = localStorage.getItem("theme") || "theme-light";
 
-  createThemeSelector() {
-    const header = document.querySelector(".main-header");
-    if (!header) return;
+  // Apply the saved theme
+  document.body.className = savedTheme;
 
-    const themeSelector = document.createElement("select");
-    themeSelector.id = "theme-select";
-    themeSelector.className = "theme-select";
+  // Set the select dropdown to match the current theme
+  if (themeSelect) {
+    themeSelect.value = savedTheme;
 
-    this.themes.forEach((theme) => {
-      const option = document.createElement("option");
-      option.value = theme;
-      option.text = theme.charAt(0).toUpperCase() + theme.slice(1);
-      option.selected = theme === this.currentTheme;
-      themeSelector.appendChild(option);
+    // Add change event listener
+    themeSelect.addEventListener("change", function () {
+      // Save the selected theme
+      const selectedTheme = themeSelect.value;
+      localStorage.setItem("theme", selectedTheme);
+
+      // Apply the theme
+      document.body.className = selectedTheme;
     });
-
-    themeSelector.addEventListener("change", (e) => {
-      this.applyTheme(e.target.value);
-    });
-
-    const container = document.createElement("div");
-    container.className = "theme-selector-container";
-    container.appendChild(themeSelector);
-    header.appendChild(container);
   }
-
-  applyTheme(theme) {
-    // Remove all theme classes
-    this.themes.forEach((t) => {
-      document.body.classList.remove(`theme-${t}`);
-    });
-
-    // Add new theme class if it's not default
-    if (theme !== "default") {
-      document.body.classList.add(`theme-${theme}`);
-    }
-
-    // Save to localStorage
-    localStorage.setItem("theme", theme);
-    this.currentTheme = theme;
-  }
-}
-
-// Initialize theme manager when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  window.themeManager = new ThemeManager();
 });

@@ -6,11 +6,27 @@
   /* border: 1px solid; */
 }
 
+:root {
+  --sidebar-width: 250px;
+  --header-height: 60px;
+}
+
+/* Apply background color to body */
+body {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .main-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,15 +108,15 @@
 
 /* Layout Container */
 .container {
-  margin-top: 1rem;
+  margin-top: var(--header-height); /* Use the header height variable */
   display: flex;
-  min-height: calc(100vh - 1rem);
+  min-height: calc(100vh - var(--header-height));
   position: relative;
-  padding-top: 40px; /* Increase this value if header is taller */
+  padding-top: 20px;
 }
 
 .sidebar {
-  width: 250px;
+  width: var(--sidebar-width);
   background-color: var(--primary-color);
   overflow: hidden;
   transition: width 0.3s ease;
@@ -115,9 +131,11 @@
 /* Sidebar Toggle Button (Outside the Sidebar) */
 .sidebar-toggle {
   position: absolute;
+  top: 20px; /* Changed from 40px to align better with sidebar content */
+  left: 0;
   width: 40px;
   height: 40px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border: none;
   cursor: pointer;
   border-radius: 0 5px 5px 0;
@@ -127,12 +145,13 @@
 }
 
 .sidebar-toggle:hover {
-  background-color: var(--tertiary-color);
+  background-color: var(--secondary-color);
 }
 
 .sidebar h2 {
   text-align: center;
   margin-top: 0;
+  color: var(--text-color);
 }
 
 /* Dropdown Menu in Sidebar */
@@ -142,14 +161,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--sidebar-bg);
+  background-color: var(--sidebar-bg, rgba(255, 255, 255, 0.05));
   border: none;
   width: 100%;
   color: var(--text-color);
 }
 
 .dropdown:hover {
-  background-color: var(--hover-color);
+  background-color: var(--hover-color, rgba(255, 255, 255, 0.1));
 }
 
 .dropdown .icon {
@@ -173,7 +192,7 @@
 }
 
 .dropdown-content div:hover {
-  background-color: var(--hover-color);
+  background-color: var(--hover-color, rgba(255, 255, 255, 0.1));
 }
 
 /* Main Content */
@@ -181,7 +200,7 @@
   flex: 1;
   padding: 20px;
   transition: margin 0.3s;
-  padding-top: 20px;
+  background-color: var(--bg-color);
 }
 
 /* Card Grid: Utilize all available space */
@@ -247,18 +266,18 @@
 @media (max-width: 768px) {
   .container {
     display: block;
+    margin-top: var(--header-height);
   }
 
   /* Sidebar becomes an overlay */
   .sidebar {
     position: fixed;
-    top: 65px;
-    /* header height */
+    top: var(--header-height); /* Use the header height variable */
     left: 0;
     width: var(--sidebar-width);
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--header-height));
     z-index: 1000;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, width 0.3s ease;
   }
 
   .sidebar.collapsed {
@@ -269,7 +288,7 @@
   /* Sidebar toggle button becomes fixed near top left */
   .sidebar-toggle {
     position: fixed;
-    top: 70px;
+    top: 70px; /* Positioned below the header */
     left: 10px;
     width: 40px;
     height: 40px;
@@ -291,4 +310,14 @@
     padding: 8px;
     font-size: 0.9rem;
   }
+}
+
+/* SVG Icons */
+.sidebar-toggle svg path,
+.sidebar .dropdown svg path {
+  stroke: var(--text-color);
+}
+
+.sidebar-toggle:hover svg path {
+  stroke: white;
 }

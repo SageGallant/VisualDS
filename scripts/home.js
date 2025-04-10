@@ -2,15 +2,20 @@
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   const toggleBtn = document.getElementById("sidebar-toggle");
+  const sidebarWidth = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--sidebar-width");
+
   sidebar.classList.toggle("collapsed");
+
   if (sidebar.classList.contains("collapsed")) {
     toggleBtn.style.left = "0px";
     toggleBtn.innerHTML =
-      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   } else {
-    toggleBtn.style.left = "var(--sidebar-width)";
+    toggleBtn.style.left = sidebarWidth;
     toggleBtn.innerHTML =
-      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
 }
 
@@ -35,7 +40,10 @@ function toggleDropdown(element) {
 // On page load, ensure the toggle button is positioned correctly (sidebar open by default)
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("sidebar-toggle");
-  toggleBtn.style.left = "var(--sidebar-width)";
+  const sidebarWidth = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--sidebar-width");
+  toggleBtn.style.left = sidebarWidth;
 });
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         (completedCount / (elements.steps.length - 1)) * 100,
         (currentStep / (elements.steps.length - 1)) * 100
       );
-      progressFill.stye.width = `${progress}%`;
+      progressFill.style.width = `${progress}%`;
     }
   }
 
