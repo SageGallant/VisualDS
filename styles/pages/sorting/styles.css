@@ -36,10 +36,15 @@
 }
 
 .progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   top: 60px;
   z-index: 100;
   background: var(--bg-color);
-  padding: 1rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .progress-container {
@@ -128,11 +133,12 @@
 .content-wrapper {
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 110px);
+  height: calc(
+    100vh - 160px
+  ); /* Adjusted to account for header and progress bar */
   background: var(--card-bg-color);
-  margin: 0; /* Added to remove any default margins */
-  padding-top: 80px; /* Match container padding-top */
-  min-height: calc(100vh - 80px); /* Subtract header height */
+  margin: 0;
+  padding: 0;
 }
 
 .content-section {
@@ -141,12 +147,12 @@
   left: 100%;
   width: 100%;
   height: 100%;
-  /* padding: 1rem; Added consistent padding */
-  margin: 0; /* Remove any default margins */
+  margin: 0;
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.5s ease;
   overflow-y: auto;
+  padding: 0;
 }
 
 .content-section.active {
@@ -304,4 +310,13 @@
   .header-container {
     padding: 0 1rem;
   }
+}
+
+#theory-content,
+#algorithm-content,
+#visualization-content {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
