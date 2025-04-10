@@ -134,7 +134,7 @@
   position: relative;
   overflow: hidden;
   height: calc(
-    100vh - 160px
+    100vh - 155px
   ); /* Adjusted to account for header and progress bar */
   background: var(--card-bg-color);
   margin: 0;
@@ -319,4 +319,6 @@
   overflow: hidden;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
